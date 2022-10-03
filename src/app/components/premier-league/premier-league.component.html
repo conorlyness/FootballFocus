@@ -1,0 +1,27 @@
+<mat-grid-list cols="6" rowHeight="190" gutterSize="10px">
+    <mat-grid-tile class="leagueIcon" [colspan]="1" [rowspan]="2">
+      <img class="tileLeagueImg" src="../../../assets/premier-league-file.png" alt="">
+    </mat-grid-tile>
+    <mat-grid-tile class="news" [colspan]="3" [rowspan]="2">
+      <div class="leagueNews">
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="6">
+      <div class="table">
+        <app-league-table [league]="leagueName"></app-league-table>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="upcomingFixtures" [colspan]="4" [rowspan]="2">
+      <div class="thisGameWeekFixtures">
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile class="previousFixtures" [colspan]="4" [rowspan]="2">
+      <div class="lastGameWeekResults">
+      </div>
+    </mat-grid-tile>
+    </mat-grid-list>
+
+
+
+
+

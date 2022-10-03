@@ -1,0 +1,21 @@
+.nameAndBadge {
+    text-align: center;
+    width: 140px;
+}
+
+table {
+    width: 100%;
+
+    th {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    td {
+        text-align: center;
+        //used to ensure all the tds are the same width
+        width: calc(100%/8);
+        font-size: 18px;
+        font-weight: bold;
+    }
+  }
