@@ -1,0 +1,14 @@
+<p class="previousResultsTitle">Previous GameWeek Results</p>
+<div class="previousResults">
+    <ng-container *ngFor="let fixture of fixtureData">
+            <mat-card>
+                <div class="teamNames">{{fixture.homeTeam}} Vs {{fixture.awayTeam}}</div>
+                <div class="teamBadges">
+                    <img class="homeTeam" src="{{fixture.homeLogo}}" alt="">
+                    <div class="gameResult">{{fixture.homeTeamScore}} - {{fixture.awayTeamScore}} </div>
+                    <img class="awayTeam" src="{{fixture.awayLogo}}" alt="">
+                </div>
+              
+            </mat-card>
+        </ng-container>
+</div>
