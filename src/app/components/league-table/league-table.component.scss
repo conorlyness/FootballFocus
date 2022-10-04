@@ -16,6 +16,10 @@ table {
         //used to ensure all the tds are the same width
         width: calc(100%/8);
         font-size: 18px;
-        font-weight: bold;
+        font-weight: 200;
     }
   }
+
+.pointsTotal {
+    font-weight: bold !important;
+}

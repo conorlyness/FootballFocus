@@ -1,25 +1,44 @@
-<mat-grid-list cols="6" rowHeight="190" gutterSize="10px">
+<div class="tileContent">
+  <mat-grid-list cols="6" rowHeight="152" gutterSize="10px">
     <mat-grid-tile class="leagueIcon" [colspan]="1" [rowspan]="2">
-      <img class="tileLeagueImg" src="../../../assets/premier-league-file.png" alt="">
+      <div>
+        <div class="leagueLogo">
+          <img class="tileLeagueImg" src="../../../assets/premier-league-file.png" alt="">
+        </div>
+        <div class="topScorersContent">
+          <p class="topScorers">Top Scorers</p>
+          <ng-container>
+            <p>Player Name G/A: 10/2</p>
+            <p>Player Name G/A: 10/2</p>
+            <p>Player Name G/A: 10/2</p>
+          </ng-container>
+        </div>
+      </div>
+     
+
     </mat-grid-tile>
     <mat-grid-tile class="news" [colspan]="3" [rowspan]="2">
       <div class="leagueNews">
       </div>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="2" [rowspan]="6">
+    <mat-grid-tile class="tableTile" [colspan]="2" [rowspan]="6">
       <div class="table">
-        <app-league-table [league]="leagueName"></app-league-table>
+        <!-- <app-league-table [league]="leagueName"></app-league-table> -->
       </div>
     </mat-grid-tile>
     <mat-grid-tile class="upcomingFixtures" [colspan]="4" [rowspan]="2">
       <div class="thisGameWeekFixtures">
+        <!-- <app-upcoming-fixtures [league]="leagueName"></app-upcoming-fixtures> -->
       </div>
     </mat-grid-tile>
-    <mat-grid-tile class="previousFixtures" [colspan]="4" [rowspan]="2">
+    <mat-grid-tile class="previousFixturesTile" [colspan]="4" [rowspan]="2">
       <div class="lastGameWeekResults">
+        <!-- <app-previous-results [league]="leagueName"></app-previous-results> -->
       </div>
     </mat-grid-tile>
     </mat-grid-list>
+</div>
+
 
 
 

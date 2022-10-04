@@ -50,7 +50,6 @@ export class UpcomingFixturesComponent implements OnInit {
           )
           .subscribe((val: any) => {
             let fixtures: any = [{ fixtures: val['response'] }];
-            console.log('fixtures : ', fixtures);
             this.fixtureData = fixtures[0].fixtures;
             console.log('fixture data : ', this.fixtureData);
           });

@@ -16,33 +16,33 @@
               </ng-container>
 
               <ng-container matColumnDef="Games Played">
-                <th mat-header-cell *matHeaderCellDef> Games Played </th>
+                <th mat-header-cell *matHeaderCellDef> GP </th>
                 <td mat-cell *matCellDef="let table"> {{table.Played}} </td>
               </ng-container>
 
               <ng-container matColumnDef="Won">
-                <th mat-header-cell *matHeaderCellDef> Won </th>
+                <th mat-header-cell *matHeaderCellDef> W </th>
                 <td mat-cell *matCellDef="let table"> {{table.Winned}} </td>
               </ng-container>
 
               <ng-container matColumnDef="Lost">
-                <th mat-header-cell *matHeaderCellDef> Lost </th>
+                <th mat-header-cell *matHeaderCellDef> L </th>
                 <td mat-cell *matCellDef="let table"> {{table.Loosed}} </td>
               </ng-container>
 
               <ng-container matColumnDef="Drew">
-                <th mat-header-cell *matHeaderCellDef> Drew </th>
+                <th mat-header-cell *matHeaderCellDef> D </th>
                 <td mat-cell *matCellDef="let table"> {{table.Tie}} </td>
               </ng-container>
 
               <ng-container matColumnDef="Goal Diff">
-                <th mat-header-cell *matHeaderCellDef> Goal Diff </th>
+                <th mat-header-cell *matHeaderCellDef> GD </th>
                 <td mat-cell *matCellDef="let table"> {{table['Goal Difference']}} </td>
               </ng-container>
 
               <ng-container matColumnDef="Points">
                 <th mat-header-cell *matHeaderCellDef> Points </th>
-                <td class="points" mat-cell *matCellDef="let table"> {{table.Points}} </td>
+                <td mat-cell *matCellDef="let table" class="pointsTotal"> {{table.Points}}</td>
               </ng-container>
           <tr class="headerRows" mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
           <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumns;"></tr>
