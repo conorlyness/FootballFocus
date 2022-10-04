@@ -15,9 +15,23 @@ import { SerieAComponent } from './components/serie-a/serie-a.component';
 import { LaLigaComponent } from './components/la-liga/la-liga.component';
 import { BundesligaComponent } from './components/bundesliga/bundesliga.component';
 import { Ligue1Component } from './components/ligue1/ligue1.component';
+import { UpcomingFixturesComponent } from './components/upcoming-fixtures/upcoming-fixtures.component';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { PreviousResultsComponent } from './components/previous-results/previous-results.component';
 
 @NgModule({
-  declarations: [AppComponent, LeagueTableComponent, PremierLeagueComponent, SerieAComponent, LaLigaComponent, BundesligaComponent, Ligue1Component],
+  declarations: [
+    AppComponent,
+    LeagueTableComponent,
+    PremierLeagueComponent,
+    SerieAComponent,
+    LaLigaComponent,
+    BundesligaComponent,
+    Ligue1Component,
+    UpcomingFixturesComponent,
+    PreviousResultsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +41,8 @@ import { Ligue1Component } from './components/ligue1/ligue1.component';
     MatGridListModule,
     MatTabsModule,
     MatIconModule,
+    MatListModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
