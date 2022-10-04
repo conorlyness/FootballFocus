@@ -1,0 +1,15 @@
+<p class="upcomingFixturesTitle">Upcoming GameWeek Fixtures</p>
+<div class="upcomingFixtures">
+    <ng-container *ngFor="let fixture of fixtureData">
+            <mat-card>
+                <div class="teamNames">{{fixture.teams.home.name}} Vs {{fixture.teams.away.name}}</div>
+                <div class="teamBadges">
+                    <img class="homeTeam" src="{{fixture.teams.home.logo}}" alt="">
+                    <div class="badgeSpacer"> | </div>
+                    <img class="awayTeam" src="{{fixture.teams.away.logo}}" alt="">
+                </div>
+                <div class="fixtureDate">{{fixture.fixture.date | date: 'EEEE, MMM d, y, h:mm a'}}</div>
+              
+            </mat-card>
+        </ng-container>
+</div>
