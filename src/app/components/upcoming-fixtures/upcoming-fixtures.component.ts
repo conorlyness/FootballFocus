@@ -14,10 +14,12 @@ export class UpcomingFixturesComponent implements OnInit {
   laLiga: boolean = false;
   bundes: boolean = false;
   ligue1: boolean = false;
+  loading: boolean = false;
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
+    this.loading = true;
     if (this.league === 'prem') {
       this.prem = true;
     } else if (this.league === 'serieA') {
@@ -49,6 +51,7 @@ export class UpcomingFixturesComponent implements OnInit {
             this.ligue1
           )
           .subscribe((val: any) => {
+            this.loading = false;
             let fixtures: any = [{ fixtures: val['response'] }];
             this.fixtureData = fixtures[0].fixtures;
             console.log('fixture data : ', this.fixtureData);
