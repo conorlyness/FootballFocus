@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
+import { urls } from '../../serviceUrls';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  urls: any = urls;
+
   options = {
     method: 'GET',
     headers: {
@@ -14,43 +17,7 @@ export class ApiService {
     },
   };
 
-  //table urls
-  premierLeagueTableUrl: string =
-    'https://football98.p.rapidapi.com/premierleague/table';
-  serieALeagueTableUrl: string =
-    'https://football98.p.rapidapi.com/seriea/table';
-  laLigaLeagueTableUrl: string = 'https://football98.p.rapidapi.com/liga/table';
-  bundesligaLeagueTableUrl: string =
-    'https://football98.p.rapidapi.com/bundesliga/table';
-  ligue1LeagueTableUrl: string =
-    'https://football98.p.rapidapi.com/ligue1/table';
-
-  //fixture urls
-  premierLeagueFixturesUrl: string =
-    'https://football98.p.rapidapi.com/premierleague/fixtures';
-  serieALeagueFixturesUrl: string =
-    'https://football98.p.rapidapi.com/seriea/fixtures';
-  laLigaLeagueFixturesUrl: string =
-    'https://football98.p.rapidapi.com/liga/fixtures';
-  bundesligaLeagueFixturesUrl: string =
-    'https://football98.p.rapidapi.com/bundesliga/fixtures';
-  ligue1LeagueFixturesUrl: string =
-    'https://football98.p.rapidapi.com/ligue1/fixtures';
-
-  //result urls
-  premierLeagueResultsUrl: string =
-    'https://football98.p.rapidapi.com/premierleague/results';
-  serieALeagueResultsUrl: string =
-    'https://football98.p.rapidapi.com/seriea/results';
-  laLigaLeagueResultsUrl: string =
-    'https://football98.p.rapidapi.com/liga/results';
-  bundesligaLeagueResultsUrl: string =
-    'https://football98.p.rapidapi.com/bundesliga/results';
-  ligue1LeagueResultsUrl: string =
-    'https://football98.p.rapidapi.com/ligue1/results';
-
   //urls for API-FOOTBALL
-
   ApiFootballOptions = {
     method: 'GET',
     headers: {
@@ -59,25 +26,21 @@ export class ApiService {
     },
   };
 
-  //current round url
-  premierLeagueCurrentRoundUrl: string =
-    'https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=39&season=2022&current=true';
-  serieALeagueCurrentRoundUrl: string =
-    'https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=135&season=2022&current=true';
-  laLigaLeagueCurrentRoundUrl: string =
-    'https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=140&season=2022&current=true';
-  bundesligaLeagueCurrentRoundUrl: string =
-    'https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=78&season=2022&current=true';
-  ligue1LeagueCurrentRoundUrl: string =
-    'https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=61&season=2022&current=true';
-
-  //fixtures by round url
   LeagueIds = {
     prem: 39,
     serieA: 135,
     laLiga: 140,
     bundesliga: 78,
     ligue1: 61,
+  };
+
+  //football highlights API
+  highlightsOptions = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '',
+      'X-RapidAPI-Host': 'free-football-soccer-videos.p.rapidapi.com',
+    },
   };
 
   constructor(private http: HttpClient) {}
@@ -92,15 +55,15 @@ export class ApiService {
     var url: string = '';
 
     if (prem) {
-      url = this.premierLeagueTableUrl;
+      url = this.urls.leagueTables.premierLeagueTableUrl;
     } else if (serieA) {
-      url = this.serieALeagueTableUrl;
+      url = this.urls.leagueTables.serieALeagueTableUrl;
     } else if (laLiga) {
-      url = this.laLigaLeagueTableUrl;
+      url = this.urls.leagueTables.laLigaLeagueTableUrl;
     } else if (bundes) {
-      url = this.bundesligaLeagueTableUrl;
+      url = this.urls.leagueTables.bundesligaLeagueTableUrl;
     } else {
-      url = this.ligue1LeagueTableUrl;
+      url = this.urls.leagueTables.ligue1LeagueTableUrl;
     }
 
     return this.http.get(url, this.options);
@@ -116,15 +79,15 @@ export class ApiService {
     var url: string = '';
 
     if (prem) {
-      url = this.premierLeagueFixturesUrl;
+      url = this.urls.leagueFixtures.premierLeagueFixturesUrl;
     } else if (serieA) {
-      url = this.serieALeagueFixturesUrl;
+      url = this.urls.leagueFixtures.serieALeagueFixturesUrl;
     } else if (laLiga) {
-      url = this.laLigaLeagueFixturesUrl;
+      url = this.urls.leagueFixtures.laLigaLeagueFixturesUrl;
     } else if (bundes) {
-      url = this.bundesligaLeagueFixturesUrl;
+      url = this.urls.leagueFixtures.bundesligaLeagueFixturesUrl;
     } else {
-      url = this.ligue1LeagueFixturesUrl;
+      url = this.urls.leagueFixtures.ligue1LeagueResultsUrl;
     }
 
     return this.http.get(url, this.options);
@@ -140,15 +103,15 @@ export class ApiService {
     var url: string = '';
 
     if (prem) {
-      url = this.premierLeagueResultsUrl;
+      url = this.urls.leagueResults.premierLeagueResultsUrl;
     } else if (serieA) {
-      url = this.serieALeagueResultsUrl;
+      url = this.urls.leagueResults.serieALeagueResultsUrl;
     } else if (laLiga) {
-      url = this.laLigaLeagueResultsUrl;
+      url = this.urls.leagueResults.laLigaLeagueResultsUrl;
     } else if (bundes) {
-      url = this.bundesligaLeagueResultsUrl;
+      url = this.urls.leagueResults.bundesligaLeagueResultsUrl;
     } else {
-      url = this.ligue1LeagueResultsUrl;
+      url = this.urls.leagueResults.ligue1LeagueResultsUrl;
     }
 
     return this.http.get(url, this.options);
@@ -164,15 +127,15 @@ export class ApiService {
     var url: string = '';
 
     if (prem) {
-      url = this.premierLeagueCurrentRoundUrl;
+      url = this.urls.leagueRound.premierLeagueCurrentRoundUrl;
     } else if (serieA) {
-      url = this.serieALeagueCurrentRoundUrl;
+      url = this.urls.leagueRound.serieALeagueCurrentRoundUrl;
     } else if (laLiga) {
-      url = this.laLigaLeagueCurrentRoundUrl;
+      url = this.urls.leagueRound.laLigaLeagueCurrentRoundUrl;
     } else if (bundes) {
-      url = this.bundesligaLeagueCurrentRoundUrl;
+      url = this.urls.leagueRound.bundesligaLeagueCurrentRoundUrl;
     } else {
-      url = this.ligue1LeagueCurrentRoundUrl;
+      url = this.urls.leagueRound.ligue1LeagueCurrentRoundUrl;
     }
 
     const resp = this.http.get(url, this.ApiFootballOptions);
@@ -203,6 +166,59 @@ export class ApiService {
       url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${this.LeagueIds.bundesliga}&season=2022&round=${round}&timezone=Europe%2FLondon`;
     } else {
       url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${this.LeagueIds.ligue1}&season=2022&round=${round}&timezone=Europe%2FLondon`;
+    }
+
+    return this.http.get(url, this.ApiFootballOptions);
+  }
+
+  getLeagueNews(
+    prem?: boolean,
+    serieA?: boolean,
+    laLiga?: boolean,
+    bundes?: boolean,
+    ligue1?: boolean
+  ) {
+    var url: string = '';
+
+    if (prem) {
+      url = this.urls.leagueNews.premierLeagueNewsUrl;
+    } else if (serieA) {
+      url = this.urls.leagueNews.serieALeagueNewsUrl;
+    } else if (laLiga) {
+      url = this.urls.leagueNews.laLigaLeagueNewsUrl;
+    } else if (bundes) {
+      url = this.urls.leagueNews.bundesligaLeagueNewsUrl;
+    } else {
+      url = this.urls.leagueNews.ligue1LeagueNewsUrl;
+    }
+
+    return this.http.get(url, this.options);
+  }
+
+  getAllHighlights() {
+    const url = 'https://free-football-soccer-videos.p.rapidapi.com/';
+    return this.http.get(url, this.highlightsOptions);
+  }
+
+  getLeagueTopScorers(
+    prem?: boolean,
+    serieA?: boolean,
+    laLiga?: boolean,
+    bundes?: boolean,
+    ligue1?: boolean
+  ) {
+    var url: string = '';
+
+    if (prem) {
+      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.prem}&season=2022`;
+    } else if (serieA) {
+      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.serieA}&season=2022`;
+    } else if (laLiga) {
+      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.laLiga}&season=2022`;
+    } else if (bundes) {
+      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.bundesliga}&season=2022`;
+    } else {
+      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.ligue1}&season=2022`;
     }
 
     return this.http.get(url, this.ApiFootballOptions);
