@@ -1,0 +1,29 @@
+<div class="highlightContent">
+    <div class="searchBar"> 
+        <form class="form">
+            <mat-form-field class="searchInput" appearance="outline">
+            <input type="tel" matInput placeholder="Search match highlights" name= "search" (ngModelChange)="filterSearch($event)" [(ngModel)]= "search">
+            </mat-form-field>
+            </form>
+    </div>
+        <div class="highlightsContent">
+            <ng-container *ngFor="let match of matchHighlights">
+                <div class="matchHighlight" (click)="openHighlight(match.embed)">
+                    <img class="thumbnail" src="{{match.thumbnail}}" alt="">
+                    <p class="matchTitle">{{match.title}}</p>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="matchHighlights.length == 0 && !isLoading then noSearchResults">
+            </ng-container>
+           
+        </div>
+    
+        <ng-template #noSearchResults>
+            <div class="noResultsDiv">
+                <p class="noResults">No results matching search</p>
+            </div>
+       
+        </ng-template>
+
+
+</div>
