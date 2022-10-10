@@ -1,0 +1,41 @@
+<div class="tileContent">
+  <gridster [options]="options">
+    <gridster-item [item]=dashboard[0]
+    (mousedown)="$event.stopPropagation()"
+    (touchstart)="$event.stopPropagation()"> 
+          <div class="topScorersComp">
+            <!-- <app-top-scorers [league]="leagueName" [leagueImg]="leagueImg"></app-top-scorers> -->
+          </div>
+    </gridster-item>
+    <gridster-item [item]=dashboard[1]
+    (mousedown)="$event.stopPropagation()"
+    (touchstart)="$event.stopPropagation()">
+    <div class="leagueNews">
+      <!-- <app-league-news [league]="leagueName"></app-league-news> -->
+    </div>
+  </gridster-item>
+  <gridster-item [item]=dashboard[4]
+  (mousedown)="$event.stopPropagation()"
+  (touchstart)="$event.stopPropagation()">
+  <div class="thisGameWeekFixtures">
+    <!-- <app-upcoming-fixtures [league]="leagueName"></app-upcoming-fixtures> -->
+  </div>
+  </gridster-item>
+  <gridster-item [item]=dashboard[3]
+  (mousedown)="$event.stopPropagation()"
+  (touchstart)="$event.stopPropagation()">
+
+  <div class="lastGameWeekResults">
+    <!-- <app-previous-results [league]="leagueName"></app-previous-results> -->
+  </div>
+  </gridster-item>
+  <gridster-item [item]=dashboard[2]
+  (mousedown)="$event.stopPropagation()"
+  (touchstart)="$event.stopPropagation()">
+  <div class="table">
+    <app-league-table [league]="leagueName"></app-league-table>
+  </div>
+  </gridster-item>
+  
+  </gridster>
+</div>
