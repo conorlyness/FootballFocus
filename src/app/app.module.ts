@@ -10,7 +10,6 @@ import { PremierLeagueComponent } from './components/premier-league/premier-leag
 import { HttpClientModule } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatIconModule } from '@angular/material/icon';
 import { SerieAComponent } from './components/serie-a/serie-a.component';
 import { LaLigaComponent } from './components/la-liga/la-liga.component';
 import { BundesligaComponent } from './components/bundesliga/bundesliga.component';
@@ -19,6 +18,18 @@ import { UpcomingFixturesComponent } from './components/upcoming-fixtures/upcomi
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { PreviousResultsComponent } from './components/previous-results/previous-results.component';
+import { HighlightsComponent } from './components/highlights/highlights.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { TopScorersComponent } from './components/top-scorers/top-scorers.component';
+import { LeagueNewsComponent } from './components/league-news/league-news.component';
+import { GridComponent } from './components/grid/grid.component';
+import { GridsterModule } from 'angular-gridster2';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -31,6 +42,10 @@ import { PreviousResultsComponent } from './components/previous-results/previous
     Ligue1Component,
     UpcomingFixturesComponent,
     PreviousResultsComponent,
+    HighlightsComponent,
+    TopScorersComponent,
+    LeagueNewsComponent,
+    GridComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,9 +55,16 @@ import { PreviousResultsComponent } from './components/previous-results/previous
     HttpClientModule,
     MatGridListModule,
     MatTabsModule,
-    MatIconModule,
     MatListModule,
     MatCardModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    GridsterModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
