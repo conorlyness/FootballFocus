@@ -1,5 +1,5 @@
 <div class="allTabContent">
-  <mat-tab-group mat-align-tabs="center">
+  <mat-tab-group mat-align-tabs="center" selectedIndex="0" (selectedTabChange)="changeTab($event)">
     <mat-tab>
       <ng-template mat-tab-label>
         <img class="tabImg" src="../assets/premier-league-file.png" alt="">
@@ -10,22 +10,43 @@
         <ng-template mat-tab-label>
         <img class="tabImg" src="../assets/laliga-v-1200x1200.png" alt="">
         La Liga
-      </ng-template><app-la-liga></app-la-liga></mat-tab>
+      </ng-template>
+      <ng-container *ngIf="tabIndex == 1">
+        <app-la-liga></app-la-liga>
+      </ng-container>
+    </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
         <img class="tabImg" src="../assets/png-clipart-bundesliga-logo-bundesliga-logo-icons-logos-emojis-football.png" alt="">
         Bundesliga
-      </ng-template><app-bundesliga></app-bundesliga></mat-tab>
+      </ng-template>
+      <ng-container *ngIf="tabIndex == 2">
+        <app-bundesliga></app-bundesliga>
+      </ng-container>
+    </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
         <img class="tabImg" src="../assets/Italian-Serie-A-TIM-Logo-2019.png" alt="">
         Serie A
-      </ng-template><app-serie-a></app-serie-a></mat-tab>
+      </ng-template>
+      <ng-container *ngIf="tabIndex == 3">
+        <app-serie-a></app-serie-a>
+      </ng-container>
+    </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
         <img class="tabImg" src="../assets/Ligue1_logo.png" alt="">
         Ligue 1
-      </ng-template><app-ligue1></app-ligue1></mat-tab>
+      </ng-template>
+      <ng-container *ngIf="tabIndex == 4">
+        <app-ligue1></app-ligue1>
+      </ng-container>
+    </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <img class="tabImg" src="../assets/football-logo-black-and-white.png" alt="">
+          Highlights
+        </ng-template><app-highlights></app-highlights></mat-tab>
   </mat-tab-group>
 </div>
 
