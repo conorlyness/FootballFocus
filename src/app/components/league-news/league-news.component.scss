@@ -1,0 +1,27 @@
+.article {
+    display: flex;
+    font-weight: 200;
+    padding: 10px;
+}
+
+.article:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+}
+
+.thumbnail {
+    height: 75px;
+    width: 100px;
+    padding-right: 20px;
+}
+
+.title {
+    //add word wrap if some articles titles are too long?
+}
+
+.noArticles {
+    text-align: center;
+    padding-top: 30px;
+    font-weight: 200;
+    font-size: 20px;
+}

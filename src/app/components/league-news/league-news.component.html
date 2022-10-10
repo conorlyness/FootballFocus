@@ -1,0 +1,17 @@
+<div class="newsContent">
+    <ng-container *ngFor="let article of news">
+        <div class="article" (click)="openArticle(article.NewsLink)">
+            <img class="thumbnail" src="{{article.Image}}" alt="">
+            <p class="title">{{article.Title}}</p>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="news.length == 0 && !isLoading then noNews">
+    </ng-container>
+
+</div>
+
+<ng-template #noNews>
+    <div class="noArticles">
+        <p>No news articles at present for this league</p>
+    </div>
+</ng-template>
