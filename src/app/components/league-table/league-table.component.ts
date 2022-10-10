@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/services/api.service';
 
 @Component({
@@ -14,10 +14,11 @@ export class LeagueTableComponent implements OnInit {
   laLiga: boolean = false;
   bundes: boolean = false;
   ligue1: boolean = false;
-
-  constructor(private api: ApiService) {}
+  loading: boolean = false;
+  constructor(private api: ApiService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    this.loading = true;
     if (this.league === 'prem') {
       this.prem = true;
     } else if (this.league === 'serieA') {
@@ -38,6 +39,7 @@ export class LeagueTableComponent implements OnInit {
         this.ligue1
       )
       .subscribe((data: any) => {
+        this.loading = false;
         this.tableData = data;
         console.log('league table', data);
       });

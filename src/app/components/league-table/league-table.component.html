@@ -1,4 +1,5 @@
 <div class="LeagueTable">
+  <ng-container *ngIf="!loading">
     <table mat-table [dataSource]="tableData">
             <ng-container matColumnDef="Position">
                 <th mat-header-cell *matHeaderCellDef> Pos. </th>
@@ -48,5 +49,12 @@
           <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
-      
+    </ng-container>
 </div>
+
+<ng-container *ngIf="loading">
+    <div class="loadingSpinner">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-container>
+
