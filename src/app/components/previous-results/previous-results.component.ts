@@ -14,10 +14,11 @@ export class PreviousResultsComponent implements OnInit {
   laLiga: boolean = false;
   bundes: boolean = false;
   ligue1: boolean = false;
-
+  loading: boolean = false;
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
+    this.loading = true;
     if (this.league === 'prem') {
       this.prem = true;
     } else if (this.league === 'serieA') {
@@ -38,6 +39,7 @@ export class PreviousResultsComponent implements OnInit {
         this.ligue1
       )
       .subscribe((data: any) => {
+        this.loading = false;
         const fixturesObj = data[0];
         //gets the first object in the object
         this.fixtureData = fixturesObj[Object.keys(fixturesObj)[0]];

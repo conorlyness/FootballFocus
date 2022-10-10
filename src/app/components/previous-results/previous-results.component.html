@@ -1,5 +1,6 @@
 <p class="previousResultsTitle">Previous GameWeek Results</p>
 <div class="previousResults">
+    <ng-container *ngIf="!loading">
     <ng-container *ngFor="let fixture of fixtureData">
             <mat-card>
                 <div class="teamNames">{{fixture.homeTeam}} Vs {{fixture.awayTeam}}</div>
@@ -11,4 +12,11 @@
               
             </mat-card>
         </ng-container>
+    </ng-container>
 </div>
+
+<ng-container *ngIf="loading">
+    <div class="loadingSpinner">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-container>
