@@ -8,6 +8,7 @@ import { ApiService } from 'src/app/services/services/api.service';
 })
 export class PremierLeagueComponent implements OnInit {
   leagueName: string = 'prem';
+  leagueImg: string = '../../../assets/premier-league-file.png';
 
   constructor(private api: ApiService) {}
 

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LaLigaComponent implements OnInit {
   leagueName: string = 'laLiga';
+  leagueImg: string = '../../../assets/laliga-v-1200x1200.png';
 
   constructor() {}
 
