@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/services/api.service';
+import { LeagueTable } from 'src/app/types';
 
 @Component({
   selector: 'app-league-table',
@@ -8,7 +9,7 @@ import { ApiService } from 'src/app/services/services/api.service';
 })
 export class LeagueTableComponent implements OnInit {
   @Input() league!: string;
-  tableData: any[] = [];
+  tableData: Array<LeagueTable> = [];
   prem: boolean = false;
   serieA: boolean = false;
   laLiga: boolean = false;
@@ -40,7 +41,9 @@ export class LeagueTableComponent implements OnInit {
       )
       .subscribe((data: any) => {
         this.loading = false;
-        this.tableData = data;
+        data.forEach((element: LeagueTable) => {
+          this.tableData.push(element);
+        });
         console.log('league table', data);
       });
   }

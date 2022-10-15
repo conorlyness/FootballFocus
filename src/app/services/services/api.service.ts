@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { urls } from '../../serviceUrls';
+import { LeagueTable } from 'src/app/types';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +52,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ) {
+  ): Observable<LeagueTable> {
     var url: string = '';
 
     if (prem) {
@@ -66,7 +67,7 @@ export class ApiService {
       url = this.urls.leagueTables.ligue1LeagueTableUrl;
     }
 
-    return this.http.get(url, this.options);
+    return this.http.get<LeagueTable>(url, this.options);
   }
 
   getLeagueFixtures(
