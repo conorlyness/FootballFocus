@@ -41,7 +41,7 @@ export class LeagueTableComponent implements OnInit {
       )
       .subscribe((data: any) => {
         this.loading = false;
-        data.forEach((element: LeagueTable) => {
+        data.response[0].league.standings[0].forEach((element: LeagueTable) => {
           this.tableData.push(element);
         });
         console.log('league table', data);
