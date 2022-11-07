@@ -1,62 +1,73 @@
 .previousResults {
-    display: flex;
-    padding-top: 20px;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  padding-top: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
 }
 
 mat-card {
-    width: 230px;
-    height: 130px;
-    padding: 10px;
-    margin: 20px;
+  width: 230px;
+  height: 130px;
+  padding: 10px;
+  margin: 20px;
 }
 
 mat-card:hover {
-    box-shadow: rgb(60,23,90) 0px 1px 3px, rgb(60,23,90) 0px 1px 2px;
+  box-shadow: rgb(60, 23, 90) 0px 1px 3px, rgb(60, 23, 90) 0px 1px 2px;
 }
 
-.homeTeam{
-    // left: 0;
-    // position: absolute;
-    // padding-left: 10px;
+.homeTeam {
+  // left: 0;
+  // position: absolute;
+  // padding-left: 10px;
 }
 
 .awayTeam {
-    // right: 0;
-    // position: absolute;
-    // padding-right: 10px;
+  // right: 0;
+  // position: absolute;
+  // padding-right: 10px;
 }
 
 .teamNames {
-    text-align: center;
-    padding-bottom: 10px;
-    font-size: 14px;
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 14px;
 }
 
-.previousResultsTitle{
-    text-align: center;
-    font-size: 22px;
-    font-weight: 200;
+.previousResultsTitle {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 200;
+  padding-top: 10px;
 }
 
 .teamBadges {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    padding-top: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-top: 10px;
 }
 
 .gameResult {
-    font-size: 18px;
-    font-weight: bold;
-    padding-left: 20px;
-    padding-right: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .loadingSpinner {
-    padding-top: 50px;
-    text-align: -webkit-center;
+  padding-top: 50px;
+  text-align: -webkit-center;
+}
+
+.buttons {
+  text-align: center;
+  justify-content: center;
+
+  button {
+    padding: 5px;
+    margin: 5px;
+  }
 }
