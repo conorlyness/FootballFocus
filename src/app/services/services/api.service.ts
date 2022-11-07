@@ -67,7 +67,7 @@ export class ApiService {
       url = this.urls.leagueTables.ligue1LeagueTableUrl;
     }
 
-    return this.http.get<LeagueTable>(url, this.options);
+    return this.http.get<LeagueTable>(url, this.ApiFootballOptions);
   }
 
   getLeagueFixtures(
@@ -221,6 +221,33 @@ export class ApiService {
     } else {
       url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.ligue1}&season=2022`;
     }
+
+    return this.http.get(url, this.ApiFootballOptions);
+  }
+
+  getLast5Results(
+    teamID: number,
+    prem?: boolean,
+    serieA?: boolean,
+    laLiga?: boolean,
+    bundes?: boolean,
+    ligue1?: boolean
+  ) {
+    let leagueID;
+
+    if (prem) {
+      leagueID = this.LeagueIds.prem;
+    } else if (serieA) {
+      leagueID = this.LeagueIds.serieA;
+    } else if (laLiga) {
+      leagueID = this.LeagueIds.laLiga;
+    } else if (bundes) {
+      leagueID = this.LeagueIds.bundesliga;
+    } else {
+      leagueID = this.LeagueIds.ligue1;
+    }
+
+    var url: string = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueID}&season=2022&team=${teamID}&last=5`;
 
     return this.http.get(url, this.ApiFootballOptions);
   }
