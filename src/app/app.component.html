@@ -1,14 +1,19 @@
 <div class="allTabContent">
-  <mat-tab-group mat-align-tabs="center" selectedIndex="0" (selectedTabChange)="changeTab($event)">
+  <mat-tab-group
+    mat-align-tabs="center"
+    selectedIndex="0"
+    (selectedTabChange)="changeTab($event)"
+  >
     <mat-tab>
       <ng-template mat-tab-label>
-        <img class="tabImg" src="../assets/premier-league-file.png" alt="">
+        <img class="tabImg" src="assets/premier-league-file.png" alt="" />
         Premier League
       </ng-template>
-      <app-premier-league></app-premier-league></mat-tab>
+      <app-premier-league></app-premier-league>
+    </mat-tab>
     <mat-tab>
-        <ng-template mat-tab-label>
-        <img class="tabImg" src="../assets/laliga-v-1200x1200.png" alt="">
+      <ng-template mat-tab-label>
+        <img class="tabImg" src="assets/laliga-v-1200x1200.png" alt="" />
         La Liga
       </ng-template>
       <ng-container *ngIf="tabIndex == 1">
@@ -17,7 +22,11 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <img class="tabImg" src="../assets/png-clipart-bundesliga-logo-bundesliga-logo-icons-logos-emojis-football.png" alt="">
+        <img
+          class="tabImg"
+          src="assets/png-clipart-bundesliga-logo-bundesliga-logo-icons-logos-emojis-football.png"
+          alt=""
+        />
         Bundesliga
       </ng-template>
       <ng-container *ngIf="tabIndex == 2">
@@ -26,7 +35,11 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <img class="tabImg" src="../assets/Italian-Serie-A-TIM-Logo-2019.png" alt="">
+        <img
+          class="tabImg"
+          src="assets/Italian-Serie-A-TIM-Logo-2019.png"
+          alt=""
+        />
         Serie A
       </ng-template>
       <ng-container *ngIf="tabIndex == 3">
@@ -35,19 +48,22 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <img class="tabImg" src="../assets/Ligue1_logo.png" alt="">
+        <img class="tabImg" src="assets/Ligue1_logo.png" alt="" />
         Ligue 1
       </ng-template>
       <ng-container *ngIf="tabIndex == 4">
         <app-ligue1></app-ligue1>
       </ng-container>
     </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <img class="tabImg" src="../assets/football-logo-black-and-white.png" alt="">
-          Highlights
-        </ng-template><app-highlights></app-highlights></mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img
+          class="tabImg"
+          src="assets/football-logo-black-and-white.png"
+          alt=""
+        />
+        Highlights </ng-template
+      ><app-highlights></app-highlights
+    ></mat-tab>
   </mat-tab-group>
 </div>
-
-

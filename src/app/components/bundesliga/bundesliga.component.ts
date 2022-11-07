@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class BundesligaComponent implements OnInit {
   leagueName: string = 'bundes';
   leagueImg: string =
-    '../../../assets/png-clipart-bundesliga-logo-bundesliga-logo-icons-logos-emojis-football.png';
+    'assets/png-clipart-bundesliga-logo-bundesliga-logo-icons-logos-emojis-football.png';
 
   constructor() {}
 

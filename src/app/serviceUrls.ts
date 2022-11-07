@@ -2,12 +2,15 @@ export let urls = {
   leagueTables: {
     //table urls
     premierLeagueTableUrl:
-      'https://football98.p.rapidapi.com/premierleague/table',
-    serieALeagueTableUrl: 'https://football98.p.rapidapi.com/seriea/table',
-    laLigaLeagueTableUrl: 'https://football98.p.rapidapi.com/liga/table',
+      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=39',
+    serieALeagueTableUrl:
+      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=135',
+    laLigaLeagueTableUrl:
+      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=140',
     bundesligaLeagueTableUrl:
-      'https://football98.p.rapidapi.com/bundesliga/table',
-    ligue1LeagueTableUrl: 'https://football98.p.rapidapi.com/ligue1/table',
+      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=78',
+    ligue1LeagueTableUrl:
+      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=61',
   },
   leagueFixtures: {
     //fixture urls
@@ -15,31 +18,34 @@ export let urls = {
       'https://football98.p.rapidapi.com/premierleague/fixtures',
     serieALeagueFixturesUrl:
       'https://football98.p.rapidapi.com/seriea/fixtures',
-    laLigaLeagueFixturesUrl: 'https://football98.p.rapidapi.com/liga/fixtures',
+    laLigaLeagueFixturesUrl:
+      'https://football98.p.rapidapi.com/laliga/fixtures',
     bundesligaLeagueFixturesUrl:
       'https://football98.p.rapidapi.com/bundesliga/fixtures',
     ligue1LeagueFixturesUrl:
-      'https://football98.p.rapidapi.com/ligue1/fixtures',
+      'https://football98.p.rapidapi.com/ligue1ubereats/fixtures',
   },
   leagueResults: {
     //result urls
     premierLeagueResultsUrl:
       'https://football98.p.rapidapi.com/premierleague/results',
     serieALeagueResultsUrl: 'https://football98.p.rapidapi.com/seriea/results',
-    laLigaLeagueResultsUrl: 'https://football98.p.rapidapi.com/liga/results',
+    laLigaLeagueResultsUrl: 'https://football98.p.rapidapi.com/laliga/results',
     bundesligaLeagueResultsUrl:
       'https://football98.p.rapidapi.com/bundesliga/results',
-    ligue1LeagueResultsUrl: 'https://football98.p.rapidapi.com/ligue1/results',
+    ligue1LeagueResultsUrl:
+      'https://football98.p.rapidapi.com/ligue1ubereats/results',
   },
   leagueNews: {
     //news urls
     premierLeagueNewsUrl:
       'https://football98.p.rapidapi.com/premierleague/news',
     serieALeagueNewsUrl: 'https://football98.p.rapidapi.com/seriea/news',
-    laLigaLeagueNewsUrl: 'https://football98.p.rapidapi.com/liga/news',
+    laLigaLeagueNewsUrl: 'https://football98.p.rapidapi.com/laliga/news',
     bundesligaLeagueNewsUrl:
       'https://football98.p.rapidapi.com/bundesliga/news',
-    ligue1LeagueNewsUrl: 'https://football98.p.rapidapi.com/ligue1/news',
+    ligue1LeagueNewsUrl:
+      'https://football98.p.rapidapi.com/ligue1ubereats/news',
   },
   leagueRound: {
     //current round url

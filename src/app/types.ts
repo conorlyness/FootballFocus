@@ -1,11 +1,10 @@
 export type LeagueTable = {
-  Position: string;
-  SquadLogo: string;
-  Name: string;
-  Points: string;
-  Played: string;
-  Winned: string;
-  Loosed: string;
-  Tie: string;
-  'Goal Difference': string;
+  rank: number;
+  team: object;
+  points: number;
+  goalsDiff: number;
+  played: number;
+  win: number;
+  lose: number;
+  draw: number;
 };
