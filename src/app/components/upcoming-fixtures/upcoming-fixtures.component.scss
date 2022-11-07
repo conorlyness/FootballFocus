@@ -1,77 +1,79 @@
 .upcomingFixtures {
-    display: flex;
-    padding-top: 20px;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  padding-top: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
 }
 
 mat-card {
-    width: 230px;
-    height: 150px;
-    padding: 10px;
-    margin: 20px;
+  width: 230px;
+  height: 150px;
+  padding: 10px;
+  margin: 20px;
 }
 
 mat-card:hover {
-    box-shadow: rgb(60,23,90) 0px 1px 3px, rgb(60,23,90) 0px 1px 2px;
+  box-shadow: rgb(60, 23, 90) 0px 1px 3px, rgb(60, 23, 90) 0px 1px 2px;
 }
 
-
-
-.homeTeam{
-    // left: 0;
-    // position: absolute;
-    // padding-left: 10px;
-    height: 44px;
-    width: 44px;
+.homeTeam {
+  height: 44px;
+  width: 44px;
 }
 
 .awayTeam {
-    // right: 0;
-    // position: absolute;
-    // padding-right: 10px;
-    height: 44px;
-    width: 44px;
+  height: 44px;
+  width: 44px;
 }
 
 .teamNames {
-    text-align: center;
-    padding-bottom: 10px;
-    font-size: 14px;
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 14px;
 }
 
-.upcomingFixturesTitle{
-    text-align: center;
-    font-size: 22px;
-    font-weight: 200;
+.upcomingFixturesTitle {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 200;
+  padding-top: 10px;
 }
 
 .teamBadges {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .fixtureDate {
-    font-size: 18px;
-    font-weight: 200;
-    padding-left: 20px;
-    padding-right: 20px;
+  font-size: 18px;
+  font-weight: 200;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .badgeSpacer {
-    padding-right: 10px;
-    font-size: 40px;
-    padding-left: 10px;
-    font-weight: 100;
+  padding-right: 10px;
+  font-size: 40px;
+  padding-left: 10px;
+  font-weight: 100;
 }
 
 .loadingSpinner {
-    padding-top: 50px;
-    text-align: -webkit-center;
+  padding-top: 50px;
+  text-align: -webkit-center;
 }
 
+.buttons {
+  text-align: center;
+  justify-content: center;
+
+  button {
+    padding: 5px;
+    margin: 5px;
+  }
+}

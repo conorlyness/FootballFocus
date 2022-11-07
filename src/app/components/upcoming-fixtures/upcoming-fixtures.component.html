@@ -1,23 +1,46 @@
-<p class="upcomingFixturesTitle">Upcoming GameWeek Fixtures</p>
+<p class="upcomingFixturesTitle">GameWeek {{ displayGameweek }} Fixtures</p>
 <div class="upcomingFixtures">
-    <ng-container *ngIf="!loading">
+  <ng-container *ngIf="!loading">
     <ng-container *ngFor="let fixture of fixtureData">
-            <mat-card>
-                <div class="teamNames">{{fixture.teams.home.name}} Vs {{fixture.teams.away.name}}</div>
-                <div class="teamBadges">
-                    <img class="homeTeam" src="{{fixture.teams.home.logo}}" alt="">
-                    <div class="badgeSpacer"> | </div>
-                    <img class="awayTeam" src="{{fixture.teams.away.logo}}" alt="">
-                </div>
-                <div class="fixtureDate">{{fixture.fixture.date | date: 'EEEE, MMM d, y, h:mm a'}}</div>
-              
-            </mat-card>
-        </ng-container>
+      <mat-card
+        [title]="'click to see last 5 results'"
+        (click)="
+          showTeamsPrevGames(
+            fixture.teams.home.id,
+            fixture.teams.away.id,
+            fixture.teams.home.name,
+            fixture.teams.away.name
+          )
+        "
+      >
+        <div class="teamNames">
+          {{ fixture.teams.home.name }} Vs {{ fixture.teams.away.name }}
+        </div>
+        <div class="teamBadges">
+          <img class="homeTeam" src="{{ fixture.teams.home.logo }}" alt="" />
+          <div class="badgeSpacer">|</div>
+          <img class="awayTeam" src="{{ fixture.teams.away.logo }}" alt="" />
+        </div>
+        <div class="fixtureDate">
+          {{ fixture.fixture.date | date: "EEEE, MMM d, y, h:mm a" }}
+        </div>
+      </mat-card>
     </ng-container>
+  </ng-container>
+</div>
+<div class="buttons">
+  <ng-container *ngIf="!loading">
+    <button (click)="previousFixtures()" [disabled]="showingPreviousGameweek">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button (click)="upcomingFixtures()" [disabled]="showingNextGameweek">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </ng-container>
 </div>
 
 <ng-container *ngIf="loading">
-    <div class="loadingSpinner">
-        <mat-spinner></mat-spinner>
-    </div>
+  <div class="loadingSpinner">
+    <mat-spinner></mat-spinner>
+  </div>
 </ng-container>

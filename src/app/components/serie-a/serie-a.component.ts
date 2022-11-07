@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SerieAComponent implements OnInit {
   leagueName: string = 'serieA';
-  leagueImg: string = '../../../assets/Italian-Serie-A-TIM-Logo-2019.png';
+  leagueImg: string = 'assets/Italian-Serie-A-TIM-Logo-2019.png';
 
   constructor() {}
 
