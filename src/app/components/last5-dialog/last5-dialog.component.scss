@@ -1,0 +1,86 @@
+.allDialogContent {
+  padding-top: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.dialogTitle {
+  text-align: center;
+}
+
+mat-card {
+  padding: 10px;
+  margin: 20px;
+}
+
+mat-card:hover {
+  box-shadow: rgb(60, 23, 90) 0px 1px 3px, rgb(60, 23, 90) 0px 1px 2px;
+}
+
+.teamNames {
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+
+.teamBadges {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-top: 10px;
+}
+
+.gameResult {
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.homeTeam {
+  height: 44px;
+  width: 44px;
+}
+
+.awayTeam {
+  height: 44px;
+  width: 44px;
+}
+
+.homeTeamsLast5 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: inherit;
+  border-bottom: 1px solid black;
+}
+
+.awayTeamsLast5 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: inherit;
+}
+
+.closeBtn {
+  justify-content: flex-end;
+}
+
+::ng-deep .mat-dialog-content {
+  max-height: none !important;
+}
+
+button {
+  box-shadow: rgb(60, 23, 90) 0px 1px 3px, rgb(60, 23, 90) 0px 1px 2px;
+}
+
+.homeName {
+  font-weight: 200;
+  font-size: 22px;
+}
+
+.awayName {
+  font-weight: 200;
+  font-size: 22px;
+  padding-top: 10px;
+}
