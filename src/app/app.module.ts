@@ -30,6 +30,7 @@ import { LeagueNewsComponent } from './components/league-news/league-news.compon
 import { GridComponent } from './components/grid/grid.component';
 import { GridsterModule } from 'angular-gridster2';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Last5DialogComponent } from './components/last5-dialog/last5-dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     TopScorersComponent,
     LeagueNewsComponent,
     GridComponent,
+    Last5DialogComponent,
   ],
   imports: [
     BrowserModule,
