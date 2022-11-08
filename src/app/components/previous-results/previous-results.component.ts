@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/services/api.service';
+import { LeagueResults } from 'src/app/types';
 
 @Component({
   selector: 'app-previous-results',
@@ -8,9 +9,9 @@ import { ApiService } from 'src/app/services/services/api.service';
 })
 export class PreviousResultsComponent implements OnInit {
   @Input() league!: string;
-  fixtureData: any[] = [];
-  previousResultsData: any[] = [];
-  currentResultsData: any[] = [];
+  fixtureData: LeagueResults[] = [];
+  previousResultsData: LeagueResults[] = [];
+  currentResultsData: LeagueResults[] = [];
   prem: boolean = false;
   serieA: boolean = false;
   laLiga: boolean = false;
@@ -65,7 +66,6 @@ export class PreviousResultsComponent implements OnInit {
 
         this.currentResultsData = fixturesObj[Object.keys(fixturesObj)[0]];
         this.previousResultsData = fixturesObj[Object.keys(fixturesObj)[1]];
-        //gets the first object in the object
         this.fixtureData = this.currentResultsData;
         console.log('league fixtures', this.fixtureData);
       });

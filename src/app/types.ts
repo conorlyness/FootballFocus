@@ -8,3 +8,12 @@ export type LeagueTable = {
   lose: number;
   draw: number;
 };
+
+export type LeagueResults = {
+  awayLogo: string;
+  awayTeam: string;
+  awayTeamScore: string;
+  homeLogo: string;
+  homeTeam: string;
+  homeTeamScore: string;
+};
