@@ -12,19 +12,6 @@ export let urls = {
     ligue1LeagueTableUrl:
       'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=61',
   },
-  leagueFixtures: {
-    //fixture urls
-    premierLeagueFixturesUrl:
-      'https://football98.p.rapidapi.com/premierleague/fixtures',
-    serieALeagueFixturesUrl:
-      'https://football98.p.rapidapi.com/seriea/fixtures',
-    laLigaLeagueFixturesUrl:
-      'https://football98.p.rapidapi.com/laliga/fixtures',
-    bundesligaLeagueFixturesUrl:
-      'https://football98.p.rapidapi.com/bundesliga/fixtures',
-    ligue1LeagueFixturesUrl:
-      'https://football98.p.rapidapi.com/ligue1ubereats/fixtures',
-  },
   leagueResults: {
     //result urls
     premierLeagueResultsUrl:

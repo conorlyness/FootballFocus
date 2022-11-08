@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { urls } from '../../serviceUrls';
-import { LeagueTable } from 'src/app/types';
+import { LeagueTable, LeagueResults } from 'src/app/types';
 
 @Injectable({
   providedIn: 'root',
@@ -70,37 +70,13 @@ export class ApiService {
     return this.http.get<LeagueTable>(url, this.ApiFootballOptions);
   }
 
-  getLeagueFixtures(
-    prem?: boolean,
-    serieA?: boolean,
-    laLiga?: boolean,
-    bundes?: boolean,
-    ligue1?: boolean
-  ) {
-    var url: string = '';
-
-    if (prem) {
-      url = this.urls.leagueFixtures.premierLeagueFixturesUrl;
-    } else if (serieA) {
-      url = this.urls.leagueFixtures.serieALeagueFixturesUrl;
-    } else if (laLiga) {
-      url = this.urls.leagueFixtures.laLigaLeagueFixturesUrl;
-    } else if (bundes) {
-      url = this.urls.leagueFixtures.bundesligaLeagueFixturesUrl;
-    } else {
-      url = this.urls.leagueFixtures.ligue1LeagueResultsUrl;
-    }
-
-    return this.http.get(url, this.options);
-  }
-
   getLeagueResults(
     prem?: boolean,
     serieA?: boolean,
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ) {
+  ): Observable<LeagueResults> {
     var url: string = '';
 
     if (prem) {
@@ -115,7 +91,7 @@ export class ApiService {
       url = this.urls.leagueResults.ligue1LeagueResultsUrl;
     }
 
-    return this.http.get(url, this.options);
+    return this.http.get<LeagueResults>(url, this.options);
   }
 
   getCurrentFixtureRound(
@@ -154,20 +130,22 @@ export class ApiService {
     bundes?: boolean,
     ligue1?: boolean
   ) {
-    var url: string = '';
     console.log('round passed in : ', round);
+    let leagueID;
 
     if (prem) {
-      url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${this.LeagueIds.prem}&season=2022&round=${round}&timezone=Europe%2FLondon`;
+      leagueID = this.LeagueIds.prem;
     } else if (serieA) {
-      url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${this.LeagueIds.serieA}&season=2022&round=${round}&timezone=Europe%2FLondon`;
+      leagueID = this.LeagueIds.serieA;
     } else if (laLiga) {
-      url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${this.LeagueIds.laLiga}&season=2022&round=${round}&timezone=Europe%2FLondon`;
+      leagueID = this.LeagueIds.laLiga;
     } else if (bundes) {
-      url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${this.LeagueIds.bundesliga}&season=2022&round=${round}&timezone=Europe%2FLondon`;
+      leagueID = this.LeagueIds.bundesliga;
     } else {
-      url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${this.LeagueIds.ligue1}&season=2022&round=${round}&timezone=Europe%2FLondon`;
+      leagueID = this.LeagueIds.ligue1;
     }
+
+    let url: string = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueID}&season=2022&round=${round}&timezone=Europe%2FLondon`;
 
     return this.http.get(url, this.ApiFootballOptions);
   }
@@ -179,7 +157,7 @@ export class ApiService {
     bundes?: boolean,
     ligue1?: boolean
   ) {
-    var url: string = '';
+    let url: string = '';
 
     if (prem) {
       url = this.urls.leagueNews.premierLeagueNewsUrl;
@@ -208,20 +186,20 @@ export class ApiService {
     bundes?: boolean,
     ligue1?: boolean
   ) {
-    var url: string = '';
+    let leagueID;
 
     if (prem) {
-      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.prem}&season=2022`;
+      leagueID = this.LeagueIds.prem;
     } else if (serieA) {
-      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.serieA}&season=2022`;
+      leagueID = this.LeagueIds.serieA;
     } else if (laLiga) {
-      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.laLiga}&season=2022`;
+      leagueID = this.LeagueIds.laLiga;
     } else if (bundes) {
-      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.bundesliga}&season=2022`;
+      leagueID = this.LeagueIds.bundesliga;
     } else {
-      url = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${this.LeagueIds.ligue1}&season=2022`;
+      leagueID = this.LeagueIds.ligue1;
     }
-
+    let url: string = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${leagueID}&season=2022`;
     return this.http.get(url, this.ApiFootballOptions);
   }
 
