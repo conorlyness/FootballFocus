@@ -3,7 +3,13 @@
     <ng-container *ngFor="let article of news">
       <div class="article" (click)="openArticle(article.NewsLink)">
         <img class="thumbnail" src="{{ article.Image }}" alt="" />
-        <p class="title">{{ article.Title }}</p>
+        <div class="articleDetails">
+          <p class="title">{{ article.Title }}</p>
+
+          <p class="publishedDate">
+            Published {{ article.PublisherDate }} by {{ article.PublisherName }}
+          </p>
+        </div>
       </div>
     </ng-container>
     <ng-container *ngIf="news.length == 0 && !isLoading; then noNews">
