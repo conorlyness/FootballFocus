@@ -1,20 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
+import { LeagueNews } from '../../types';
 
 @Component({
   selector: 'app-league-news',
   templateUrl: './league-news.component.html',
   styleUrls: ['./league-news.component.scss'],
 })
-export class LeagueNewsComponent implements OnInit {
+export class LeagueNewsComponent implements OnInit, OnDestroy {
   @Input() league!: string;
-  news: any[] = [];
+  news: LeagueNews[] = [];
   prem: boolean = false;
   serieA: boolean = false;
   laLiga: boolean = false;
   bundes: boolean = false;
   ligue1: boolean = false;
   isLoading: boolean = false;
+  subscriptions = new Subscription();
 
   constructor(private api: ApiService) {}
 
@@ -31,22 +34,32 @@ export class LeagueNewsComponent implements OnInit {
     } else {
       this.ligue1 = true;
     }
-    this.api
-      .getLeagueNews(
-        this.prem,
-        this.serieA,
-        this.laLiga,
-        this.bundes,
-        this.ligue1
-      )
-      .subscribe((data: any) => {
-        this.isLoading = false;
-        this.news = data;
-        console.log('league news', data);
-      });
+    this.subscriptions.add(
+      this.api
+        .getLeagueNews(
+          this.prem,
+          this.serieA,
+          this.laLiga,
+          this.bundes,
+          this.ligue1
+        )
+        .subscribe({
+          next: (data: any) => {
+            this.isLoading = false;
+            data.forEach((article: LeagueNews) => {
+              this.news.push(article);
+            });
+          },
+          error: (error) => console.log('got an error: ', error),
+        })
+    );
   }
 
   openArticle(url: string) {
     window.open(url, '_blank');
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }

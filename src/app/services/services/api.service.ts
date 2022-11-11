@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { map, Observable, pluck, retry, throwError } from 'rxjs';
 import { urls } from '../../serviceUrls';
-import { LeagueTable, LeagueResults } from 'src/app/types';
-
+import {
+  LeagueTable,
+  LeagueResults,
+  LeagueRound,
+  ApiResponse,
+} from 'src/app/types';
+import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -67,7 +72,10 @@ export class ApiService {
       url = this.urls.leagueTables.ligue1LeagueTableUrl;
     }
 
-    return this.http.get<LeagueTable>(url, this.ApiFootballOptions);
+    return this.http.get<LeagueTable>(url, this.ApiFootballOptions).pipe(
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
   }
 
   getLeagueResults(
@@ -91,7 +99,10 @@ export class ApiService {
       url = this.urls.leagueResults.ligue1LeagueResultsUrl;
     }
 
-    return this.http.get<LeagueResults>(url, this.options);
+    return this.http.get<LeagueResults>(url, this.options).pipe(
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
   }
 
   getCurrentFixtureRound(
@@ -100,7 +111,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ) {
+  ): Observable<LeagueRound> {
     var url: string = '';
 
     if (prem) {
@@ -115,11 +126,14 @@ export class ApiService {
       url = this.urls.leagueRound.ligue1LeagueCurrentRoundUrl;
     }
 
-    const resp = this.http.get(url, this.ApiFootballOptions);
+    const resp = this.http.get<LeagueRound>(url, this.ApiFootballOptions);
 
     let currentRound$ = resp.pipe(map((obj: any) => obj?.response[0]));
 
-    return currentRound$;
+    return currentRound$.pipe(
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
   }
 
   getFixturesByRound(
@@ -129,7 +143,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ) {
+  ): Observable<Array<object>> {
     console.log('round passed in : ', round);
     let leagueID;
 
@@ -147,7 +161,11 @@ export class ApiService {
 
     let url: string = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueID}&season=2022&round=${round}&timezone=Europe%2FLondon`;
 
-    return this.http.get(url, this.ApiFootballOptions);
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      map((resp) => resp?.response),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
   }
 
   getLeagueNews(
@@ -156,7 +174,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ) {
+  ): Observable<any> {
     let url: string = '';
 
     if (prem) {
@@ -171,10 +189,13 @@ export class ApiService {
       url = this.urls.leagueNews.ligue1LeagueNewsUrl;
     }
 
-    return this.http.get(url, this.options);
+    return this.http.get(url, this.options).pipe(
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
   }
 
-  getAllHighlights() {
+  getAllHighlights(): Observable<any> {
     const url = 'https://free-football-soccer-videos.p.rapidapi.com/';
     return this.http.get(url, this.highlightsOptions);
   }
@@ -185,7 +206,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ) {
+  ): Observable<any> {
     let leagueID;
 
     if (prem) {
@@ -200,7 +221,10 @@ export class ApiService {
       leagueID = this.LeagueIds.ligue1;
     }
     let url: string = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${leagueID}&season=2022`;
-    return this.http.get(url, this.ApiFootballOptions);
+    return this.http.get(url, this.ApiFootballOptions).pipe(
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
   }
 
   getLast5Results(
@@ -210,7 +234,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ) {
+  ): Observable<any> {
     let leagueID;
 
     if (prem) {
@@ -227,6 +251,16 @@ export class ApiService {
 
     var url: string = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueID}&season=2022&team=${teamID}&last=5`;
 
-    return this.http.get(url, this.ApiFootballOptions);
+    return this.http.get(url, this.ApiFootballOptions).pipe(
+      pluck('response'),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
+  }
+
+  handleError(error: HttpErrorResponse) {
+    return throwError(
+      () => new Error(`Observable error: ${error.error.message}`)
+    );
   }
 }

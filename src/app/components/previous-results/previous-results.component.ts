@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
 import { LeagueResults } from 'src/app/types';
 
@@ -7,7 +8,7 @@ import { LeagueResults } from 'src/app/types';
   templateUrl: './previous-results.component.html',
   styleUrls: ['./previous-results.component.scss'],
 })
-export class PreviousResultsComponent implements OnInit {
+export class PreviousResultsComponent implements OnInit, OnDestroy {
   @Input() league!: string;
   fixtureData: LeagueResults[] = [];
   previousResultsData: LeagueResults[] = [];
@@ -20,6 +21,8 @@ export class PreviousResultsComponent implements OnInit {
   loading: boolean = false;
   currentGameweek: any;
   showingPreviousWeeks: boolean = false;
+  subscriptions = new Subscription();
+
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
@@ -37,38 +40,48 @@ export class PreviousResultsComponent implements OnInit {
       this.ligue1 = true;
     }
 
-    this.api
-      .getCurrentFixtureRound(
-        this.prem,
-        this.serieA,
-        this.laLiga,
-        this.bundes,
-        this.ligue1
-      )
-      .subscribe((gWeek: any) => {
-        var gameweek = gWeek.match(/\d/g);
-        gameweek = gameweek.join('');
-        this.currentGameweek = gameweek;
-        console.log('Current gameweek ', this.currentGameweek);
-      });
+    this.subscriptions.add(
+      this.api
+        .getCurrentFixtureRound(
+          this.prem,
+          this.serieA,
+          this.laLiga,
+          this.bundes,
+          this.ligue1
+        )
+        .subscribe({
+          next: (gWeek: any) => {
+            var gameweek = gWeek.match(/\d/g);
+            gameweek = gameweek.join('');
+            this.currentGameweek = gameweek;
+            console.log('Current gameweek ', this.currentGameweek);
+          },
+          error: (error) => console.log('got an error: ', error),
+        })
+    );
 
-    this.api
-      .getLeagueResults(
-        this.prem,
-        this.serieA,
-        this.laLiga,
-        this.bundes,
-        this.ligue1
-      )
-      .subscribe((data: any) => {
-        this.loading = false;
-        const fixturesObj = data[0];
+    this.subscriptions.add(
+      this.api
+        .getLeagueResults(
+          this.prem,
+          this.serieA,
+          this.laLiga,
+          this.bundes,
+          this.ligue1
+        )
+        .subscribe({
+          next: (data: any) => {
+            this.loading = false;
+            const fixturesObj = data[0];
 
-        this.currentResultsData = fixturesObj[Object.keys(fixturesObj)[0]];
-        this.previousResultsData = fixturesObj[Object.keys(fixturesObj)[1]];
-        this.fixtureData = this.currentResultsData;
-        console.log('league fixtures', this.fixtureData);
-      });
+            this.currentResultsData = fixturesObj[Object.keys(fixturesObj)[0]];
+            this.previousResultsData = fixturesObj[Object.keys(fixturesObj)[1]];
+            this.fixtureData = this.currentResultsData;
+            console.log('league fixtures', this.fixtureData);
+          },
+          error: (error) => console.log('got an error: ', error),
+        })
+    );
   }
 
   //shows previous game weeks results
@@ -83,5 +96,9 @@ export class PreviousResultsComponent implements OnInit {
     this.fixtureData = this.currentResultsData;
     this.currentGameweek = this.currentGameweek + 1;
     this.showingPreviousWeeks = false;
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }

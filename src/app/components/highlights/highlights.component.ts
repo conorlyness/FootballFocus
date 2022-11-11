@@ -4,6 +4,7 @@ import {
   Inject,
   OnInit,
   ViewChild,
+  OnDestroy,
 } from '@angular/core';
 import { ApiService } from 'src/app/services/services/api.service';
 import {
@@ -11,6 +12,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 export interface DialogData {
   video: any;
@@ -21,22 +23,24 @@ export interface DialogData {
   templateUrl: './highlights.component.html',
   styleUrls: ['./highlights.component.scss'],
 })
-export class HighlightsComponent implements OnInit {
+export class HighlightsComponent implements OnInit, OnDestroy {
   search: string = '';
   matchHighlights: any[] = [];
   original!: any;
   isLoading: boolean = false;
+  subscriptions = new Subscription();
 
   constructor(private api: ApiService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.api.getAllHighlights().subscribe((highlights: any) => {
-      this.matchHighlights = highlights;
-      this.original = highlights;
-      this.isLoading = false;
-      console.log('match highlights arr : ', this.matchHighlights);
-    });
+    this.subscriptions.add(
+      this.api.getAllHighlights().subscribe((highlights: any) => {
+        this.matchHighlights = highlights;
+        this.original = highlights;
+        this.isLoading = false;
+      })
+    );
   }
 
   filterSearch(search: any) {
@@ -59,6 +63,10 @@ export class HighlightsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
 
