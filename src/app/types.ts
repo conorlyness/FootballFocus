@@ -39,3 +39,32 @@ export type LeagueNews = {
   PublisherName: string;
   Title: string;
 };
+
+export type Last5 = {
+  fixture: object;
+  goals: object;
+  league: object;
+  score: object;
+  teams: object;
+};
+
+export type TeamStats = {
+  all: object;
+  away: object;
+  home: object;
+  description: string;
+  form: string;
+  goalsDiff: number;
+  group: string;
+  points: number;
+  rank: number;
+  status: string;
+  team: Team;
+  update: string;
+};
+
+export type Team = {
+  id: number;
+  name: string;
+  logo: string;
+};
