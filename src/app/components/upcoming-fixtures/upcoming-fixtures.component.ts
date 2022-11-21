@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/services/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Last5DialogComponent } from '../last5-dialog/last5-dialog.component';
 import { forkJoin, Subscription } from 'rxjs';
-import { LeagueRound } from '../../types';
+import { Last5 } from '../../types';
 
 export interface DialogData {
   homeTeamName: string;
@@ -34,8 +34,8 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
   showingCurrentGameweek: boolean = false;
   showingPreviousGameweek: boolean = false;
   showingNextGameweek: boolean = false;
-  homeTeamLast5: any[] = [];
-  awayTeamLast5: any[] = [];
+  homeTeamLast5: Last5[] = [];
+  awayTeamLast5: Last5[] = [];
   subscriptions = new Subscription();
 
   constructor(private api: ApiService, public dialog: MatDialog) {}
@@ -207,7 +207,7 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
     });
   }
 
-  fetchLast5Results(homeTeamID: number, awayTeamId: number) {
+  fetchLast5Results(homeTeamID: number, awayTeamId: number): Promise<Object> {
     return new Promise((resolve, reject) => {
       let homeTeam = this.api.getLast5Results(
         homeTeamID,
@@ -234,15 +234,18 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
           next: (res) => {
             const { home } = res;
             const { away } = res;
-            this.homeTeamLast5 = home as any;
-            this.awayTeamLast5 = away as any;
+            this.homeTeamLast5 = home as Array<Last5>;
+            this.awayTeamLast5 = away as Array<Last5>;
             const resultsObj = {
               home: this.homeTeamLast5,
               away: this.awayTeamLast5,
             };
             resolve(resultsObj);
           },
-          error: (error) => console.log('got an error: ', error),
+          error: (error) => {
+            console.log('got an error: ', error);
+            reject('could not get last 5 games');
+          },
         })
       );
     });

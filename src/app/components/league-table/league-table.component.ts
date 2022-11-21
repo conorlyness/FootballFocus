@@ -8,6 +8,12 @@ import {
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
 import { LeagueTable } from 'src/app/types';
+import { MatDialog } from '@angular/material/dialog';
+import { TeamStatsDialogComponent } from '../team-stats-dialog/team-stats-dialog.component';
+
+export interface DialogData {
+  stats: any;
+}
 
 @Component({
   selector: 'app-league-table',
@@ -25,7 +31,7 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   subscriptions = new Subscription();
 
-  constructor(private api: ApiService, private cd: ChangeDetectorRef) {}
+  constructor(private api: ApiService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -76,6 +82,28 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
   ];
 
   dataSource = this.tableData;
+
+  showTeam(teamName: any) {
+    const dialogData = {
+      stats: teamName,
+    };
+
+    this.openStatsDialog(dialogData);
+  }
+
+  openStatsDialog(data: DialogData): void {
+    const dialogRef = this.dialog.open(TeamStatsDialogComponent, {
+      width: '900px',
+      height: '850px',
+      data: {
+        stats: data.stats,
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .subscribe(() => console.log('The dialog was closed'));
+  }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();

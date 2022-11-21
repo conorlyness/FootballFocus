@@ -31,6 +31,7 @@ import { GridComponent } from './components/grid/grid.component';
 import { GridsterModule } from 'angular-gridster2';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Last5DialogComponent } from './components/last5-dialog/last5-dialog.component';
+import { TeamStatsDialogComponent } from './components/team-stats-dialog/team-stats-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { Last5DialogComponent } from './components/last5-dialog/last5-dialog.com
     LeagueNewsComponent,
     GridComponent,
     Last5DialogComponent,
+    TeamStatsDialogComponent,
   ],
   imports: [
     BrowserModule,

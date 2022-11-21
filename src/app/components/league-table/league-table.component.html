@@ -56,6 +56,7 @@
         mat-row
         class="table-row"
         *matRowDef="let row; columns: displayedColumns"
+        (click)="showTeam(row)"
       ></tr>
     </table>
   </ng-container>
