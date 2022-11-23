@@ -6,6 +6,7 @@ import {
 } from '@angular/material/dialog';
 import { DialogData } from '../league-table/league-table.component';
 import { TeamStats } from 'src/app/types';
+import { OrdinalPipe } from 'src/app/pipes/ordinal.pipe';
 
 @Component({
   selector: 'app-team-stats-dialog',
@@ -14,6 +15,7 @@ import { TeamStats } from 'src/app/types';
 })
 export class TeamStatsDialogComponent implements OnInit {
   teamStats!: TeamStats;
+  teamForm: string[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<TeamStatsDialogComponent>,
@@ -23,7 +25,8 @@ export class TeamStatsDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.teamStats);
+    let formString = this.teamStats?.form;
+    this.teamForm = formString?.split('');
   }
 
   onNoClick(): void {

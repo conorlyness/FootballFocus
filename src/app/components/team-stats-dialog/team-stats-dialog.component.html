@@ -2,3 +2,26 @@
   <h1>{{ teamStats.team.name }}</h1>
   <img class="teamBadge" src="{{ teamStats.team.logo }}" alt="" />
 </div>
+
+<div class="leagueStats">
+  <div>
+    <mat-card class="formCard">
+      <div class="pos">
+        <p class="position">Current Position: {{ teamStats.rank | ordinal }}</p>
+      </div>
+      <div class="recentForm">
+        <ng-container *ngFor="let result of teamForm">
+          <p
+            [ngClass]="{
+              win: result === 'W',
+              loss: result === 'L',
+              draw: result === 'D'
+            }"
+          >
+            {{ result }}
+          </p>
+        </ng-container>
+      </div>
+    </mat-card>
+  </div>
+</div>

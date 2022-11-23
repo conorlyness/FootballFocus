@@ -6,3 +6,32 @@
     margin: auto;
   }
 }
+
+.leagueStats {
+  .pos {
+    .position {
+      font-size: 22px;
+      font-weight: lighter;
+      color: black;
+    }
+  }
+  .formCard {
+    margin-top: 20px;
+  }
+
+  .recentForm {
+    display: flex;
+  }
+}
+
+.win {
+  color: #008000;
+}
+
+.loss {
+  color: #dc143c;
+}
+
+.draw {
+  color: #ff8c00;
+}

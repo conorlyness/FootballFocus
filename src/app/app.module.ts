@@ -32,6 +32,7 @@ import { GridsterModule } from 'angular-gridster2';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Last5DialogComponent } from './components/last5-dialog/last5-dialog.component';
 import { TeamStatsDialogComponent } from './components/team-stats-dialog/team-stats-dialog.component';
+import { OrdinalPipe } from './pipes/ordinal.pipe';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { TeamStatsDialogComponent } from './components/team-stats-dialog/team-st
     GridComponent,
     Last5DialogComponent,
     TeamStatsDialogComponent,
+    OrdinalPipe,
   ],
   imports: [
     BrowserModule,
