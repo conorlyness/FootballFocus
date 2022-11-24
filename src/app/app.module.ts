@@ -33,6 +33,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Last5DialogComponent } from './components/last5-dialog/last5-dialog.component';
 import { TeamStatsDialogComponent } from './components/team-stats-dialog/team-stats-dialog.component';
 import { OrdinalPipe } from './pipes/ordinal.pipe';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { OrdinalPipe } from './pipes/ordinal.pipe';
     MatIconModule,
     GridsterModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

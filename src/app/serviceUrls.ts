@@ -1,17 +1,6 @@
+let currentYear = new Date().getFullYear();
+
 export let urls = {
-  leagueTables: {
-    //table urls
-    premierLeagueTableUrl:
-      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=39',
-    serieALeagueTableUrl:
-      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=135',
-    laLigaLeagueTableUrl:
-      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=140',
-    bundesligaLeagueTableUrl:
-      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=78',
-    ligue1LeagueTableUrl:
-      'https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=61',
-  },
   leagueResults: {
     //result urls
     premierLeagueResultsUrl:
