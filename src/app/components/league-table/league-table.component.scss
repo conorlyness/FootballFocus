@@ -48,3 +48,17 @@ table {
   padding-top: 50px;
   text-align: -webkit-center;
 }
+
+.seasonDropDown {
+  width: -webkit-fill-available;
+}
+
+.seasonLabel {
+  color: black;
+  font-weight: 200;
+}
+
+mat-select,
+mat-option {
+  font-weight: 200;
+}

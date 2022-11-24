@@ -1,4 +1,19 @@
 <div class="LeagueTable">
+  <div class="filters">
+    <mat-form-field class="seasonDropDown">
+      <mat-label class="seasonLabel">Season</mat-label>
+      <mat-select
+        [(ngModel)]="season"
+        (selectionChange)="getLeagueTable(season)"
+      >
+        <mat-option value="2022">Season - 22/23</mat-option>
+        <mat-option value="2021">Season - 21/22</mat-option>
+        <mat-option value="2020">Season - 20/21</mat-option>
+        <mat-option value="2019">Season - 19/20</mat-option>
+        <mat-option value="2018">Season - 18/19</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
   <ng-container *ngIf="!loading">
     <table mat-table [dataSource]="tableData">
       <ng-container matColumnDef="Position">
@@ -56,7 +71,7 @@
         mat-row
         class="table-row"
         *matRowDef="let row; columns: displayedColumns"
-        (click)="showTeam(row)"
+        (click)="season === '2022' ? showTeam(row) : null"
       ></tr>
     </table>
   </ng-container>
