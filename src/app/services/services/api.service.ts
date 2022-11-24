@@ -52,25 +52,29 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getLeagueTable(
+    season: string,
     prem?: boolean,
     serieA?: boolean,
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
   ): Observable<LeagueTable> {
-    var url: string = '';
+    let url: string = '';
+    let leagueId: number;
 
     if (prem) {
-      url = this.urls.leagueTables.premierLeagueTableUrl;
+      leagueId = this.LeagueIds.prem;
     } else if (serieA) {
-      url = this.urls.leagueTables.serieALeagueTableUrl;
+      leagueId = this.LeagueIds.serieA;
     } else if (laLiga) {
-      url = this.urls.leagueTables.laLigaLeagueTableUrl;
+      leagueId = this.LeagueIds.laLiga;
     } else if (bundes) {
-      url = this.urls.leagueTables.bundesligaLeagueTableUrl;
+      leagueId = this.LeagueIds.bundesliga;
     } else {
-      url = this.urls.leagueTables.ligue1LeagueTableUrl;
+      leagueId = this.LeagueIds.ligue1;
     }
+
+    url = `https://api-football-v1.p.rapidapi.com/v3/standings?season=${season}&league=${leagueId}`;
 
     return this.http.get<LeagueTable>(url, this.ApiFootballOptions).pipe(
       retry(2),
@@ -85,7 +89,7 @@ export class ApiService {
     bundes?: boolean,
     ligue1?: boolean
   ): Observable<LeagueResults> {
-    var url: string = '';
+    let url: string = '';
 
     if (prem) {
       url = this.urls.leagueResults.premierLeagueResultsUrl;
@@ -253,6 +257,24 @@ export class ApiService {
 
     return this.http.get(url, this.ApiFootballOptions).pipe(
       pluck('response'),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
+  }
+
+  getTeamsDetails(id: number) {
+    let url = `https://api-football-v1.p.rapidapi.com/v3/teams?id=${id}`;
+    return this.http.get(url, this.ApiFootballOptions).pipe(
+      pluck('response'[0]),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
+  }
+
+  getTeamsPlayers(id: number) {
+    let url = `https://api-football-v1.p.rapidapi.com/v3/players/squads?team=${id}`;
+    return this.http.get(url, this.ApiFootballOptions).pipe(
+      pluck('response'[0]),
       retry(2),
       catchError((error) => this.handleError(error))
     );
