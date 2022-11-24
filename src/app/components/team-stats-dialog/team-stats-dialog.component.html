@@ -23,5 +23,16 @@
         </ng-container>
       </div>
     </mat-card>
+    <ng-container *ngIf="!loading; else loadingSpin">
+      <div class="teamDetails">
+        {{ detailedTeamStats?.team }}
+      </div>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loadingSpin>
+  <div class="loadingSpinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
