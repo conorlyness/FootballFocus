@@ -30,8 +30,21 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
   ligue1: boolean = false;
   loading: boolean = false;
   subscriptions = new Subscription();
+  season: string = '2022';
 
   constructor(private api: ApiService, public dialog: MatDialog) {}
+  displayedColumns: string[] = [
+    'Position',
+    'Team',
+    'Games Played',
+    'Won',
+    'Lost',
+    'Drew',
+    'Goal Diff',
+    'Points',
+  ];
+
+  dataSource = this.tableData;
 
   ngOnInit(): void {
     this.loading = true;
@@ -46,9 +59,18 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
     } else {
       this.ligue1 = true;
     }
+
+    //this will get the current seasons table initally
+    this.getLeagueTable(this.season);
+  }
+
+  getLeagueTable(season: string) {
+    this.loading = true;
+    this.tableData = [];
     this.subscriptions.add(
       this.api
         .getLeagueTable(
+          season,
           this.prem,
           this.serieA,
           this.laLiga,
@@ -69,19 +91,6 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
         })
     );
   }
-
-  displayedColumns: string[] = [
-    'Position',
-    'Team',
-    'Games Played',
-    'Won',
-    'Lost',
-    'Drew',
-    'Goal Diff',
-    'Points',
-  ];
-
-  dataSource = this.tableData;
 
   showTeam(teamName: any) {
     const dialogData = {
