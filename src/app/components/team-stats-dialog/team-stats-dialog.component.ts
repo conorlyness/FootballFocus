@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { DialogData } from '../league-table/league-table.component';
-import { TeamStats } from 'src/app/types';
+import { Player, TeamStats } from 'src/app/types';
 import { OrdinalPipe } from 'src/app/pipes/ordinal.pipe';
 import { ApiService } from 'src/app/services/services/api.service';
 import { forkJoin, Subscription } from 'rxjs';
@@ -15,14 +15,18 @@ import { forkJoin, Subscription } from 'rxjs';
   templateUrl: './team-stats-dialog.component.html',
   styleUrls: ['./team-stats-dialog.component.scss'],
 })
-export class TeamStatsDialogComponent implements OnInit {
+export class TeamStatsDialogComponent implements OnInit, OnDestroy {
   teamStats!: TeamStats;
   teamForm: string[] = [];
   teamID!: number;
   detailedTeamStats!: any;
-  detailedPlayerStats!: any;
+  detailedPlayerStats!: Array<Player>;
   loading: boolean = false;
   subscriptions = new Subscription();
+
+  displayedColumns: string[] = ['photo', 'Name', 'Age', 'Position', 'Number'];
+
+  dataSource = this.detailedPlayerStats;
 
   constructor(
     public dialogRef: MatDialogRef<TeamStatsDialogComponent>,
@@ -65,8 +69,8 @@ export class TeamStatsDialogComponent implements OnInit {
           const { team } = value as any;
           const { players } = value as any;
 
-          this.detailedTeamStats = team;
-          this.detailedPlayerStats = players;
+          this.detailedTeamStats = team[0];
+          this.detailedPlayerStats = players[0].players;
           console.log(this.detailedTeamStats);
           console.log(this.detailedPlayerStats);
           this.loading = false;
@@ -74,5 +78,9 @@ export class TeamStatsDialogComponent implements OnInit {
         error: (err) => console.log('got an error: ', err),
       })
     );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
