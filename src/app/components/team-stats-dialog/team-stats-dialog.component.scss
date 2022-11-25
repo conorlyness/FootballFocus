@@ -10,9 +10,7 @@
 .leagueStats {
   .pos {
     .position {
-      font-size: 22px;
-      font-weight: lighter;
-      color: black;
+      // font-size: 22px;
     }
   }
   .formCard {
@@ -34,4 +32,63 @@
 
 .draw {
   color: #ff8c00;
+}
+
+h3 {
+  text-align: center;
+}
+
+p {
+  font-weight: lighter;
+  color: black;
+}
+
+.stadiumHeading {
+  border-top: black 1px solid;
+}
+
+.imgDiv {
+  text-align: center;
+  .stadiumImg {
+    height: 300px;
+  }
+}
+
+.playersTableDiv {
+  margin-top: 20px;
+
+  .playersTable {
+    width: 100%;
+    th {
+      text-align: center;
+      font-size: 20px;
+    }
+
+    td {
+      text-align: center;
+      //used to ensure all the tds are the same width
+      width: calc(100% / 8);
+      font-size: 18px;
+      font-weight: 200;
+
+      .playerImg {
+        height: 64px;
+        width: 64px;
+      }
+
+      img {
+        height: 64px;
+        width: 64px;
+      }
+    }
+
+    .table-row:hover {
+      scale: (1.1);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}
+
+.closeContainer {
+  text-align: right;
 }

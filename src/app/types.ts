@@ -68,3 +68,12 @@ export type Team = {
   name: string;
   logo: string;
 };
+
+export type Player = {
+  age: number;
+  id: number;
+  name: string;
+  number: number;
+  photo: string;
+  position: string;
+};

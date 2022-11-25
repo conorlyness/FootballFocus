@@ -1,3 +1,4 @@
+<div class="closeContainer" (click)="onNoClick()">X</div>
 <div class="teamId">
   <h1>{{ teamStats.team.name }}</h1>
   <img class="teamBadge" src="{{ teamStats.team.logo }}" alt="" />
@@ -6,10 +7,13 @@
 <div class="leagueStats">
   <div>
     <mat-card class="formCard">
+      <h3>Team</h3>
       <div class="pos">
         <p class="position">Current Position: {{ teamStats.rank | ordinal }}</p>
       </div>
       <div class="recentForm">
+        <p class="form">Form:</p>
+
         <ng-container *ngFor="let result of teamForm">
           <p
             [ngClass]="{
@@ -22,12 +26,74 @@
           </p>
         </ng-container>
       </div>
+      <ng-container *ngIf="!loading; else loadingSpin">
+        <div class="teamDetails">
+          <p class="founded">Founded: {{ detailedTeamStats?.team.founded }}</p>
+          <h3 class="stadiumHeading">Stadium</h3>
+          <p class="stadiumName">
+            Plays at: {{ detailedTeamStats?.venue.name }}
+          </p>
+          <p class="stadiumCapacity">
+            Capacity: {{ detailedTeamStats?.venue.capacity }}
+          </p>
+          <div class="imgDiv">
+            <img
+              class="stadiumImg"
+              src="{{ detailedTeamStats?.venue.image }}"
+              alt=""
+            />
+          </div>
+        </div>
+      </ng-container>
     </mat-card>
-    <ng-container *ngIf="!loading; else loadingSpin">
-      <div class="teamDetails">
-        {{ detailedTeamStats?.team }}
-      </div>
-    </ng-container>
+  </div>
+  <div class="playersTableDiv">
+    <mat-card>
+      <h3>Players</h3>
+      <table class="playersTable" mat-table [dataSource]="detailedPlayerStats">
+        <ng-container matColumnDef="photo">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td class="playerImg" mat-cell *matCellDef="let table">
+            <figure>
+              <img src="{{ table.photo }}" alt="" />
+            </figure>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let table">
+            {{ table.name }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Age">
+          <th mat-header-cell *matHeaderCellDef>Age</th>
+          <td mat-cell *matCellDef="let table">{{ table.age }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Position">
+          <th mat-header-cell *matHeaderCellDef>Position</th>
+          <td mat-cell *matCellDef="let table">{{ table.position }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Number">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let table">{{ table.number }}</td>
+        </ng-container>
+
+        <tr
+          class="headerRows"
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
+        <tr
+          mat-row
+          class="table-row"
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
+      </table>
+    </mat-card>
   </div>
 </div>
 

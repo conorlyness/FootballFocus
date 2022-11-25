@@ -45,7 +45,7 @@ export class ApiService {
     method: 'GET',
     headers: {
       'X-RapidAPI-Key': '',
-      'X-RapidAPI-Host': 'free-football-soccer-videos.p.rapidapi.com',
+      'X-RapidAPI-Host': 'free-football-soccer-videos1.p.rapidapi.com',
     },
   };
 
@@ -200,7 +200,7 @@ export class ApiService {
   }
 
   getAllHighlights(): Observable<any> {
-    const url = 'https://free-football-soccer-videos.p.rapidapi.com/';
+    const url = 'https://free-football-soccer-videos1.p.rapidapi.com/v1/';
     return this.http.get(url, this.highlightsOptions);
   }
 
@@ -265,7 +265,7 @@ export class ApiService {
   getTeamsDetails(id: number) {
     let url = `https://api-football-v1.p.rapidapi.com/v3/teams?id=${id}`;
     return this.http.get(url, this.ApiFootballOptions).pipe(
-      pluck('response'[0]),
+      pluck('response'),
       retry(2),
       catchError((error) => this.handleError(error))
     );
@@ -274,7 +274,7 @@ export class ApiService {
   getTeamsPlayers(id: number) {
     let url = `https://api-football-v1.p.rapidapi.com/v3/players/squads?team=${id}`;
     return this.http.get(url, this.ApiFootballOptions).pipe(
-      pluck('response'[0]),
+      pluck('response'),
       retry(2),
       catchError((error) => this.handleError(error))
     );
