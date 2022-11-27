@@ -9,13 +9,29 @@ export type LeagueTable = {
   draw: number;
 };
 
-export type LeagueResults = {
-  awayLogo: string;
-  awayTeam: string;
-  awayTeamScore: string;
-  homeLogo: string;
-  homeTeam: string;
-  homeTeamScore: string;
+export type LeagueInfo = {
+  country: string;
+  flag: string;
+  id: number;
+  logo: string;
+  name: string;
+  round: string;
+  season: number;
+};
+
+export type Score = {
+  extratime: any;
+  fulltime: any;
+  halftime: any;
+  penalty: any;
+};
+
+export type Fixture = {
+  fixture: object;
+  goals: object;
+  league: LeagueInfo;
+  score: Score;
+  teams: any;
 };
 
 export type LeagueRound = {
