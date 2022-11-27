@@ -21,6 +21,7 @@ export class GridComponent implements OnInit {
       },
       swap: true,
       pushItems: false,
+      pushResizeItems: true,
       maxCols: 6,
       resizable: {
         enabled: true,
