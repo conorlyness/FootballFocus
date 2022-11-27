@@ -1,17 +1,6 @@
 let currentYear = new Date().getFullYear();
 
 export let urls = {
-  leagueResults: {
-    //result urls
-    premierLeagueResultsUrl:
-      'https://football98.p.rapidapi.com/premierleague/results',
-    serieALeagueResultsUrl: 'https://football98.p.rapidapi.com/seriea/results',
-    laLigaLeagueResultsUrl: 'https://football98.p.rapidapi.com/laliga/results',
-    bundesligaLeagueResultsUrl:
-      'https://football98.p.rapidapi.com/bundesliga/results',
-    ligue1LeagueResultsUrl:
-      'https://football98.p.rapidapi.com/ligue1ubereats/results',
-  },
   leagueNews: {
     //news urls
     premierLeagueNewsUrl:

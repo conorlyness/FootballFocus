@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, Observable, pluck, retry, throwError } from 'rxjs';
 import { urls } from '../../serviceUrls';
-import {
-  LeagueTable,
-  LeagueResults,
-  LeagueRound,
-  ApiResponse,
-} from 'src/app/types';
+import { LeagueTable, LeagueRound, ApiResponse } from 'src/app/types';
 import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
@@ -77,33 +72,6 @@ export class ApiService {
     url = `https://api-football-v1.p.rapidapi.com/v3/standings?season=${season}&league=${leagueId}`;
 
     return this.http.get<LeagueTable>(url, this.ApiFootballOptions).pipe(
-      retry(2),
-      catchError((error) => this.handleError(error))
-    );
-  }
-
-  getLeagueResults(
-    prem?: boolean,
-    serieA?: boolean,
-    laLiga?: boolean,
-    bundes?: boolean,
-    ligue1?: boolean
-  ): Observable<LeagueResults> {
-    let url: string = '';
-
-    if (prem) {
-      url = this.urls.leagueResults.premierLeagueResultsUrl;
-    } else if (serieA) {
-      url = this.urls.leagueResults.serieALeagueResultsUrl;
-    } else if (laLiga) {
-      url = this.urls.leagueResults.laLigaLeagueResultsUrl;
-    } else if (bundes) {
-      url = this.urls.leagueResults.bundesligaLeagueResultsUrl;
-    } else {
-      url = this.urls.leagueResults.ligue1LeagueResultsUrl;
-    }
-
-    return this.http.get<LeagueResults>(url, this.options).pipe(
       retry(2),
       catchError((error) => this.handleError(error))
     );
