@@ -1,31 +1,48 @@
-<p class="previousResultsTitle">GameWeek {{ currentGameweek }} Results</p>
+<div class="resultsTopContent">
+  <p class="previousResultsTitle">Game Week {{ currentGameweek }} Results</p>
+  <div class="filters">
+    <mat-form-field class="gwkDropDown">
+      <mat-label class="gwkLabel">Game Week</mat-label>
+      <mat-select
+        [(ngModel)]="currentGameweek"
+        (selectionChange)="getResults(currentGameweek)"
+      >
+        <ng-container *ngFor="let gameweek of numberOfGameWeeks">
+          <mat-option value="{{ gameweek }}"
+            >GameWeek - {{ gameweek }}</mat-option
+          >
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
 <div class="previousResults">
   <ng-container *ngIf="!loading">
     <ng-container *ngFor="let fixture of fixtureData">
       <mat-card>
         <div class="teamNames">
-          {{ fixture.homeTeam }} Vs {{ fixture.awayTeam }}
+          {{ fixture.teams.home.name }} Vs {{ fixture.teams.away.name }}
         </div>
         <div class="teamBadges">
-          <img class="homeTeam" src="{{ fixture.homeLogo }}" alt="" />
+          <img class="homeTeam" src="{{ fixture.teams.home.logo }}" alt="" />
           <div class="gameResult">
-            {{ fixture.homeTeamScore }} - {{ fixture.awayTeamScore }}
+            {{
+              fixture.score.fulltime.home === null
+                ? "TBA"
+                : fixture.score.fulltime.home
+            }}
+            -
+            {{
+              fixture.score.fulltime.away === null
+                ? "TBA"
+                : fixture.score.fulltime.away
+            }}
           </div>
-          <img class="awayTeam" src="{{ fixture.awayLogo }}" alt="" />
+          <img class="awayTeam" src="{{ fixture.teams.away.logo }}" alt="" />
         </div>
       </mat-card>
     </ng-container>
-  </ng-container>
-</div>
-
-<div class="buttons">
-  <ng-container *ngIf="!loading">
-    <button [disabled]="showingPreviousWeeks" (click)="showPreviousResults()">
-      <mat-icon>keyboard_arrow_left</mat-icon>
-    </button>
-    <button [disabled]="!showingPreviousWeeks" (click)="showCurrentResults()">
-      <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
   </ng-container>
 </div>
 

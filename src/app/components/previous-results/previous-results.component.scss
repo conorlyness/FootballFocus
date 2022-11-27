@@ -9,9 +9,8 @@
 
 mat-card {
   width: 230px;
-  height: 130px;
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
 }
 
 mat-card:hover {
@@ -28,6 +27,16 @@ mat-card:hover {
   // right: 0;
   // position: absolute;
   // padding-right: 10px;
+}
+
+.homeTeam {
+  height: 44px;
+  width: 44px;
+}
+
+.awayTeam {
+  height: 44px;
+  width: 44px;
 }
 
 .teamNames {
@@ -70,4 +79,24 @@ mat-card:hover {
     padding: 5px;
     margin: 5px;
   }
+}
+
+.gwkDropDown {
+  width: -webkit-fill-available;
+}
+
+.gwkLabel {
+  color: black;
+  font-weight: 200;
+}
+
+mat-select,
+mat-option {
+  font-weight: 200;
+}
+
+.resultsTopContent {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
 }
