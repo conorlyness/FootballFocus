@@ -248,6 +248,35 @@ export class ApiService {
     );
   }
 
+  getTotalNumberOfGameWeeks(
+    prem?: boolean,
+    serieA?: boolean,
+    laLiga?: boolean,
+    bundes?: boolean,
+    ligue1?: boolean
+  ) {
+    let leagueID;
+
+    if (prem) {
+      leagueID = this.LeagueIds.prem;
+    } else if (serieA) {
+      leagueID = this.LeagueIds.serieA;
+    } else if (laLiga) {
+      leagueID = this.LeagueIds.laLiga;
+    } else if (bundes) {
+      leagueID = this.LeagueIds.bundesliga;
+    } else {
+      leagueID = this.LeagueIds.ligue1;
+    }
+
+    let url = `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=${leagueID}&season=2022`;
+    return this.http.get(url, this.ApiFootballOptions).pipe(
+      pluck('response'),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
+  }
+
   handleError(error: HttpErrorResponse) {
     return throwError(
       () => new Error(`Observable error: ${error.error.message}`)
