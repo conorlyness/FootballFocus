@@ -29,18 +29,15 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
   loading: boolean = false;
   displayGameweek!: any;
   currentGameweek!: any;
-  previousGameweek!: any;
-  nextGameweek!: any;
-  showingCurrentGameweek: boolean = false;
-  showingPreviousGameweek: boolean = false;
-  showingNextGameweek: boolean = false;
   homeTeamLast5: Last5[] = [];
   awayTeamLast5: Last5[] = [];
+  totalGameWeeks!: number;
+  gameWeeks: any[] = [];
   subscriptions = new Subscription();
 
   constructor(private api: ApiService, public dialog: MatDialog) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.loading = true;
     if (this.league === 'prem') {
       this.prem = true;
@@ -53,10 +50,67 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
     } else {
       this.ligue1 = true;
     }
+    this.getTotalGameWeeks();
+    await this.getGameWeekRound();
+    this.getFixtures(this.currentGameweek);
+  }
 
+  //gets the number of game weeks for a season depending on the league
+  //this is how the mat select knows how many gameweeks to put in the dropdown
+  getTotalGameWeeks() {
+    this.loading = true;
+    this.api
+      .getTotalNumberOfGameWeeks(
+        this.prem,
+        this.serieA,
+        this.laLiga,
+        this.bundes,
+        this.ligue1
+      )
+      .subscribe((val: any) => {
+        this.totalGameWeeks = val.length;
+        for (let i = 1; i <= this.totalGameWeeks; i++) {
+          this.gameWeeks.push(i);
+        }
+        this.loading = false;
+      });
+  }
+
+  getGameWeekRound(): Promise<Object> {
+    return new Promise((resolve, reject) => {
+      this.subscriptions.add(
+        this.api
+          .getCurrentFixtureRound(
+            this.prem,
+            this.serieA,
+            this.laLiga,
+            this.bundes,
+            this.ligue1
+          )
+          .subscribe({
+            next: (gWeek: any) => {
+              var gameweek = gWeek.match(/(\d+)/)[0];
+
+              this.currentGameweek = gameweek;
+              console.log('Current gameweek ', this.currentGameweek);
+              resolve(this.currentGameweek);
+            },
+            error: (error) => {
+              console.log('got an error: ', error);
+              reject('got an error');
+            },
+          })
+      );
+    });
+  }
+
+  getFixtures(round: number) {
+    this.loading = true;
+    const GameweekToPass = `Regular Season - ${round}`;
     this.subscriptions.add(
       this.api
-        .getCurrentFixtureRound(
+        .getFixturesByRound(
+          GameweekToPass,
           this.prem,
           this.serieA,
           this.laLiga,
@@ -64,113 +118,21 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
           this.ligue1
         )
         .subscribe({
-          next: (gWeek: any) => {
-            console.log(gWeek);
-            var gameweek = gWeek.match(/(\d+)/)[0];
+          next: (val: Array<object>) => {
+            this.loading = false;
 
-            this.currentGameweek = gameweek;
-            this.previousGameweek = +gameweek - 1;
-            this.nextGameweek = +gameweek + 1;
-
-            this.subscriptions.add(
-              this.api
-                .getFixturesByRound(
-                  gWeek,
-                  this.prem,
-                  this.serieA,
-                  this.laLiga,
-                  this.bundes,
-                  this.ligue1
-                )
-                .subscribe({
-                  next: (val: Array<object>) => {
-                    this.loading = false;
-
-                    let fixtures = val;
-                    this.currentWeekFixtures = fixtures;
-                    this.fixtureData = this.currentWeekFixtures;
-                    this.displayGameweek = this.currentGameweek;
-                    this.showingCurrentGameweek = true;
-                    console.log(
-                      'fixture data for current gameweek : ',
-                      this.fixtureData
-                    );
-                  },
-                  error: (error) => console.log('got an error: ', error),
-                })
+            let fixtures = val;
+            this.currentWeekFixtures = fixtures;
+            this.fixtureData = this.currentWeekFixtures;
+            this.displayGameweek = this.currentGameweek;
+            console.log(
+              'fixture data for current gameweek : ',
+              this.fixtureData
             );
           },
           error: (error) => console.log('got an error: ', error),
         })
     );
-  }
-
-  previousFixtures() {
-    let previousFixtures;
-
-    if (this.showingNextGameweek) {
-      this.fixtureData = this.currentWeekFixtures;
-      this.displayGameweek = this.currentGameweek;
-      this.showingNextGameweek = false;
-    } else {
-      this.loading = true;
-      const previousGameweek = `Regular Season - ${this.previousGameweek}`;
-      this.subscriptions.add(
-        this.api
-          .getFixturesByRound(
-            previousGameweek,
-            this.prem,
-            this.serieA,
-            this.laLiga,
-            this.bundes,
-            this.ligue1
-          )
-          .subscribe({
-            next: (val: Array<object>) => {
-              this.loading = false;
-              previousFixtures = val;
-              this.fixtureData = previousFixtures;
-              this.displayGameweek = this.previousGameweek;
-              this.showingPreviousGameweek = true;
-            },
-            error: (error) => console.log('got an error: ', error),
-          })
-      );
-    }
-  }
-
-  upcomingFixtures() {
-    let nextWeekFixtures;
-
-    if (this.showingPreviousGameweek) {
-      this.fixtureData = this.currentWeekFixtures;
-      this.displayGameweek = this.currentGameweek;
-      this.showingPreviousGameweek = false;
-    } else {
-      this.loading = true;
-      const upcomingGameweek = `Regular Season - ${this.nextGameweek}`;
-      this.subscriptions.add(
-        this.api
-          .getFixturesByRound(
-            upcomingGameweek,
-            this.prem,
-            this.serieA,
-            this.laLiga,
-            this.bundes,
-            this.ligue1
-          )
-          .subscribe({
-            next: (val: Array<object>) => {
-              this.loading = false;
-              nextWeekFixtures = val;
-              this.fixtureData = nextWeekFixtures;
-              this.displayGameweek = this.nextGameweek;
-              this.showingNextGameweek = true;
-            },
-            error: (error) => console.log('got an error: ', error),
-          })
-      );
-    }
   }
 
   async showTeamsPrevGames(

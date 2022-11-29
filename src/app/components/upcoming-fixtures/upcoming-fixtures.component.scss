@@ -77,3 +77,23 @@ mat-card:hover {
     margin: 5px;
   }
 }
+
+.gwkDropDown {
+  width: -webkit-fill-available;
+}
+
+.gwkLabel {
+  color: black;
+  font-weight: 200;
+}
+
+mat-select,
+mat-option {
+  font-weight: 200;
+}
+
+.fixturesTopContent {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,4 +1,22 @@
-<p class="upcomingFixturesTitle">GameWeek {{ displayGameweek }} Fixtures</p>
+<div class="fixturesTopContent">
+  <p class="upcomingFixturesTitle">GameWeek {{ displayGameweek }} Fixtures</p>
+  <div class="filters">
+    <mat-form-field class="gwkDropDown">
+      <mat-label class="gwkLabel">Game Week</mat-label>
+      <mat-select
+        [(ngModel)]="currentGameweek"
+        (selectionChange)="getFixtures(currentGameweek)"
+      >
+        <ng-container *ngFor="let gameweek of gameWeeks">
+          <mat-option value="{{ gameweek }}"
+            >GameWeek - {{ gameweek }}</mat-option
+          >
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
 <div class="upcomingFixtures">
   <ng-container *ngIf="!loading">
     <ng-container *ngFor="let fixture of fixtureData">
@@ -26,16 +44,6 @@
         </div>
       </mat-card>
     </ng-container>
-  </ng-container>
-</div>
-<div class="buttons">
-  <ng-container *ngIf="!loading">
-    <button (click)="previousFixtures()" [disabled]="showingPreviousGameweek">
-      <mat-icon>keyboard_arrow_left</mat-icon>
-    </button>
-    <button (click)="upcomingFixtures()" [disabled]="showingNextGameweek">
-      <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
   </ng-container>
 </div>
 
