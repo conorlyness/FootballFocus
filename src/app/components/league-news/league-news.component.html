@@ -12,14 +12,24 @@
         </div>
       </div>
     </ng-container>
-    <ng-container *ngIf="news.length == 0 && !isLoading; then noNews">
+    <ng-container
+      *ngIf="news.length == 0 && !isLoading && !hasError; then noNews"
+    >
     </ng-container>
+    <ng-container *ngIf="hasError; then newsError"></ng-container>
   </ng-container>
 </div>
 
 <ng-template #noNews>
   <div class="noArticles">
     <p>No news articles at present for this league</p>
+  </div>
+</ng-template>
+
+<ng-template #newsError>
+  <div class="newsError">
+    <p>An error has occured fetching news articles</p>
+    <button class="retryBtn" mat-button (click)="retryNews()">Retry</button>
   </div>
 </ng-template>
 

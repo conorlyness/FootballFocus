@@ -279,7 +279,7 @@ export class ApiService {
 
   handleError(error: HttpErrorResponse) {
     return throwError(
-      () => new Error(`Observable error: ${error.error.message}`)
+      () => new Error(`Observable returned -> ${error.status}`)
     );
   }
 }

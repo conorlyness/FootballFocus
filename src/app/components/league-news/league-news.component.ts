@@ -17,6 +17,7 @@ export class LeagueNewsComponent implements OnInit, OnDestroy {
   bundes: boolean = false;
   ligue1: boolean = false;
   isLoading: boolean = false;
+  hasError: boolean = false;
   subscriptions = new Subscription();
 
   constructor(private api: ApiService) {}
@@ -34,6 +35,13 @@ export class LeagueNewsComponent implements OnInit, OnDestroy {
     } else {
       this.ligue1 = true;
     }
+
+    this.getLeagueNews();
+  }
+
+  getLeagueNews() {
+    this.isLoading = true;
+    this.hasError = false;
     this.subscriptions.add(
       this.api
         .getLeagueNews(
@@ -50,13 +58,21 @@ export class LeagueNewsComponent implements OnInit, OnDestroy {
               this.news.push(article);
             });
           },
-          error: (error) => console.log('got an error: ', error),
+          error: (error) => {
+            console.log(error);
+            this.isLoading = false;
+            this.hasError = true;
+          },
         })
     );
   }
 
   openArticle(url: string) {
     window.open(url, '_blank');
+  }
+
+  retryNews() {
+    this.getLeagueNews();
   }
 
   ngOnDestroy() {
