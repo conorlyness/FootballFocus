@@ -9,11 +9,12 @@ import { catchError } from 'rxjs/operators';
 })
 export class ApiService {
   urls: any = urls;
+  apiKey: string = '';
 
   options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '',
+      'X-RapidAPI-Key': `${this.apiKey}`,
       'X-RapidAPI-Host': 'football98.p.rapidapi.com',
     },
   };
@@ -22,7 +23,7 @@ export class ApiService {
   ApiFootballOptions = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '',
+      'X-RapidAPI-Key': `${this.apiKey}`,
       'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
     },
   };
@@ -39,7 +40,7 @@ export class ApiService {
   highlightsOptions = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '',
+      'X-RapidAPI-Key': `${this.apiKey}`,
       'X-RapidAPI-Host': 'free-football-soccer-videos1.p.rapidapi.com',
     },
   };
