@@ -207,7 +207,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ): Observable<any> {
+  ): Observable<ApiResponse> {
     let leagueID;
 
     if (prem) {
@@ -224,8 +224,9 @@ export class ApiService {
 
     var url: string = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueID}&season=2022&team=${teamID}&last=5`;
 
-    return this.http.get(url, this.ApiFootballOptions).pipe(
-      pluck('response'),
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      // pluck('response'),
+      map((x: any) => x?.response),
       retry(2),
       catchError((error) => this.handleError(error))
     );
