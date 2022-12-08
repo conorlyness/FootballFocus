@@ -1,42 +1,44 @@
-<h1 class="dialogTitle">{{ homeName }} & {{ awayName }} Last 5 Results</h1>
-<div mat-dialog-content class="allDialogContent">
-  <h3 class="homeName">{{ homeName }}</h3>
-  <div class="homeTeamsLast5">
-    <ng-container *ngFor="let fixture of homeTeam">
-      <mat-card>
-        <div class="teamNames">
-          {{ fixture.teams.home.name }} Vs {{ fixture.teams.away.name }}
-        </div>
-        <div class="teamBadges">
-          <img class="homeTeam" src="{{ fixture.teams.home.logo }}" alt="" />
-          <div class="gameResult">
-            {{ fixture.score.fulltime.home }} -
-            {{ fixture.score.fulltime.away }}
+<div class="last5Dialog">
+  <h1 class="dialogTitle">{{ homeName }} & {{ awayName }} Last 5 Results</h1>
+  <div mat-dialog-content class="allDialogContent">
+    <h3 class="homeName">{{ homeName }}</h3>
+    <div class="homeTeamsLast5">
+      <ng-container *ngFor="let fixture of homeTeam">
+        <mat-card>
+          <div class="teamNames">
+            {{ fixture.teams.home.name }} Vs {{ fixture.teams.away.name }}
           </div>
-          <img class="awayTeam" src="{{ fixture.teams.away.logo }}" alt="" />
-        </div>
-      </mat-card>
-    </ng-container>
-  </div>
-  <h3 class="awayName">{{ awayName }}</h3>
-  <div class="awayTeamsLast5">
-    <ng-container *ngFor="let fixture of awayTeam">
-      <mat-card>
-        <div class="teamNames">
-          {{ fixture.teams.home.name }} Vs {{ fixture.teams.away.name }}
-        </div>
-        <div class="teamBadges">
-          <img class="homeTeam" src="{{ fixture.teams.home.logo }}" alt="" />
-          <div class="gameResult">
-            {{ fixture.score.fulltime.home }} -
-            {{ fixture.score.fulltime.away }}
+          <div class="teamBadges">
+            <img class="homeTeam" src="{{ fixture.teams.home.logo }}" alt="" />
+            <div class="gameResult">
+              {{ fixture.score.fulltime.home }} -
+              {{ fixture.score.fulltime.away }}
+            </div>
+            <img class="awayTeam" src="{{ fixture.teams.away.logo }}" alt="" />
           </div>
-          <img class="awayTeam" src="{{ fixture.teams.away.logo }}" alt="" />
-        </div>
-      </mat-card>
-    </ng-container>
+        </mat-card>
+      </ng-container>
+    </div>
+    <h3 class="awayName">{{ awayName }}</h3>
+    <div class="awayTeamsLast5">
+      <ng-container *ngFor="let fixture of awayTeam">
+        <mat-card>
+          <div class="teamNames">
+            {{ fixture.teams.home.name }} Vs {{ fixture.teams.away.name }}
+          </div>
+          <div class="teamBadges">
+            <img class="homeTeam" src="{{ fixture.teams.home.logo }}" alt="" />
+            <div class="gameResult">
+              {{ fixture.score.fulltime.home }} -
+              {{ fixture.score.fulltime.away }}
+            </div>
+            <img class="awayTeam" src="{{ fixture.teams.away.logo }}" alt="" />
+          </div>
+        </mat-card>
+      </ng-container>
+    </div>
   </div>
-</div>
-<div mat-dialog-actions class="closeBtn">
-  <button mat-button (click)="onNoClick()">Close</button>
+  <div mat-dialog-actions class="closeBtnContainer">
+    <button class="closeBtn" mat-button (click)="onNoClick()">Close</button>
+  </div>
 </div>

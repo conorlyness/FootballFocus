@@ -21,6 +21,7 @@
   <ng-container *ngIf="!loading">
     <ng-container *ngFor="let fixture of fixtureData">
       <mat-card
+        class="fixtureCard"
         [title]="'click to see last 5 results'"
         (click)="
           showTeamsPrevGames(
@@ -40,7 +41,7 @@
           <img class="awayTeam" src="{{ fixture.teams.away.logo }}" alt="" />
         </div>
         <div class="fixtureDate">
-          {{ fixture.fixture.date | date: "EEEE, MMM d, y, h:mm a" }}
+          {{ fixture.fixture.date | date : "EEEE, MMM d, y, h:mm a" }}
         </div>
       </mat-card>
     </ng-container>
