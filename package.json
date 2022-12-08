@@ -9,9 +9,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "ng build && electron .",
-    "package": "electron-packager . --icon=./src/assets/football.ico --overwrite ",
+    "package": "electron-packager . --icon=./src/assets/app-logo.ico --overwrite ",
     "playwrightTests": "npx playwright test",
-    "showplaywrightReport": "npx playwright show-report"
+    "showplaywrightReport": "npx playwright show-report",
+    "codegen": "npx playwright codegen"
   },
   "private": true,
   "dependencies": {
