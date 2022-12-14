@@ -27,7 +27,7 @@ export type Score = {
 };
 
 export type Fixture = {
-  fixture: object;
+  fixture: FixtureDetails;
   goals: object;
   league: LeagueInfo;
   score: Score;
@@ -92,4 +92,27 @@ export type Player = {
   number: number;
   photo: string;
   position: string;
+};
+
+export type FixtureDetails = {
+  date: string;
+  id: number;
+  periods: object;
+  referee: string;
+  status: GameStatus;
+  timestamp: number;
+  timezone: string;
+  venue: MatchVenue;
+};
+
+export type GameStatus = {
+  elapsed: string;
+  long: string;
+  short: string;
+};
+
+export type MatchVenue = {
+  id: number;
+  name: string;
+  city: string;
 };
