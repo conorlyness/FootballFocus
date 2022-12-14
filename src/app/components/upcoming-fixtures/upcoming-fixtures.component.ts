@@ -3,13 +3,13 @@ import { ApiService } from 'src/app/services/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Last5DialogComponent } from '../last5-dialog/last5-dialog.component';
 import { forkJoin, Subscription } from 'rxjs';
-import { Last5 } from '../../types';
+import { Fixture, Last5 } from '../../types';
 
 export interface DialogData {
   homeTeamName: string;
   awayTeamName: string;
-  homeTeam: any;
-  awayTeam: any;
+  homeTeam: Last5[];
+  awayTeam: Last5[];
 }
 
 @Component({
@@ -19,8 +19,7 @@ export interface DialogData {
 })
 export class UpcomingFixturesComponent implements OnInit, OnDestroy {
   @Input() league!: string;
-  fixtureData: any[] = [];
-  currentWeekFixtures: object[] = [];
+  fixtureData: Fixture[] = [];
   prem: boolean = false;
   serieA: boolean = false;
   laLiga: boolean = false;
@@ -118,17 +117,10 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
           this.ligue1
         )
         .subscribe({
-          next: (val: Array<object>) => {
+          next: (val: Array<Fixture>) => {
             this.loading = false;
-
-            let fixtures = val;
-            this.currentWeekFixtures = fixtures;
-            this.fixtureData = this.currentWeekFixtures;
+            this.fixtureData = val;
             this.displayGameweek = this.currentGameweek;
-            console.log(
-              'fixture data for current gameweek : ',
-              this.fixtureData
-            );
           },
           error: (error) => console.log('got an error: ', error),
         })
@@ -164,9 +156,7 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe();
   }
 
   fetchLast5Results(homeTeamID: number, awayTeamId: number): Promise<Object> {

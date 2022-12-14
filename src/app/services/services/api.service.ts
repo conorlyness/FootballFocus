@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, Observable, pluck, retry, throwError } from 'rxjs';
 import { urls } from '../../serviceUrls';
-import { LeagueTable, LeagueRound, ApiResponse } from 'src/app/types';
+import { LeagueTable, LeagueRound, ApiResponse, Fixture } from 'src/app/types';
 import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
@@ -116,7 +116,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ): Observable<Array<object>> {
+  ): Observable<Array<Fixture>> {
     console.log('round passed in : ', round);
     let leagueID;
 
@@ -134,11 +134,13 @@ export class ApiService {
 
     let url: string = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueID}&season=2022&round=${round}&timezone=Europe%2FLondon`;
 
-    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
-      map((resp) => resp?.response),
-      retry(2),
-      catchError((error) => this.handleError(error))
-    );
+    return this.http
+      .get<Observable<ApiResponse>>(url, this.ApiFootballOptions)
+      .pipe(
+        map((resp: ApiResponse | any) => resp?.response),
+        retry(2),
+        catchError((error) => this.handleError(error))
+      );
   }
 
   getLeagueNews(
