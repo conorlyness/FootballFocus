@@ -186,8 +186,9 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
           next: (res) => {
             const { home } = res;
             const { away } = res;
-            this.homeTeamLast5 = home as any as Array<Last5>;
-            this.awayTeamLast5 = away as any as Array<Last5>;
+            this.homeTeamLast5 = home;
+            this.awayTeamLast5 = away;
+
             const resultsObj = {
               home: this.homeTeamLast5,
               away: this.awayTeamLast5,

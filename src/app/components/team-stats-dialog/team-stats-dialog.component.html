@@ -28,18 +28,18 @@
       </div>
       <ng-container *ngIf="!loading; else loadingSpin">
         <div class="teamDetails">
-          <p class="founded">Founded: {{ detailedTeamStats?.team.founded }}</p>
+          <p class="founded">Founded: {{ detailedTeamStats?.team?.founded }}</p>
           <h3 class="stadiumHeading">Stadium</h3>
           <p class="stadiumName">
-            Plays at: {{ detailedTeamStats?.venue.name }}
+            Plays at: {{ detailedTeamStats?.venue?.name }}
           </p>
           <p class="stadiumCapacity">
-            Capacity: {{ detailedTeamStats?.venue.capacity }}
+            Capacity: {{ detailedTeamStats?.venue?.capacity }}
           </p>
           <div class="imgDiv">
             <img
               class="stadiumImg"
-              src="{{ detailedTeamStats?.venue.image }}"
+              src="{{ detailedTeamStats?.venue?.image }}"
               alt=""
             />
           </div>

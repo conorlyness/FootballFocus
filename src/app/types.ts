@@ -116,3 +116,42 @@ export type MatchVenue = {
   name: string;
   city: string;
 };
+
+export type ExtendedTeamDetails = {
+  team: TeamInfo;
+  venue: VenueInfo;
+};
+
+export type ExtendedPlayerDetails = Player & Team;
+
+export type TeamInfo = Team & {
+  code: string;
+  country: string;
+  founded: number;
+  national: boolean;
+};
+
+export type VenueInfo = MatchVenue & {
+  address: string;
+  capacity: number;
+  image: string;
+  surface: string;
+};
+
+export type Highlight = {
+  competition: Competition;
+  date: string;
+  embed: string;
+  side1: object;
+  side2: object;
+  thumbnail: string;
+  title: string;
+  url: string;
+  videos: Array<object>;
+};
+
+export type Competition = {
+  id: number;
+  name: string;
+  url: string;
+};

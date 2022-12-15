@@ -5,7 +5,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { DialogData } from '../league-table/league-table.component';
-import { Player, TeamStats } from 'src/app/types';
+import { ExtendedTeamDetails, Player, TeamStats } from 'src/app/types';
 import { OrdinalPipe } from 'src/app/pipes/ordinal.pipe';
 import { ApiService } from 'src/app/services/services/api.service';
 import { forkJoin, Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ export class TeamStatsDialogComponent implements OnInit, OnDestroy {
   teamStats!: TeamStats;
   teamForm: string[] = [];
   teamID!: number;
-  detailedTeamStats!: any;
+  detailedTeamStats?: ExtendedTeamDetails;
   detailedPlayerStats!: Array<Player>;
   loading: boolean = false;
   subscriptions = new Subscription();
@@ -66,13 +66,12 @@ export class TeamStatsDialogComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       teamAndPlayers.subscribe({
         next: (value) => {
-          const { team } = value as any;
-          const { players } = value as any;
+          const { team } = value;
+          const { players } = value;
 
-          this.detailedTeamStats = team[0];
-          this.detailedPlayerStats = players[0].players;
-          console.log(this.detailedTeamStats);
-          console.log(this.detailedPlayerStats);
+          this.detailedTeamStats = team;
+          this.detailedPlayerStats = players;
+
           this.loading = false;
         },
         error: (err) => console.log('got an error: ', err),

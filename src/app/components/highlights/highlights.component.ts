@@ -13,6 +13,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { Highlight } from 'src/app/types';
 
 export interface DialogData {
   video: any;
@@ -25,8 +26,8 @@ export interface DialogData {
 })
 export class HighlightsComponent implements OnInit, OnDestroy {
   search: string = '';
-  matchHighlights: any[] = [];
-  original!: any;
+  matchHighlights: Highlight[] = [];
+  original: Highlight[] = [];
   isLoading: boolean = false;
   subscriptions = new Subscription();
 
@@ -35,7 +36,7 @@ export class HighlightsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoading = true;
     this.subscriptions.add(
-      this.api.getAllHighlights().subscribe((highlights: any) => {
+      this.api.getAllHighlights().subscribe((highlights: Array<Highlight>) => {
         this.matchHighlights = highlights;
         this.original = highlights;
         this.isLoading = false;
@@ -48,7 +49,6 @@ export class HighlightsComponent implements OnInit, OnDestroy {
     const result = this.original.filter((match: { title: any }) =>
       match.title.toLowerCase().includes(search.toLowerCase())
     );
-    console.log('the origional : ', this.original);
     this.matchHighlights = result;
     console.log(console.log('match hightlights : ', this.matchHighlights));
   }
