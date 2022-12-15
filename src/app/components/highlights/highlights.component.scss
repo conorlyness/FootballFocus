@@ -9,7 +9,7 @@
 
 .highlightsContent {
   // height: 700px;
-  width: 1300px;
+  width: 100%;
   margin: 0 auto;
   overflow-y: scroll;
 }
@@ -23,6 +23,7 @@
   display: flex;
   padding: 10px;
   margin: 2px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .matchHighlight:hover {
@@ -31,10 +32,17 @@
 }
 
 .matchTitle {
-  padding: 50px;
-  text-align: center;
   font-weight: 200;
   font-size: 22px;
+}
+
+.highlightInfo {
+  display: block;
+  margin-left: 50px;
+  border-left: 1px black solid;
+  p {
+    margin-left: 5px;
+  }
 }
 
 .matchHighlightsTitle {
