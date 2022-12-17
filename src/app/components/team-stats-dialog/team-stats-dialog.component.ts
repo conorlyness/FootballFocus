@@ -6,7 +6,6 @@ import {
 } from '@angular/material/dialog';
 import { DialogData } from '../league-table/league-table.component';
 import { ExtendedTeamDetails, Player, TeamStats } from 'src/app/types';
-import { OrdinalPipe } from 'src/app/pipes/ordinal.pipe';
 import { ApiService } from 'src/app/services/services/api.service';
 import { forkJoin, Subscription } from 'rxjs';
 

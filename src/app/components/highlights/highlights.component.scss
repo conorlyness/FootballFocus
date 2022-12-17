@@ -62,14 +62,14 @@
 }
 
 .video {
-  padding-top: 30px;
+  padding-top: 50px;
   margin: 0 auto;
-  height: 390px !important;
+  height: 386px !important;
   width: 600px !important;
+  overflow: hidden;
 }
 
 .closeContainer {
-  text-align: right;
   cursor: pointer;
 }
 
@@ -81,4 +81,12 @@
 .noResultsDiv {
   padding-top: 50px;
   text-align: center;
+}
+
+.dialogInfo {
+  display: flex;
+  justify-content: space-between;
+  p {
+    font-weight: 200;
+  }
 }

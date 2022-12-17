@@ -16,7 +16,8 @@ import { Subscription } from 'rxjs';
 import { Highlight } from 'src/app/types';
 
 export interface DialogData {
-  video: any;
+  video: string;
+  title: string;
 }
 
 @Component({
@@ -50,19 +51,16 @@ export class HighlightsComponent implements OnInit, OnDestroy {
       match.title.toLowerCase().includes(search.toLowerCase())
     );
     this.matchHighlights = result;
-    console.log(console.log('match hightlights : ', this.matchHighlights));
   }
 
-  openHighlight(embeddedVid: any) {
+  openHighlight(embeddedVid: string, title: string) {
     const dialogRef = this.dialog.open(HighlightDialog, {
       width: '950px',
-      height: '750px',
-      data: { video: embeddedVid },
+      height: '550px',
+      data: { video: embeddedVid, title: title },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
+    dialogRef.afterClosed().subscribe();
   }
 
   ngOnDestroy() {
