@@ -12,6 +12,7 @@ import {
   ExtendedPlayerDetails,
   Player,
   Highlight,
+  LeagueNews,
 } from 'src/app/types';
 import { catchError } from 'rxjs/operators';
 @Injectable({
@@ -159,7 +160,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ): Observable<any> {
+  ): Observable<Array<LeagueNews>> {
     let url: string = '';
 
     if (prem) {
@@ -174,7 +175,7 @@ export class ApiService {
       url = this.urls.leagueNews.ligue1LeagueNewsUrl;
     }
 
-    return this.http.get(url, this.options).pipe(
+    return this.http.get<Array<LeagueNews>>(url, this.options).pipe(
       retry(2),
       catchError((error) => this.handleError(error))
     );

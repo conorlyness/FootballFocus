@@ -52,7 +52,7 @@ export class LeagueNewsComponent implements OnInit, OnDestroy {
           this.ligue1
         )
         .subscribe({
-          next: (data: any) => {
+          next: (data: Array<LeagueNews>) => {
             this.isLoading = false;
             data.forEach((article: LeagueNews) => {
               this.news.push(article);
