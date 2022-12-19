@@ -2,19 +2,27 @@
   <div class="searchBar">
     <form class="form">
       <mat-form-field class="searchInput" appearance="outline">
-        <input
-          type="tel"
-          matInput
-          placeholder="Search match highlights"
-          name="search"
-          (ngModelChange)="filterSearch($event)"
-          [(ngModel)]="search"
-        />
+        <div class="inputAndButton">
+          <input
+            #searchInput
+            type="search"
+            matInput
+            placeholder="Search highlights..."
+            name="search"
+            (ngModelChange)="filterSearch($event)"
+            [(ngModel)]="search"
+          />
+          <ng-container *ngIf="searchInput.value.length > 0"
+            ><button class="clearSearchButton" (click)="clearSearch()">
+              <mat-icon>close</mat-icon>
+            </button></ng-container
+          >
+        </div>
       </mat-form-field>
     </form>
   </div>
   <div class="highlightsContent">
-    <ng-container *ngFor="let match of matchHighlights">
+    <ng-container *ngFor="let match of highlightsSubject | async">
       <div
         class="matchHighlight"
         (click)="openHighlight(match.embed, match.title)"
@@ -39,3 +47,9 @@
     </div>
   </ng-template>
 </div>
+<mat-paginator
+  #paginator
+  [length]="matchHighlights.length"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 25, 50, 100]"
+></mat-paginator>

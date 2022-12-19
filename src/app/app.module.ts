@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +33,7 @@ import { Last5DialogComponent } from './components/last5-dialog/last5-dialog.com
 import { TeamStatsDialogComponent } from './components/team-stats-dialog/team-stats-dialog.component';
 import { OrdinalPipe } from './pipes/ordinal.pipe';
 import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -73,6 +73,7 @@ import { MatSelectModule } from '@angular/material/select';
     GridsterModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

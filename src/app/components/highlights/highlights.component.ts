@@ -12,8 +12,10 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Highlight } from 'src/app/types';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface DialogData {
   video: string;
@@ -32,6 +34,11 @@ export class HighlightsComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   subscriptions = new Subscription();
 
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild('searchInput') searchInput!: ElementRef;
+  dataSource!: MatTableDataSource<Highlight>;
+  highlightsSubject!: Subject<Array<Highlight>>;
+
   constructor(private api: ApiService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -39,18 +46,28 @@ export class HighlightsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.api.getAllHighlights().subscribe((highlights: Array<Highlight>) => {
         this.matchHighlights = highlights;
+        this.dataSource = new MatTableDataSource<Highlight>(
+          this.matchHighlights
+        );
         this.original = highlights;
+        this.dataSource.paginator = this.paginator;
+        this.highlightsSubject = this.dataSource.connect();
         this.isLoading = false;
       })
     );
   }
 
-  filterSearch(search: any) {
-    console.log(search);
-    const result = this.original.filter((match: { title: any }) =>
+  filterSearch(search: string) {
+    const result = this.original.filter((match: { title: string }) =>
       match.title.toLowerCase().includes(search.toLowerCase())
     );
     this.matchHighlights = result;
+    this.highlightsSubject.next(this.matchHighlights);
+  }
+
+  clearSearch() {
+    this.searchInput.nativeElement.value = '';
+    this.filterSearch('');
   }
 
   openHighlight(embeddedVid: string, title: string) {
