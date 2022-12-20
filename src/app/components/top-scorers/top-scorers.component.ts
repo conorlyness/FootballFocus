@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
+import { TopScorer } from 'src/app/types';
 
 @Component({
   selector: 'app-top-scorers',
@@ -10,7 +11,7 @@ import { ApiService } from 'src/app/services/services/api.service';
 export class TopScorersComponent implements OnInit, OnDestroy {
   @Input() league!: string;
   @Input() leagueImg!: string;
-  playerData: any[] = [];
+  playerData: TopScorer[] = [];
   prem: boolean = false;
   serieA: boolean = false;
   laLiga: boolean = false;
@@ -44,10 +45,18 @@ export class TopScorersComponent implements OnInit, OnDestroy {
           this.ligue1
         )
         .subscribe({
-          next: (val: any) => {
+          next: (val: Array<TopScorer>) => {
+            //use slice so we get only the top three players
+            let stats = val.slice(0, 3);
+
+            stats.forEach((player: any) => {
+              this.playerData.push({
+                player: player.player,
+                statistics: player.statistics[0],
+              });
+            });
+
             this.loading = false;
-            this.playerData = val.response.slice(0, 3);
-            console.log('player data : ', this.playerData);
           },
           error: (error) => console.log('got an error: ', error),
         })

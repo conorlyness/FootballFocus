@@ -13,6 +13,7 @@ import {
   Player,
   Highlight,
   LeagueNews,
+  TopScorer,
 } from 'src/app/types';
 import { catchError } from 'rxjs/operators';
 @Injectable({
@@ -192,7 +193,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ): Observable<any> {
+  ): Observable<Array<TopScorer>> {
     let leagueID;
 
     if (prem) {
@@ -207,10 +208,13 @@ export class ApiService {
       leagueID = this.LeagueIds.ligue1;
     }
     let url: string = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${leagueID}&season=2022`;
-    return this.http.get(url, this.ApiFootballOptions).pipe(
-      retry(2),
-      catchError((error) => this.handleError(error))
-    );
+    return this.http
+      .get<Observable<ApiResponse>>(url, this.ApiFootballOptions)
+      .pipe(
+        map((x: ApiResponse | any) => x?.response),
+        retry(2),
+        catchError((error) => this.handleError(error))
+      );
   }
 
   getLast5Results(

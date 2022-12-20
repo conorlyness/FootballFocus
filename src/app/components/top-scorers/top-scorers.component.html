@@ -1,22 +1,27 @@
 <div class="topScorersContent">
   <ng-container *ngIf="!loading">
-  <div class="leagueLogo">
-    <img class="tileLeagueImg" src="{{leagueImg}}" alt="">
-  </div>
+    <div class="leagueLogo">
+      <img class="tileLeagueImg" src="{{ leagueImg }}" alt="" />
+    </div>
     <p class="topScorers">Top Scorers</p>
-    <ng-container *ngFor="let player of playerData let idx = index">
+    <ng-container *ngFor="let player of playerData; let idx = index">
       <div class="player">
-        <p> {{idx+1 }} {{player.player.name}}</p>
-        <p class="ga"> G/A </p> <p class="GoalsAndAssists">
-          {{player.statistics[0].goals.total}}:{{player.statistics[0].goals.assists === null? 0 : player.statistics[0].goals.assists }}
-        </p> 
+        <p>{{ idx + 1 }} {{ player.player.name }}</p>
+        <p class="ga">G/A</p>
+        <p class="GoalsAndAssists">
+          {{ player.statistics.goals.total }}:{{
+            player.statistics.goals.assists === null
+              ? 0
+              : player.statistics.goals.assists
+          }}
+        </p>
       </div>
     </ng-container>
   </ng-container>
-  </div>
+</div>
 
-  <ng-container *ngIf="loading">
-    <div class="loadingSpinner">
-        <mat-spinner></mat-spinner>
-    </div>
+<ng-container *ngIf="loading">
+  <div class="loadingSpinner">
+    <mat-spinner></mat-spinner>
+  </div>
 </ng-container>
