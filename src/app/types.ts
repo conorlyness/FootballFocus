@@ -114,23 +114,21 @@ export type PlayerBirth = {
   country: string;
 };
 
-export type DetailedStats = [
-  {
-    cards: any;
-    dribbles: any;
-    duels: any;
-    fouls: any;
-    games: any;
-    goals: any;
-    league: any;
-    passes: any;
-    penalty: any;
-    shots: any;
-    substitutes: any;
-    tackles: any;
-    team: Team;
-  }
-];
+export type DetailedStats = {
+  cards: any;
+  dribbles: any;
+  duels: any;
+  fouls: any;
+  games: any;
+  goals: any;
+  league: any;
+  passes: any;
+  penalty: any;
+  shots: any;
+  substitutes: any;
+  tackles: any;
+  team: Team;
+};
 
 export type FixtureDetails = {
   date: string;
