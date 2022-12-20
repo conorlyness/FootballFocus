@@ -94,6 +94,44 @@ export type Player = {
   position: string;
 };
 
+export type DetailedPlayer = {
+  age: number;
+  birth: PlayerBirth;
+  firstname: string;
+  height: string;
+  id: number;
+  injured: boolean;
+  lastname: string;
+  name: string;
+  nationality: string;
+  photo: string;
+  weight: string;
+};
+
+export type PlayerBirth = {
+  date: string;
+  place: string;
+  country: string;
+};
+
+export type DetailedStats = [
+  {
+    cards: any;
+    dribbles: any;
+    duels: any;
+    fouls: any;
+    games: any;
+    goals: any;
+    league: any;
+    passes: any;
+    penalty: any;
+    shots: any;
+    substitutes: any;
+    tackles: any;
+    team: Team;
+  }
+];
+
 export type FixtureDetails = {
   date: string;
   id: number;
@@ -154,4 +192,9 @@ export type Competition = {
   id: number;
   name: string;
   url: string;
+};
+
+export type TopScorer = {
+  player: DetailedPlayer;
+  statistics: DetailedStats;
 };
