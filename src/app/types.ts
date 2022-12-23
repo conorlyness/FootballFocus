@@ -128,7 +128,7 @@ export type DetailedStats = {
   substitutes: any;
   tackles: any;
   team: Team;
-};
+}[];
 
 export type FixtureDetails = {
   date: string;

@@ -5,17 +5,17 @@
     </div>
     <p class="topScorers">Top Scorers</p>
     <ng-container *ngFor="let player of playerData; let idx = index">
-      <div class="player">
-        <p>{{ idx + 1 }} {{ player.player.name }}</p>
-        <p class="ga">G/A</p>
-        <p class="GoalsAndAssists">
-          {{ player.statistics.goals.total }}:{{
-            player.statistics.goals.assists === null
-              ? 0
-              : player.statistics.goals.assists
-          }}
-        </p>
-      </div>
+      <ng-container *ngFor="let statistics of player.statistics">
+        <div class="player">
+          <p>{{ idx + 1 }} {{ player.player.name }}</p>
+          <p class="ga">G/A</p>
+          <p class="GoalsAndAssists">
+            {{ statistics.goals.total }}:{{
+              statistics.goals.assists === null ? 0 : statistics.goals.assists
+            }}
+          </p>
+        </div>
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>

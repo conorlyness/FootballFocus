@@ -49,10 +49,10 @@ export class TopScorersComponent implements OnInit, OnDestroy {
             //use slice so we get only the top three players
             let stats = val.slice(0, 3);
 
-            stats.forEach((player: any) => {
+            stats.forEach((player: TopScorer) => {
               this.playerData.push({
                 player: player.player,
-                statistics: player.statistics[0],
+                statistics: player.statistics,
               });
             });
 
