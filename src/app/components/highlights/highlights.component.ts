@@ -43,15 +43,21 @@ export class HighlightsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.getAllHighlights();
+  }
+
+  getAllHighlights() {
     this.subscriptions.add(
       this.api.getAllHighlights().subscribe((highlights: Array<Highlight>) => {
         this.matchHighlights = highlights;
+        this.original = highlights;
+
         this.dataSource = new MatTableDataSource<Highlight>(
           this.matchHighlights
         );
-        this.original = highlights;
         this.dataSource.paginator = this.paginator;
         this.highlightsSubject = this.dataSource.connect();
+
         this.isLoading = false;
       })
     );
@@ -61,8 +67,12 @@ export class HighlightsComponent implements OnInit, OnDestroy {
     const result = this.original.filter((match: { title: string }) =>
       match.title.toLowerCase().includes(search.toLowerCase())
     );
+
     this.matchHighlights = result;
-    this.highlightsSubject.next(this.matchHighlights);
+
+    this.dataSource = new MatTableDataSource<Highlight>(this.matchHighlights);
+    this.dataSource.paginator = this.paginator;
+    this.highlightsSubject = this.dataSource.connect();
   }
 
   clearSearch() {
