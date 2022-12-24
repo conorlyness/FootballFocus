@@ -15,7 +15,7 @@ export type LeagueInfo = {
   id: number;
   logo: string;
   name: string;
-  round: string;
+  round?: string;
   season: number;
 };
 
@@ -114,19 +114,93 @@ export type PlayerBirth = {
   country: string;
 };
 
+//types for the DetailedStats type
+
+export type Cards = {
+  yellow: number;
+  yellowred: number;
+  red: number;
+};
+
+export type Dribbles = {
+  attempts: number;
+  success: number;
+  past: number | null;
+};
+
+export type Duels = {
+  total: number;
+  won: number;
+};
+
+export type Fouls = {
+  drawn: number;
+  commited: number;
+};
+
+export type Games = {
+  appearances: number;
+  captain: boolean;
+  lineups: number;
+  minutes: number;
+  number: number | null;
+  position: string;
+  rating: string;
+};
+
+export type Goals = {
+  assists: number;
+  conceded: number;
+  saves: number | null;
+  total: number;
+};
+
+export type Passes = {
+  accuracy: number;
+  key: number;
+  total: number;
+};
+
+export type Penalty = {
+  commited: number | null;
+  missed: number;
+  saved: number | null;
+  scored: number;
+  won: number | null;
+};
+
+export type Shots = {
+  on: number;
+  total: number;
+};
+
+export type Substitutes = {
+  bench: number;
+  in: number;
+  out: number;
+};
+
+export type Tackles = {
+  blocks: number | null;
+  interceptions: number;
+  total: number;
+};
+
+//
+
 export type DetailedStats = {
-  cards: any;
-  dribbles: any;
-  duels: any;
-  fouls: any;
-  games: any;
-  goals: any;
-  league: any;
-  passes: any;
-  penalty: any;
-  shots: any;
-  substitutes: any;
-  tackles: any;
+  cards: Cards;
+  dribbles: Dribbles;
+  duels: Duels;
+  fouls: Fouls;
+  games: Games;
+  goals: Goals;
+  league: LeagueInfo;
+  passes: Passes;
+  penalty: Penalty;
+  shots: Shots;
+  substitutes: Substitutes;
+  tackles: Tackles;
   team: Team;
 }[];
 
