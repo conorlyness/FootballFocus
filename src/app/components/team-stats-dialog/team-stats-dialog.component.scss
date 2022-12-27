@@ -81,12 +81,52 @@ p {
         width: 64px;
       }
     }
-
-    .table-row:hover {
-      scale: (1.1);
-      transition: all 0.2s ease-in-out;
-    }
   }
+}
+
+tr.playerDetailRow {
+  height: 0;
+}
+
+.detailedPlayerStats {
+  padding: 5px;
+}
+
+.fetchDetailsBtn {
+  text-align: left;
+}
+
+.getStatsBtn {
+  border: 1px solid black;
+}
+
+.playersStats {
+  padding-top: 10px;
+}
+
+.playerDetail {
+  overflow: hidden;
+}
+
+.personalStatsContent {
+  font-size: 12px;
+  border-bottom: 1px solid black;
+  text-align: left;
+}
+
+.seasonStatsContent {
+  width: 100%;
+  font-size: 12px;
+  border-bottom: 1px solid black;
+  text-align: left;
+}
+
+.playerName {
+  text-align: center;
+}
+
+.competitionName {
+  text-align: center;
 }
 
 .closeContainer {
