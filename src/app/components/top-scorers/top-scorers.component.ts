@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
-import { TopScorer } from 'src/app/types';
+import { PlayerDetails } from 'src/app/types';
 
 @Component({
   selector: 'app-top-scorers',
@@ -11,7 +11,7 @@ import { TopScorer } from 'src/app/types';
 export class TopScorersComponent implements OnInit, OnDestroy {
   @Input() league!: string;
   @Input() leagueImg!: string;
-  playerData: TopScorer[] = [];
+  playerData: PlayerDetails[] = [];
   prem: boolean = false;
   serieA: boolean = false;
   laLiga: boolean = false;
@@ -45,11 +45,11 @@ export class TopScorersComponent implements OnInit, OnDestroy {
           this.ligue1
         )
         .subscribe({
-          next: (val: Array<TopScorer>) => {
+          next: (val: Array<PlayerDetails>) => {
             //use slice so we get only the top three players
             let stats = val.slice(0, 3);
 
-            stats.forEach((player: TopScorer) => {
+            stats.forEach((player: PlayerDetails) => {
               this.playerData.push({
                 player: player.player,
                 statistics: player.statistics,

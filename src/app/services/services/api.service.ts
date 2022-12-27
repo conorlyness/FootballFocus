@@ -13,7 +13,7 @@ import {
   Player,
   Highlight,
   LeagueNews,
-  TopScorer,
+  PlayerDetails,
 } from 'src/app/types';
 import { catchError } from 'rxjs/operators';
 @Injectable({
@@ -193,7 +193,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ): Observable<Array<TopScorer>> {
+  ): Observable<Array<PlayerDetails>> {
     let leagueID;
 
     if (prem) {
@@ -264,6 +264,17 @@ export class ApiService {
       retry(2),
       catchError((error) => this.handleError(error))
     );
+  }
+
+  getPlayerDetailsById(id: number): Observable<Array<PlayerDetails>> {
+    let url = `https://api-football-v1.p.rapidapi.com/v3/players?id=${id}&season=2022`;
+    return this.http
+      .get<Observable<ApiResponse>>(url, this.ApiFootballOptions)
+      .pipe(
+        map((x: ApiResponse | any) => x?.response),
+        retry(2),
+        catchError((error) => this.handleError(error))
+      );
   }
 
   getTotalNumberOfGameWeeks(

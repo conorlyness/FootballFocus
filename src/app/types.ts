@@ -139,7 +139,7 @@ export type Fouls = {
 };
 
 export type Games = {
-  appearances: number;
+  appearences: number;
   captain: boolean;
   lineups: number;
   minutes: number;
@@ -266,7 +266,7 @@ export type Competition = {
   url: string;
 };
 
-export type TopScorer = {
+export type PlayerDetails = {
   player: DetailedPlayer;
   statistics: DetailedStats;
 };
