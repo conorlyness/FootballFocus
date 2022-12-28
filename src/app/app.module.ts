@@ -34,6 +34,7 @@ import { TeamStatsDialogComponent } from './components/team-stats-dialog/team-st
 import { OrdinalPipe } from './pipes/ordinal.pipe';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NullReplacePipe } from './pipes/null-replace.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     Last5DialogComponent,
     TeamStatsDialogComponent,
     OrdinalPipe,
+    NullReplacePipe,
   ],
   imports: [
     BrowserModule,
