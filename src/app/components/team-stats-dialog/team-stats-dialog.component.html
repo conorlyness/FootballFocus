@@ -164,32 +164,152 @@
                               </h3>
                               <div class="seasonStatsContent">
                                 <div class="gameStats">
-                                  <h3>Game Stats</h3>
+                                  <h3>Games</h3>
                                   <p>
                                     Appearences -
-                                    {{ statistics?.games?.appearences }}
+                                    {{
+                                      statistics?.games?.appearences
+                                        | nullReplace
+                                    }}
                                   </p>
                                   <p>
-                                    Minutes - {{ statistics?.games?.minutes }}
+                                    Minutes -
+                                    {{
+                                      statistics?.games?.minutes | nullReplace
+                                    }}
                                   </p>
                                   <p>
-                                    Rating - {{ statistics?.games?.rating }}
+                                    Rating -
+                                    {{
+                                      statistics?.games?.rating | nullReplace
+                                    }}
                                   </p>
                                 </div>
 
                                 <div class="substituteStats">
-                                  <h3>Substitute Stats</h3>
+                                  <h3>Substitutions</h3>
                                   <p>
                                     Subbed on -
-                                    {{ statistics?.substitutes?.in }}
+                                    {{
+                                      statistics?.substitutes?.in | nullReplace
+                                    }}
                                   </p>
                                   <p>
                                     Subbed off -
-                                    {{ statistics?.substitutes?.out }}
+                                    {{
+                                      statistics?.substitutes?.out | nullReplace
+                                    }}
                                   </p>
                                   <p>
                                     Benched -
-                                    {{ statistics?.substitutes?.bench }}
+                                    {{
+                                      statistics?.substitutes?.bench
+                                        | nullReplace
+                                    }}
+                                  </p>
+                                </div>
+
+                                <div class="cardStats">
+                                  <h3>Cards</h3>
+                                  <p>
+                                    Yellow -
+                                    {{
+                                      statistics?.cards?.yellow | nullReplace
+                                    }}
+                                  </p>
+                                  <p>
+                                    Red -
+                                    {{ statistics?.cards?.red | nullReplace }}
+                                  </p>
+                                </div>
+
+                                <div class="passStats">
+                                  <h3>Passes</h3>
+                                  <p>
+                                    Accuracy-
+                                    {{
+                                      statistics?.passes?.accuracy
+                                        | nullReplace
+                                    }}%
+                                  </p>
+                                  <p>
+                                    Key -
+                                    {{ statistics?.passes?.key | nullReplace }}
+                                  </p>
+                                  <p>
+                                    Total -
+                                    {{
+                                      statistics?.passes?.total | nullReplace
+                                    }}
+                                  </p>
+                                </div>
+
+                                <div class="shotStats">
+                                  <h3>Shots</h3>
+                                  <p>
+                                    On Target -
+                                    {{ statistics?.shots?.on | nullReplace }}
+                                  </p>
+                                  <p>
+                                    Total -
+                                    {{ statistics?.shots?.total | nullReplace }}
+                                  </p>
+                                </div>
+
+                                <div class="goalStats">
+                                  <h3>Goals</h3>
+                                  <p>
+                                    Goals -
+                                    {{ statistics?.goals?.total | nullReplace }}
+                                  </p>
+                                  <p>
+                                    Assists -
+                                    {{
+                                      statistics?.goals?.assists | nullReplace
+                                    }}
+                                  </p>
+                                  <p>
+                                    Conceded -
+                                    {{
+                                      statistics?.goals?.conceded | nullReplace
+                                    }}
+                                  </p>
+                                  <p>
+                                    Saves -
+                                    {{ statistics?.goals?.saves | nullReplace }}
+                                  </p>
+                                </div>
+
+                                <div class="penaltyStats">
+                                  <h3>Penaltys</h3>
+                                  <p>
+                                    Scored -
+                                    {{
+                                      statistics?.penalty?.scored | nullReplace
+                                    }}
+                                  </p>
+                                  <p>
+                                    Missed -
+                                    {{
+                                      statistics?.penalty?.missed | nullReplace
+                                    }}
+                                  </p>
+                                  <p>
+                                    Commited -
+                                    {{
+                                      statistics?.penalty?.commited
+                                        | nullReplace
+                                    }}
+                                  </p>
+                                  <p>
+                                    Won -
+                                    {{ statistics?.penalty?.won | nullReplace }}
+                                  </p>
+                                  <p>
+                                    Saved -
+                                    {{
+                                      statistics?.penalty?.saved | nullReplace
+                                    }}
                                   </p>
                                 </div>
                               </div>
