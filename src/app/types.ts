@@ -125,7 +125,7 @@ export type Cards = {
 export type Dribbles = {
   attempts: number;
   success: number;
-  past: number | null;
+  past: number;
 };
 
 export type Duels = {
@@ -143,7 +143,7 @@ export type Games = {
   captain: boolean;
   lineups: number;
   minutes: number;
-  number: number | null;
+  number: number;
   position: string;
   rating: string;
 };
@@ -151,7 +151,7 @@ export type Games = {
 export type Goals = {
   assists: number;
   conceded: number;
-  saves: number | null;
+  saves: number;
   total: number;
 };
 
@@ -162,11 +162,11 @@ export type Passes = {
 };
 
 export type Penalty = {
-  commited: number | null;
+  commited: number;
   missed: number;
-  saved: number | null;
+  saved: number;
   scored: number;
-  won: number | null;
+  won: number;
 };
 
 export type Shots = {
@@ -181,7 +181,7 @@ export type Substitutes = {
 };
 
 export type Tackles = {
-  blocks: number | null;
+  blocks: number;
   interceptions: number;
   total: number;
 };
