@@ -1,5 +1,5 @@
 <div class="highlightContent">
-  <div class="searchBar">
+  <div class="searchBar" #content>
     <form class="form">
       <mat-form-field class="searchInput" appearance="outline">
         <div class="inputAndButton">
@@ -52,4 +52,5 @@
   [length]="matchHighlights.length"
   [pageSize]="10"
   [pageSizeOptions]="[5, 10, 25, 50, 100]"
+  (page)="scrollUp()"
 ></mat-paginator>

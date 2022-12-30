@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, Observable, pluck, retry, throwError } from 'rxjs';
+import { map, Observable, retry, throwError } from 'rxjs';
 import { urls } from '../../serviceUrls';
 import {
   LeagueTable,
@@ -111,18 +111,15 @@ export class ApiService {
       url = this.urls.leagueRound.ligue1LeagueCurrentRoundUrl;
     }
 
-    const resp = this.http.get<LeagueRound>(url, this.ApiFootballOptions);
-
-    let currentRound$ = resp.pipe(map((obj: any) => obj?.response[0]));
-
-    return currentRound$.pipe(
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      map((obj: ApiResponse) => obj?.response[0]),
       retry(2),
       catchError((error) => this.handleError(error))
     );
   }
 
   getFixturesByRound(
-    round: any,
+    round: number | string,
     prem?: boolean,
     serieA?: boolean,
     laLiga?: boolean,
@@ -146,13 +143,11 @@ export class ApiService {
 
     let url: string = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueID}&season=2022&round=${round}&timezone=Europe%2FLondon`;
 
-    return this.http
-      .get<Observable<ApiResponse>>(url, this.ApiFootballOptions)
-      .pipe(
-        map((resp: ApiResponse | any) => resp?.response),
-        retry(2),
-        catchError((error) => this.handleError(error))
-      );
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      map((resp: ApiResponse) => resp?.response),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
   }
 
   getLeagueNews(
@@ -208,13 +203,11 @@ export class ApiService {
       leagueID = this.LeagueIds.ligue1;
     }
     let url: string = `https://api-football-v1.p.rapidapi.com/v3/players/topscorers?league=${leagueID}&season=2022`;
-    return this.http
-      .get<Observable<ApiResponse>>(url, this.ApiFootballOptions)
-      .pipe(
-        map((x: ApiResponse | any) => x?.response),
-        retry(2),
-        catchError((error) => this.handleError(error))
-      );
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      map((x: ApiResponse) => x?.response),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
   }
 
   getLast5Results(
@@ -260,7 +253,7 @@ export class ApiService {
   getTeamsPlayers(id: number): Observable<Array<Player>> {
     let url = `https://api-football-v1.p.rapidapi.com/v3/players/squads?team=${id}`;
     return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
-      map((x: ApiResponse | any) => x?.response[0]?.players),
+      map((x: ApiResponse) => x?.response[0]?.players),
       retry(2),
       catchError((error) => this.handleError(error))
     );
@@ -268,13 +261,11 @@ export class ApiService {
 
   getPlayerDetailsById(id: number): Observable<Array<PlayerDetails>> {
     let url = `https://api-football-v1.p.rapidapi.com/v3/players?id=${id}&season=2022`;
-    return this.http
-      .get<Observable<ApiResponse>>(url, this.ApiFootballOptions)
-      .pipe(
-        map((x: ApiResponse | any) => x?.response),
-        retry(2),
-        catchError((error) => this.handleError(error))
-      );
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      map((x: ApiResponse) => x?.response),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
   }
 
   getTotalNumberOfGameWeeks(

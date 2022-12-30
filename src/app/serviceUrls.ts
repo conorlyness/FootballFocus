@@ -1,5 +1,3 @@
-let currentYear = new Date().getFullYear();
-
 export let urls = {
   leagueNews: {
     //news urls

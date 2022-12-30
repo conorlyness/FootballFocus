@@ -36,6 +36,7 @@ export class HighlightsComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild('searchInput') searchInput!: ElementRef;
+  @ViewChild('content', { read: ElementRef }) topOfPage!: ElementRef;
   dataSource!: MatTableDataSource<Highlight>;
   highlightsSubject!: Subject<Array<Highlight>>;
 
@@ -88,6 +89,15 @@ export class HighlightsComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe();
+  }
+
+  scrollUp(): void {
+    setTimeout(() =>
+      this.topOfPage.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      })
+    );
   }
 
   ngOnDestroy() {
