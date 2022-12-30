@@ -43,7 +43,7 @@ export type ApiResponse = {
   get: string;
   paging: object;
   parameters: object;
-  response: Array<object>;
+  response: Array<any>;
   results: number;
 };
 

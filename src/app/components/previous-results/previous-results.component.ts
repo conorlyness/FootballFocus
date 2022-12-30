@@ -18,6 +18,11 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
   ligue1: boolean = false;
   loading: boolean = false;
   currentGameweek: any;
+
+  //this is so we have a current game week that doesnt change,
+  //so that if the user selects current in the mat select then it will always
+  //be the correct current week
+  currentGameweekMatOption!: string;
   showingPreviousWeeks: boolean = false;
   subscriptions = new Subscription();
   numberOfGameWeeks: any[] = [];
@@ -58,6 +63,7 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
               var gameweek = gWeek.match(/\d/g);
               gameweek = gameweek.join('');
               this.currentGameweek = gameweek;
+              this.currentGameweekMatOption = gameweek;
               for (let i = 1; i <= this.currentGameweek; i++) {
                 this.numberOfGameWeeks.push(i);
               }

@@ -1,5 +1,5 @@
 <div class="fixturesTopContent">
-  <p class="upcomingFixturesTitle">GameWeek {{ displayGameweek }} Fixtures</p>
+  <p class="upcomingFixturesTitle">Game Week {{ displayGameweek }} Fixtures</p>
   <div class="filters">
     <mat-form-field class="gwkDropDown">
       <mat-label class="gwkLabel">Game Week</mat-label>
@@ -7,6 +7,9 @@
         [(ngModel)]="currentGameweek"
         (selectionChange)="getFixtures(currentGameweek)"
       >
+        <mat-option value="{{ currentGameweekMatOption }}"
+          >Current GameWeek</mat-option
+        >
         <ng-container *ngFor="let gameweek of gameWeeks">
           <mat-option value="{{ gameweek }}"
             >GameWeek - {{ gameweek }}</mat-option

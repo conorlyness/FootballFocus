@@ -7,6 +7,9 @@
         [(ngModel)]="currentGameweek"
         (selectionChange)="getResults(currentGameweek)"
       >
+        <mat-option value="{{ currentGameweekMatOption }}"
+          >Current GameWeek</mat-option
+        >
         <ng-container *ngFor="let gameweek of numberOfGameWeeks">
           <mat-option value="{{ gameweek }}"
             >GameWeek - {{ gameweek }}</mat-option

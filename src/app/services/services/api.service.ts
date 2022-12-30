@@ -242,7 +242,7 @@ export class ApiService {
     var url: string = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=${leagueID}&season=2022&team=${teamID}&last=5`;
 
     return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
-      map((x: ApiResponse | any) => x?.response),
+      map((x: ApiResponse) => x?.response),
       retry(2),
       catchError((error) => this.handleError(error))
     );
@@ -251,7 +251,7 @@ export class ApiService {
   getTeamsDetails(id: number): Observable<ExtendedTeamDetails> {
     let url = `https://api-football-v1.p.rapidapi.com/v3/teams?id=${id}`;
     return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
-      map((x: ApiResponse | any) => x?.response[0]),
+      map((x: ApiResponse) => x?.response[0]),
       retry(2),
       catchError((error) => this.handleError(error))
     );
@@ -283,7 +283,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ): Observable<any> {
+  ): Observable<Array<string>> {
     let leagueID;
 
     if (prem) {
@@ -299,8 +299,8 @@ export class ApiService {
     }
 
     let url = `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=${leagueID}&season=2022`;
-    return this.http.get(url, this.ApiFootballOptions).pipe(
-      pluck('response'),
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      map((x: ApiResponse) => x?.response),
       retry(2),
       catchError((error) => this.handleError(error))
     );
