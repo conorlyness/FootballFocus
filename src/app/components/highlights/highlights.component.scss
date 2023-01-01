@@ -61,18 +61,6 @@
   text-align: center;
 }
 
-.video {
-  padding-top: 50px;
-  margin: 0 auto;
-  height: 386px !important;
-  width: 600px !important;
-  overflow: hidden;
-}
-
-.closeContainer {
-  cursor: pointer;
-}
-
 .noResults {
   font-weight: 200;
   font-size: 30px;
@@ -81,14 +69,6 @@
 .noResultsDiv {
   padding-top: 50px;
   text-align: center;
-}
-
-.dialogInfo {
-  display: flex;
-  justify-content: space-between;
-  p {
-    font-weight: 200;
-  }
 }
 
 .clearSearchButton {

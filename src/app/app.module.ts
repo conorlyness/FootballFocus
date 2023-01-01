@@ -35,6 +35,7 @@ import { OrdinalPipe } from './pipes/ordinal.pipe';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NullReplacePipe } from './pipes/null-replace.pipe';
+import { HighlightDialogComponent } from './components/highlight-dialog/highlight-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { NullReplacePipe } from './pipes/null-replace.pipe';
     TeamStatsDialogComponent,
     OrdinalPipe,
     NullReplacePipe,
+    HighlightDialogComponent,
   ],
   imports: [
     BrowserModule,

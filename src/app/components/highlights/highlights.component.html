@@ -22,7 +22,7 @@
     </form>
   </div>
   <div class="highlightsContent">
-    <ng-container *ngFor="let match of highlightsSubject | async">
+    <ng-container *ngFor="let match of highlightsObs$ | async">
       <div
         class="matchHighlight"
         (click)="openHighlight(match.embed, match.title)"

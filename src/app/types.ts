@@ -270,3 +270,8 @@ export type PlayerDetails = {
   player: DetailedPlayer;
   statistics: DetailedStats;
 };
+
+export type HighlightDialogData = {
+  video: string;
+  title: string;
+};
