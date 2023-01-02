@@ -20,10 +20,10 @@ export type LeagueInfo = {
 };
 
 export type Score = {
-  extratime: any;
-  fulltime: any;
-  halftime: any;
-  penalty: any;
+  extratime: Goals;
+  fulltime: Goals;
+  halftime: Goals;
+  penalty: Goals;
 };
 
 export type Fixture = {
@@ -57,11 +57,16 @@ export type LeagueNews = {
 };
 
 export type Last5 = {
-  fixture: object;
-  goals: object;
-  league: object;
-  score: object;
-  teams: object;
+  fixture: FixtureDetails;
+  goals: Goals;
+  league: LeagueInfo;
+  score: Score;
+  teams: Teams;
+};
+
+export type Goals = {
+  home: number;
+  away: number;
 };
 
 export type TeamStats = {
@@ -83,6 +88,15 @@ export type Team = {
   id: number;
   name: string;
   logo: string;
+};
+
+export type Teams = {
+  home: Team & {
+    winner: boolean;
+  };
+  away: Team & {
+    winner: boolean;
+  };
 };
 
 export type Player = {
@@ -148,7 +162,7 @@ export type Games = {
   rating: string;
 };
 
-export type Goals = {
+export type PlayerGoals = {
   assists: number;
   conceded: number;
   saves: number;
@@ -194,7 +208,7 @@ export type DetailedStats = {
   duels: Duels;
   fouls: Fouls;
   games: Games;
-  goals: Goals;
+  goals: PlayerGoals;
   league: LeagueInfo;
   passes: Passes;
   penalty: Penalty;

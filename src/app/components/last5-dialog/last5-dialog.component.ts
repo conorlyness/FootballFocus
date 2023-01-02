@@ -4,6 +4,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { Last5 } from 'src/app/types';
 import { DialogData } from '../upcoming-fixtures/upcoming-fixtures.component';
 
 @Component({
@@ -12,8 +13,8 @@ import { DialogData } from '../upcoming-fixtures/upcoming-fixtures.component';
   styleUrls: ['./last5-dialog.component.scss'],
 })
 export class Last5DialogComponent implements OnInit {
-  homeTeam: any[] = [];
-  awayTeam: any[] = [];
+  homeTeam!: Last5[];
+  awayTeam!: Last5[];
   homeName!: string;
   awayName!: string;
 
