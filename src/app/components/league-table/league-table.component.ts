@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
-import { LeagueTable } from 'src/app/types';
+import { LeageSeasons, LeagueTable } from 'src/app/types';
 import { MatDialog } from '@angular/material/dialog';
 import { TeamStatsDialogComponent } from '../team-stats-dialog/team-stats-dialog.component';
 
@@ -23,6 +23,13 @@ export interface DialogData {
 export class LeagueTableComponent implements OnInit, OnDestroy {
   @Input() league!: string;
   tableData: Array<LeagueTable> = [];
+  leagueSeasons: Array<LeageSeasons> = [
+    { value: '2022', displayName: 'Season - 22/23' },
+    { value: '2021', displayName: 'Season - 21/22' },
+    { value: '2020', displayName: 'Season - 20/21' },
+    { value: '2019', displayName: 'Season - 19/20' },
+    { value: '2018', displayName: 'Season - 18/19' },
+  ];
   prem: boolean = false;
   serieA: boolean = false;
   laLiga: boolean = false;

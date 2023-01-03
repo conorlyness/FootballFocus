@@ -289,3 +289,8 @@ export type HighlightDialogData = {
   video: string;
   title: string;
 };
+
+export type LeageSeasons = {
+  value: string;
+  displayName: string;
+};

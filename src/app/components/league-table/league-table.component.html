@@ -6,11 +6,11 @@
         [(ngModel)]="season"
         (selectionChange)="getLeagueTable(season)"
       >
-        <mat-option value="2022">Season - 22/23</mat-option>
-        <mat-option value="2021">Season - 21/22</mat-option>
-        <mat-option value="2020">Season - 20/21</mat-option>
-        <mat-option value="2019">Season - 19/20</mat-option>
-        <mat-option value="2018">Season - 18/19</mat-option>
+        <ng-container *ngFor="let season of leagueSeasons">
+          <mat-option value="{{ season.value }}">
+            {{ season.displayName }}
+          </mat-option>
+        </ng-container>
       </mat-select>
     </mat-form-field>
   </div>
