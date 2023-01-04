@@ -1,10 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
 import { LeageSeasons, LeagueTable } from 'src/app/types';
@@ -99,7 +93,7 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
     );
   }
 
-  showTeam(teamName: any) {
+  showTeam(teamName: string) {
     const dialogData = {
       stats: teamName,
     };
@@ -116,9 +110,7 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
       },
     });
 
-    dialogRef
-      .afterClosed()
-      .subscribe(() => console.log('The dialog was closed'));
+    dialogRef.afterClosed().subscribe();
   }
 
   ngOnDestroy() {

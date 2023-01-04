@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, Observable, retry, throwError } from 'rxjs';
+import { map, Observable, retry, tap, throwError } from 'rxjs';
 import { urls } from '../../serviceUrls';
 import {
   LeagueTable,
-  LeagueRound,
   ApiResponse,
   Fixture,
   Last5,
   ExtendedTeamDetails,
-  ExtendedPlayerDetails,
   Player,
   Highlight,
   LeagueNews,
@@ -96,7 +94,7 @@ export class ApiService {
     laLiga?: boolean,
     bundes?: boolean,
     ligue1?: boolean
-  ): Observable<LeagueRound> {
+  ): Observable<string> {
     var url: string = '';
 
     if (prem) {

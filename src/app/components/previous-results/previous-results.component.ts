@@ -17,7 +17,7 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
   bundes: boolean = false;
   ligue1: boolean = false;
   loading: boolean = false;
-  currentGameweek: any;
+  currentGameweek!: string;
 
   //this is so we have a current game week that doesnt change,
   //so that if the user selects current in the mat select then it will always
@@ -59,16 +59,19 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
             this.ligue1
           )
           .subscribe({
-            next: (gWeek: any) => {
-              var gameweek = gWeek.match(/\d/g);
-              gameweek = gameweek.join('');
-              this.currentGameweek = gameweek;
-              this.currentGameweekMatOption = gameweek;
-              for (let i = 1; i <= this.currentGameweek; i++) {
-                this.numberOfGameWeeks.push(i);
+            next: (gWeek: string) => {
+              let gameweek = gWeek.match(/\d/g);
+              let formattedGameweek = gameweek?.join('');
+
+              if (formattedGameweek) {
+                this.currentGameweek = formattedGameweek;
+                this.currentGameweekMatOption = formattedGameweek;
+
+                for (let i = 1; i <= +this.currentGameweek; i++) {
+                  this.numberOfGameWeeks.push(i);
+                }
+                resolve(this.currentGameweek);
               }
-              console.log('Current gameweek ', this.currentGameweek);
-              resolve(this.currentGameweek);
             },
             error: (error) => {
               console.log('got an error: ', error);
@@ -79,7 +82,7 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
     });
   }
 
-  getResults(round: number) {
+  getResults(round: string) {
     this.loading = true;
     const GameweekToPass = `Regular Season - ${round}`;
     this.subscriptions.add(
