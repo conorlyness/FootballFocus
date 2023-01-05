@@ -1,9 +1,5 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../league-table/league-table.component';
 import {
   ExtendedTeamDetails,
@@ -47,9 +43,9 @@ export class TeamStatsDialogComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
 
   displayedColumns: string[] = ['photo', 'Name', 'Age', 'Position', 'Number'];
-  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
+  columnsToDisplayWithExpand: string[] = [...this.displayedColumns, 'expand'];
   dataSource = this.detailedPlayerStats;
-  expandedPlayer: any | null;
+  expandedPlayer!: Player | null;
   playerStatsVisible: boolean = false;
   playerStats: PlayerDetails[] = [];
 
@@ -107,7 +103,7 @@ export class TeamStatsDialogComponent implements OnInit, OnDestroy {
     await this.fetchPlayerStats(playerID);
   }
 
-  expandedRowChange(player: any, event: any) {
+  expandedRowChange(player: Player, event: Event) {
     this.playerStatsVisible = false;
     this.expandedPlayer = this.expandedPlayer === player ? null : player;
     event.stopPropagation();
