@@ -96,36 +96,13 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
           this.ligue1
         )
         .subscribe({
-          next: (fixtures: Array<any>) => {
+          next: (fixtures: Array<Fixture>) => {
             this.loading = false;
             this.fixtureData = fixtures;
           },
           error: (error) => console.log('got an error: ', error),
         })
     );
-
-    // this.subscriptions.add(
-    //   this.api
-    //     .getLeagueResults(
-    //       this.prem,
-    //       this.serieA,
-    //       this.laLiga,
-    //       this.bundes,
-    //       this.ligue1
-    //     )
-    //     .subscribe({
-    //       next: (data: any) => {
-    //         this.loading = false;
-    //         const fixturesObj = data[0];
-
-    //         this.currentResultsData = fixturesObj[Object.keys(fixturesObj)[0]];
-    //         this.previousResultsData = fixturesObj[Object.keys(fixturesObj)[1]];
-    //         this.fixtureData = this.currentResultsData;
-    //         console.log('league fixtures', this.fixtureData);
-    //       },
-    //       error: (error) => console.log('got an error: ', error),
-    //     })
-    // );
   }
 
   ngOnDestroy() {
