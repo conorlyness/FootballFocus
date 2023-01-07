@@ -26,8 +26,8 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
   bundes: boolean = false;
   ligue1: boolean = false;
   loading: boolean = false;
-  displayGameweek!: any;
-  currentGameweek!: any;
+  displayGameweek!: string;
+  currentGameweek!: string;
 
   //this is so we have a current game week that doesnt change,
   //so that if the user selects current in the mat select then it will always
@@ -92,12 +92,9 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
             this.ligue1
           )
           .subscribe({
-            next: (gWeek: any) => {
-              var gameweek = gWeek.match(/(\d+)/)[0];
-
-              this.currentGameweek = gameweek;
-              this.currentGameweekMatOption = gameweek;
-
+            next: (gWeek: string) => {
+              this.currentGameweek = gWeek;
+              this.currentGameweekMatOption = gWeek;
               resolve(this.currentGameweek);
             },
             error: (error) => {
@@ -109,7 +106,7 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
     });
   }
 
-  getFixtures(round: number) {
+  getFixtures(round: string) {
     this.loading = true;
     const GameweekToPass = `Regular Season - ${round}`;
     this.subscriptions.add(

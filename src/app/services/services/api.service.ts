@@ -111,6 +111,8 @@ export class ApiService {
 
     return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
       map((obj: ApiResponse) => obj?.response[0]),
+      //use regex to get numbers from string i.e the current round
+      map((val) => val.match(/\d/g).join('')),
       retry(2),
       catchError((error) => this.handleError(error))
     );

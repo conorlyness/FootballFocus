@@ -60,18 +60,13 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
           )
           .subscribe({
             next: (gWeek: string) => {
-              let gameweek = gWeek.match(/\d/g);
-              let formattedGameweek = gameweek?.join('');
+              this.currentGameweek = gWeek;
+              this.currentGameweekMatOption = gWeek;
 
-              if (formattedGameweek) {
-                this.currentGameweek = formattedGameweek;
-                this.currentGameweekMatOption = formattedGameweek;
-
-                for (let i = 1; i <= +this.currentGameweek; i++) {
-                  this.numberOfGameWeeks.push(i);
-                }
-                resolve(this.currentGameweek);
+              for (let i = 1; i <= +this.currentGameweek; i++) {
+                this.numberOfGameWeeks.push(i);
               }
+              resolve(this.currentGameweek);
             },
             error: (error) => {
               console.log('got an error: ', error);
