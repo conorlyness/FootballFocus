@@ -36,7 +36,7 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
   homeTeamLast5: Last5[] = [];
   awayTeamLast5: Last5[] = [];
   totalGameWeeks!: number;
-  gameWeeks: any[] = [];
+  gameWeeks: number[] = [];
   subscriptions = new Subscription();
 
   constructor(private api: ApiService, public dialog: MatDialog) {}

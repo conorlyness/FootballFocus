@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTabChangeEvent } from './types';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,7 @@ export class AppComponent implements OnInit {
   constructor() {}
   ngOnInit(): void {}
 
-  changeTab(event: any) {
-    console.log(event.index);
+  changeTab(event: MatTabChangeEvent) {
     this.tabIndex = event.index;
   }
 }

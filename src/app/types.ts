@@ -294,3 +294,8 @@ export type LeageSeasons = {
   value: string;
   displayName: string;
 };
+
+export type MatTabChangeEvent = {
+  index: number;
+  tab: any;
+};
