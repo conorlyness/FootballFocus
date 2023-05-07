@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/services/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Last5DialogComponent } from '../last5-dialog/last5-dialog.component';
 import { forkJoin, Subscription } from 'rxjs';
-import { Fixture, Last5 } from '../../types';
+import { Fixture, Last5, LeagueData } from '../../types';
 
 export interface DialogData {
   homeTeamName: string;
@@ -20,11 +20,6 @@ export interface DialogData {
 export class UpcomingFixturesComponent implements OnInit, OnDestroy {
   @Input() league!: string;
   fixtureData: Fixture[] = [];
-  prem: boolean = false;
-  serieA: boolean = false;
-  laLiga: boolean = false;
-  bundes: boolean = false;
-  ligue1: boolean = false;
   loading: boolean = false;
   displayGameweek!: string;
   currentGameweek!: string;
@@ -38,22 +33,14 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
   totalGameWeeks!: number;
   gameWeeks: number[] = [];
   subscriptions = new Subscription();
+  selectedLeague!: LeagueData[];
 
   constructor(private api: ApiService, public dialog: MatDialog) {}
 
   async ngOnInit(): Promise<void> {
     this.loading = true;
-    if (this.league === 'prem') {
-      this.prem = true;
-    } else if (this.league === 'serieA') {
-      this.serieA = true;
-    } else if (this.league === 'laLiga') {
-      this.laLiga = true;
-    } else if (this.league === 'bundes') {
-      this.bundes = true;
-    } else {
-      this.ligue1 = true;
-    }
+    this.selectedLeague = this.api.determineLeague(this.league);
+
     this.getTotalGameWeeks();
     await this.getGameWeekRound();
     this.getFixtures(this.currentGameweek);
@@ -64,13 +51,7 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
   getTotalGameWeeks() {
     this.loading = true;
     this.api
-      .getTotalNumberOfGameWeeks(
-        this.prem,
-        this.serieA,
-        this.laLiga,
-        this.bundes,
-        this.ligue1
-      )
+      .getTotalNumberOfGameWeeks(this.selectedLeague)
       .subscribe((val: Array<string>) => {
         this.totalGameWeeks = val.length;
         for (let i = 1; i <= this.totalGameWeeks; i++) {
@@ -83,25 +64,17 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
   getGameWeekRound(): Promise<Object> {
     return new Promise((resolve, reject) => {
       this.subscriptions.add(
-        this.api
-          .getCurrentFixtureRound(
-            this.prem,
-            this.serieA,
-            this.laLiga,
-            this.bundes,
-            this.ligue1
-          )
-          .subscribe({
-            next: (gWeek: string) => {
-              this.currentGameweek = gWeek;
-              this.currentGameweekMatOption = gWeek;
-              resolve(this.currentGameweek);
-            },
-            error: (error) => {
-              console.log('got an error: ', error);
-              reject('got an error');
-            },
-          })
+        this.api.getCurrentFixtureRound(this.selectedLeague).subscribe({
+          next: (gWeek: string) => {
+            this.currentGameweek = gWeek;
+            this.currentGameweekMatOption = gWeek;
+            resolve(this.currentGameweek);
+          },
+          error: (error) => {
+            console.log('got an error: ', error);
+            reject('got an error');
+          },
+        })
       );
     });
   }
@@ -111,14 +84,7 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
     const GameweekToPass = `Regular Season - ${round}`;
     this.subscriptions.add(
       this.api
-        .getFixturesByRound(
-          GameweekToPass,
-          this.prem,
-          this.serieA,
-          this.laLiga,
-          this.bundes,
-          this.ligue1
-        )
+        .getFixturesByRound(GameweekToPass, this.selectedLeague)
         .subscribe({
           next: (val: Array<Fixture>) => {
             this.loading = false;
@@ -164,23 +130,9 @@ export class UpcomingFixturesComponent implements OnInit, OnDestroy {
 
   fetchLast5Results(homeTeamID: number, awayTeamId: number): Promise<Object> {
     return new Promise((resolve, reject) => {
-      let homeTeam = this.api.getLast5Results(
-        homeTeamID,
-        this.prem,
-        this.serieA,
-        this.laLiga,
-        this.bundes,
-        this.ligue1
-      );
+      let homeTeam = this.api.getLast5Results(homeTeamID, this.selectedLeague);
 
-      let awayTeam = this.api.getLast5Results(
-        awayTeamId,
-        this.prem,
-        this.serieA,
-        this.laLiga,
-        this.bundes,
-        this.ligue1
-      );
+      let awayTeam = this.api.getLast5Results(awayTeamId, this.selectedLeague);
 
       let homeAndAwayLast5 = forkJoin({ home: homeTeam, away: awayTeam });
 

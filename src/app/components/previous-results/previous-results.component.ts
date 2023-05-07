@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
-import { Fixture } from 'src/app/types';
+import { Fixture, LeagueData } from 'src/app/types';
 
 @Component({
   selector: 'app-previous-results',
@@ -11,11 +11,6 @@ import { Fixture } from 'src/app/types';
 export class PreviousResultsComponent implements OnInit, OnDestroy {
   @Input() league!: string;
   fixtureData: Fixture[] = [];
-  prem: boolean = false;
-  serieA: boolean = false;
-  laLiga: boolean = false;
-  bundes: boolean = false;
-  ligue1: boolean = false;
   loading: boolean = false;
   currentGameweek!: string;
 
@@ -26,23 +21,14 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
   showingPreviousWeeks: boolean = false;
   subscriptions = new Subscription();
   numberOfGameWeeks: any[] = [];
+  selectedLeague!: LeagueData[];
 
   constructor(private api: ApiService) {}
 
   async ngOnInit(): Promise<void> {
     this.loading = true;
+    this.selectedLeague = this.api.determineLeague(this.league);
 
-    if (this.league === 'prem') {
-      this.prem = true;
-    } else if (this.league === 'serieA') {
-      this.serieA = true;
-    } else if (this.league === 'laLiga') {
-      this.laLiga = true;
-    } else if (this.league === 'bundes') {
-      this.bundes = true;
-    } else {
-      this.ligue1 = true;
-    }
     await this.getGameWeekRound();
     this.getResults(this.currentGameweek);
   }
@@ -50,29 +36,21 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
   getGameWeekRound(): Promise<Object> {
     return new Promise((resolve, reject) => {
       this.subscriptions.add(
-        this.api
-          .getCurrentFixtureRound(
-            this.prem,
-            this.serieA,
-            this.laLiga,
-            this.bundes,
-            this.ligue1
-          )
-          .subscribe({
-            next: (gWeek: string) => {
-              this.currentGameweek = gWeek;
-              this.currentGameweekMatOption = gWeek;
+        this.api.getCurrentFixtureRound(this.selectedLeague).subscribe({
+          next: (gWeek: string) => {
+            this.currentGameweek = gWeek;
+            this.currentGameweekMatOption = gWeek;
 
-              for (let i = 1; i <= +this.currentGameweek; i++) {
-                this.numberOfGameWeeks.push(i);
-              }
-              resolve(this.currentGameweek);
-            },
-            error: (error) => {
-              console.log('got an error: ', error);
-              reject('got an error');
-            },
-          })
+            for (let i = 1; i <= +this.currentGameweek; i++) {
+              this.numberOfGameWeeks.push(i);
+            }
+            resolve(this.currentGameweek);
+          },
+          error: (error) => {
+            console.log('got an error: ', error);
+            reject('got an error');
+          },
+        })
       );
     });
   }
@@ -82,14 +60,7 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
     const GameweekToPass = `Regular Season - ${round}`;
     this.subscriptions.add(
       this.api
-        .getFixturesByRound(
-          GameweekToPass,
-          this.prem,
-          this.serieA,
-          this.laLiga,
-          this.bundes,
-          this.ligue1
-        )
+        .getFixturesByRound(GameweekToPass, this.selectedLeague)
         .subscribe({
           next: (fixtures: Array<Fixture>) => {
             this.loading = false;

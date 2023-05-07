@@ -11,7 +11,9 @@
           <p class="premierLeagueTab">Premier League</p>
         </div>
       </ng-template>
-      <app-premier-league></app-premier-league>
+      <ng-container *ngIf="tabIndex == 0">
+        <app-premier-league></app-premier-league>
+      </ng-container>
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>

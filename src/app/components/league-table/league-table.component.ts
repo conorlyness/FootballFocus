@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
-import { LeageSeasons, LeagueTable } from 'src/app/types';
+import { LeageSeasons, LeagueData, LeagueTable } from 'src/app/types';
 import { MatDialog } from '@angular/material/dialog';
 import { TeamStatsDialogComponent } from '../team-stats-dialog/team-stats-dialog.component';
 
@@ -24,14 +24,11 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
     { value: '2019', displayName: 'Season - 19/20' },
     { value: '2018', displayName: 'Season - 18/19' },
   ];
-  prem: boolean = false;
-  serieA: boolean = false;
-  laLiga: boolean = false;
-  bundes: boolean = false;
-  ligue1: boolean = false;
   loading: boolean = false;
   subscriptions = new Subscription();
-  season: string = '2022';
+  season: string = (new Date().getFullYear() - 1).toString();
+  currentSeason: string = (new Date().getFullYear() - 1).toString();
+  selectedLeague!: LeagueData[];
 
   constructor(private api: ApiService, public dialog: MatDialog) {}
   displayedColumns: string[] = [
@@ -49,17 +46,7 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loading = true;
-    if (this.league === 'prem') {
-      this.prem = true;
-    } else if (this.league === 'serieA') {
-      this.serieA = true;
-    } else if (this.league === 'laLiga') {
-      this.laLiga = true;
-    } else if (this.league === 'bundes') {
-      this.bundes = true;
-    } else {
-      this.ligue1 = true;
-    }
+    this.selectedLeague = this.api.determineLeague(this.league);
 
     //this will get the current seasons table initally
     this.getLeagueTable(this.season);
@@ -69,27 +56,17 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.tableData = [];
     this.subscriptions.add(
-      this.api
-        .getLeagueTable(
-          season,
-          this.prem,
-          this.serieA,
-          this.laLiga,
-          this.bundes,
-          this.ligue1
-        )
-        .subscribe({
-          next: (data: any) => {
-            this.loading = false;
-            data.response[0].league.standings[0].forEach(
-              (element: LeagueTable) => {
-                this.tableData.push(element);
-              }
-            );
-            console.log('league table', data);
-          },
-          error: (error) => console.log('got an error: ', error),
-        })
+      this.api.getLeagueTable(season, this.selectedLeague).subscribe({
+        next: (data: any) => {
+          this.loading = false;
+          data.response[0].league.standings[0].forEach(
+            (element: LeagueTable) => {
+              this.tableData.push(element);
+            }
+          );
+        },
+        error: (error) => console.log('got an error: ', error),
+      })
     );
   }
 

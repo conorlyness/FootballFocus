@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
-import { LeagueNews } from '../../types';
+import { LeagueData, LeagueNews } from '../../types';
 
 @Component({
   selector: 'app-league-news',
@@ -11,30 +11,16 @@ import { LeagueNews } from '../../types';
 export class LeagueNewsComponent implements OnInit, OnDestroy {
   @Input() league!: string;
   news: LeagueNews[] = [];
-  prem: boolean = false;
-  serieA: boolean = false;
-  laLiga: boolean = false;
-  bundes: boolean = false;
-  ligue1: boolean = false;
   isLoading: boolean = false;
   hasError: boolean = false;
+  selectedLeague!: LeagueData[];
   subscriptions = new Subscription();
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    if (this.league === 'prem') {
-      this.prem = true;
-    } else if (this.league === 'serieA') {
-      this.serieA = true;
-    } else if (this.league === 'laLiga') {
-      this.laLiga = true;
-    } else if (this.league === 'bundes') {
-      this.bundes = true;
-    } else {
-      this.ligue1 = true;
-    }
+    this.selectedLeague = this.api.determineLeague(this.league);
 
     this.getLeagueNews();
   }
@@ -43,27 +29,19 @@ export class LeagueNewsComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.hasError = false;
     this.subscriptions.add(
-      this.api
-        .getLeagueNews(
-          this.prem,
-          this.serieA,
-          this.laLiga,
-          this.bundes,
-          this.ligue1
-        )
-        .subscribe({
-          next: (data: Array<LeagueNews>) => {
-            this.isLoading = false;
-            data.forEach((article: LeagueNews) => {
-              this.news.push(article);
-            });
-          },
-          error: (error) => {
-            console.log(error);
-            this.isLoading = false;
-            this.hasError = true;
-          },
-        })
+      this.api.getLeagueNews(this.selectedLeague).subscribe({
+        next: (data: Array<LeagueNews>) => {
+          this.isLoading = false;
+          data.forEach((article: LeagueNews) => {
+            this.news.push(article);
+          });
+        },
+        error: (error) => {
+          console.log(error);
+          this.isLoading = false;
+          this.hasError = true;
+        },
+      })
     );
   }
 

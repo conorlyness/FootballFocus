@@ -299,3 +299,11 @@ export type MatTabChangeEvent = {
   index: number;
   tab: any;
 };
+
+export type LeagueData = {
+  name: string;
+  value: boolean;
+  newsUrl: string;
+  leagueRound: string;
+  id: number;
+};

@@ -71,7 +71,7 @@
         mat-row
         class="table-row"
         *matRowDef="let row; columns: displayedColumns"
-        (click)="season === '2022' ? showTeam(row) : null"
+        (click)="season === currentSeason ? showTeam(row) : null"
       ></tr>
     </table>
   </ng-container>
