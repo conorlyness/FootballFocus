@@ -1,6 +1,6 @@
 <div class="resultsTopContent">
   <p class="previousResultsTitle">Game Week {{ currentGameweek }} Results</p>
-  <div class="filters">
+  <div class="filters" *ngIf="numberOfGameWeeks.length > 1">
     <mat-form-field class="gwkDropDown">
       <mat-label class="gwkLabel">Game Week</mat-label>
       <mat-select
