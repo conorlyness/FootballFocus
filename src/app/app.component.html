@@ -18,7 +18,7 @@
     <mat-tab>
       <ng-template mat-tab-label>
         <div class="tabContent">
-          <img class="tabImg" src="assets/laliga-v-1200x1200.png" alt="" />
+          <img class="tabImg" src="assets/LaLiga-Logo.png" alt="" />
           <p class="laLigaTab">La Liga</p>
         </div>
       </ng-template>
@@ -65,6 +65,28 @@
       </ng-template>
       <ng-container *ngIf="tabIndex == 4">
         <app-ligue1></app-ligue1>
+      </ng-container>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="tabContent">
+          <img class="tabImg" src="assets/UCL-logo.png" alt="" />
+          <p class="championsLeagueTab">UCL</p>
+        </div>
+      </ng-template>
+      <ng-container *ngIf="tabIndex == 5">
+        <app-champions-league></app-champions-league>
+      </ng-container>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="tabContent">
+          <img class="tabImg" src="assets/UEL-logo.png" alt="" />
+          <p class="europaLeagueTab">UEL</p>
+        </div>
+      </ng-template>
+      <ng-container *ngIf="tabIndex == 6">
+        <app-europa-league></app-europa-league>
       </ng-container>
     </mat-tab>
     <mat-tab>

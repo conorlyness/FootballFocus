@@ -22,6 +22,7 @@ export class ApiService {
   urls: any = urls;
   apiKey: string = '';
 
+  //https://rapidapi.com/GiulianoCrescimbeni/api/football98
   options = {
     method: 'GET',
     headers: {
@@ -75,9 +76,23 @@ export class ApiService {
       leagueRound: this.urls.leagueRound.ligue1LeagueCurrentRoundUrl,
       id: 61,
     },
+    {
+      name: 'europaLeague',
+      value: false,
+      newsUrl: '',
+      leagueRound: this.urls.leagueRound.europaLeagueCurrentRoundUrl,
+      id: 3,
+    },
+    {
+      name: 'championsLeague',
+      value: false,
+      newsUrl: '',
+      leagueRound: this.urls.leagueRound.championsLeagueCurrentRoundUrl,
+      id: 2,
+    },
   ];
 
-  currentSeason: string = (new Date().getFullYear() - 1).toString();
+  currentSeason: string = new Date().getFullYear().toString();
 
   //football highlights API
   highlightsOptions = {
@@ -111,11 +126,27 @@ export class ApiService {
         url = league.leagueRound;
       }
     });
-
+    console.log('getCurrentFixtureRound::URL::', url);
     return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
       map((obj: ApiResponse) => obj?.response[0]),
       //use regex to get numbers from string i.e the current round
-      map((val) => val.match(/\d/g).join('')),
+      map((val) => val?.match(/\d/g).join('')),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
+  }
+
+  getCurrentFixtureRoundEuropean(leagues: LeagueData[]): Observable<any> {
+    var url: string = '';
+    leagues.forEach((league: LeagueData) => {
+      if (league.value) {
+        url = league.leagueRound;
+      }
+    });
+    console.log('getCurrentFixtureRound::URL::', url);
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      tap((v) => console.log('resp from current round::', v)),
+      map((obj: ApiResponse) => obj?.response),
       retry(2),
       catchError((error) => this.handleError(error))
     );
@@ -257,9 +288,25 @@ export class ApiService {
     return leagueID;
   }
 
-  handleError(error: HttpErrorResponse) {
-    return throwError(
-      () => new Error(`Observable returned -> ${error.status}`)
+  getFixtureStatistics(leagueID: number) {
+    let url = `https://api-football-v1.p.rapidapi.com/v3/fixtures/statistics?fixture=${leagueID}`;
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      map((x: ApiResponse) => x?.response),
+      retry(2),
+      catchError((error) => this.handleError(error))
     );
+  }
+
+  getFixtureById(leagueID: number) {
+    let url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${leagueID}`;
+    return this.http.get<ApiResponse>(url, this.ApiFootballOptions).pipe(
+      map((x: ApiResponse) => x?.response),
+      retry(2),
+      catchError((error) => this.handleError(error))
+    );
+  }
+
+  handleError(error: HttpErrorResponse) {
+    return throwError(() => new Error(`Observable returned -> ${error}`));
   }
 }

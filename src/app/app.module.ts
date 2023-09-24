@@ -36,6 +36,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NullReplacePipe } from './pipes/null-replace.pipe';
 import { HighlightDialogComponent } from './components/highlight-dialog/highlight-dialog.component';
+import { FixtureStatsDialogComponent } from './components/fixture-stats-dialog/fixture-stats-dialog.component';
+import { ChampionsLeagueComponent } from './components/champions-league/champions-league.component';
+import { EuropaLeagueComponent } from './components/europa-league/europa-league.component';
+import { GroupsComponent } from './components/europeanComps/groups/groups.component';
+import { FixturesComponent } from './components/europeanComps/fixtures/fixtures.component';
+import { ResultsComponent } from './components/europeanComps/results/results.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +63,12 @@ import { HighlightDialogComponent } from './components/highlight-dialog/highligh
     OrdinalPipe,
     NullReplacePipe,
     HighlightDialogComponent,
+    FixtureStatsDialogComponent,
+    ChampionsLeagueComponent,
+    EuropaLeagueComponent,
+    GroupsComponent,
+    FixturesComponent,
+    ResultsComponent,
   ],
   imports: [
     BrowserModule,
