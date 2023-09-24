@@ -18,6 +18,7 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
   @Input() league!: string;
   tableData: Array<LeagueTable> = [];
   leagueSeasons: Array<LeageSeasons> = [
+    { value: '2023', displayName: 'Season - 23/24' },
     { value: '2022', displayName: 'Season - 22/23' },
     { value: '2021', displayName: 'Season - 21/22' },
     { value: '2020', displayName: 'Season - 20/21' },
@@ -26,8 +27,8 @@ export class LeagueTableComponent implements OnInit, OnDestroy {
   ];
   loading: boolean = false;
   subscriptions = new Subscription();
-  season: string = (new Date().getFullYear() - 1).toString();
-  currentSeason: string = (new Date().getFullYear() - 1).toString();
+  season: string = new Date().getFullYear().toString();
+  currentSeason: string = new Date().getFullYear().toString();
   selectedLeague!: LeagueData[];
 
   constructor(private api: ApiService, public dialog: MatDialog) {}
