@@ -1,4 +1,4 @@
-const currentSeason = (new Date().getFullYear() - 1).toString();
+const currentSeason = new Date().getFullYear().toString();
 export let urls = {
   leagueNews: {
     //news urls
@@ -13,10 +13,12 @@ export let urls = {
   },
   leagueRound: {
     //current round url
-    premierLeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=39&season=${currentSeason}&current=false`,
-    serieALeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=135&season=${currentSeason}&current=false`,
-    laLigaLeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=140&season=${currentSeason}&current=false`,
-    bundesligaLeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=78&season=${currentSeason}&current=false`,
-    ligue1LeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=61&season=${currentSeason}&current=false`,
+    premierLeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=39&season=${currentSeason}&current=true`,
+    serieALeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=135&season=${currentSeason}&current=true`,
+    laLigaLeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=140&season=${currentSeason}&current=true`,
+    bundesligaLeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=78&season=${currentSeason}&current=true`,
+    ligue1LeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=61&season=${currentSeason}&current=true`,
+    championsLeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=2&season=${currentSeason}&current=true`,
+    europaLeagueCurrentRoundUrl: `https://api-football-v1.p.rapidapi.com/v3/fixtures/rounds?league=3&season=${currentSeason}&current=true`,
   },
 };

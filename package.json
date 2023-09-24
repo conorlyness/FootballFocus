@@ -8,6 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "testAPI": "mocha ./src/app/apiTests/*.spec.js",
     "electron": "ng build && electron .",
     "package": "electron-packager . --icon=./src/assets/app-logo.ico --overwrite ",
     "playwrightTests": "npx playwright test",
@@ -38,6 +39,9 @@
     "@angular/compiler-cli": "^14.1.0",
     "@playwright/test": "^1.28.1",
     "@types/jasmine": "~4.0.0",
+    "axios": "^1.4.0",
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
     "electron-packager": "^16.0.0",
     "jasmine-core": "~4.2.0",
     "karma": "~6.4.0",
@@ -45,6 +49,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3",
     "typescript": "~4.7.2"
   }
 }

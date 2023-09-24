@@ -1,0 +1,44 @@
+<div class="fixturesTop">
+  <p class="fixturesTitle">{{ displayMatchday }} Fixtures</p>
+  <mat-form-field class="fixturesMdDropDown">
+    <mat-label class="matchDayLabel">Matchday</mat-label>
+    <mat-select
+      [(ngModel)]="currentMatchday"
+      (selectionChange)="getFixtures(currentMatchday)"
+    >
+      <mat-option value="{{ currentMatchdayMatOption }}"
+        >Current Matchday</mat-option
+      >
+      <!-- Add a default option -->
+      <ng-container *ngFor="let mDay of matchdays">
+        <mat-option value="{{ mDay }}">
+          {{ mDay }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="fixturesContent">
+  <ng-container *ngIf="!fixturesLoading">
+    <ng-container *ngFor="let fixture of fixtureData">
+      <mat-card class="fixtureCard">
+        <div class="teamNames">
+          {{ fixture.teams.home.name }} Vs {{ fixture.teams.away.name }}
+        </div>
+        <div class="teamBadges">
+          <img class="homeTeam" src="{{ fixture.teams.home.logo }}" alt="" />
+          <div class="badgeSpacer">|</div>
+          <img class="awayTeam" src="{{ fixture.teams.away.logo }}" alt="" />
+        </div>
+        <div class="fixtureDate">
+          {{ fixture.fixture.date | date : "EEEE, MMM d, y, h:mm a" }}
+        </div>
+      </mat-card>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="fixturesLoading">
+    <div class="loadingSpinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+</div>

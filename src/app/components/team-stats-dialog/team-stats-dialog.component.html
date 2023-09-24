@@ -1,4 +1,8 @@
-<div class="closeContainer" (click)="onNoClick()">X</div>
+<div class="closeContainer">
+  <button mat-fab class="closeBtn">
+    <mat-icon (click)="onNoClick()">close</mat-icon>
+  </button>
+</div>
 <div class="teamId">
   <h1>{{ teamStats.team.name }}</h1>
   <img class="teamBadge" src="{{ teamStats.team.logo }}" alt="" />

@@ -1,0 +1,21 @@
+.uclContent {
+  margin: 10px;
+  height: calc(100vh - 70px);
+}
+
+.fixturesTile,
+.resultsTile,
+.groupTableTile {
+  overflow-y: scroll;
+  height: 95%;
+  width: 99%;
+}
+
+gridster-item {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+gridster {
+  background-color: transparent;
+}

@@ -23,7 +23,7 @@
 <div class="previousResults">
   <ng-container *ngIf="!loading">
     <ng-container *ngFor="let fixture of fixtureData">
-      <mat-card>
+      <mat-card (click)="loadFixtureStats(fixture)">
         <div class="teamNames">
           {{ fixture.teams.home.name }} Vs {{ fixture.teams.away.name }}
         </div>

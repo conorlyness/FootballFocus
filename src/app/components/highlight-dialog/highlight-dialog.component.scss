@@ -10,6 +10,17 @@
   cursor: pointer;
 }
 
+.closeBtn {
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: transparent;
+  color: black;
+  &:hover {
+    background-color: #b52020;
+    color: white;
+  }
+}
+
 .video {
   padding-top: 50px;
   margin: 0 auto;
