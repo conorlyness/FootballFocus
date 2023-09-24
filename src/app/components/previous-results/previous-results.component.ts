@@ -1,7 +1,9 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { ApiService } from 'src/app/services/services/api.service';
 import { Fixture, LeagueData } from 'src/app/types';
+import { MatDialog } from '@angular/material/dialog';
+import { FixtureStatsDialogComponent } from '../fixture-stats-dialog/fixture-stats-dialog.component';
 
 @Component({
   selector: 'app-previous-results',
@@ -23,7 +25,7 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
   numberOfGameWeeks: any[] = [];
   selectedLeague!: LeagueData[];
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private dialog: MatDialog) {}
 
   async ngOnInit(): Promise<void> {
     this.loading = true;
@@ -38,6 +40,7 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
       this.subscriptions.add(
         this.api.getCurrentFixtureRound(this.selectedLeague).subscribe({
           next: (gWeek: string) => {
+            console.log(gWeek);
             this.currentGameweek = gWeek;
             this.currentGameweekMatOption = gWeek;
 
@@ -69,6 +72,57 @@ export class PreviousResultsComponent implements OnInit, OnDestroy {
           error: (error) => console.log('got an error: ', error),
         })
     );
+  }
+
+  async loadFixtureStats(fixture: any) {
+    console.log('fixture::', fixture);
+    let stats = (await this.fetchFixtureStats(fixture.fixture.id)) as any;
+    console.log('fetchFixtureStats reutrned::', stats);
+
+    if (!Object.keys(stats)) {
+      //user has clicked on a fixture that has not started, meaning no stats available
+      //do nothing
+    } else {
+      const dialogData = {
+        homeTeam: stats[0].statistics[0],
+        awayTeam: stats[0].statistics[1],
+        fixture: stats[0],
+      };
+      this.openFixtureStats(dialogData);
+    }
+  }
+
+  fetchFixtureStats(fixtureID: number) {
+    console.log('going to fetch stats from game with id::', fixtureID);
+    return new Promise((resolve, reject) => {
+      this.subscriptions.add(
+        this.api.getFixtureById(fixtureID).subscribe({
+          next: (res) => {
+            resolve(res);
+          },
+          error: (error) => {
+            console.log('got an error: ', error);
+            reject('could not get fixture statistics');
+          },
+        })
+      );
+    });
+  }
+
+  openFixtureStats(dialogData: any) {
+    const dialogRef = this.dialog.open(FixtureStatsDialogComponent, {
+      width: '900px',
+      height: '750px',
+      autoFocus: false,
+      data: {
+        homeTeam: dialogData.homeTeam,
+        awayTeam: dialogData.awayTeam,
+        fixture: dialogData.fixture,
+        league: this.league,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe();
   }
 
   ngOnDestroy() {

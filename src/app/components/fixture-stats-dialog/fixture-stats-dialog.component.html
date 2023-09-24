@@ -1,0 +1,94 @@
+<div class="closeContainer">
+  <button mat-fab class="closeBtn">
+    <mat-icon (click)="onNoClick()">close</mat-icon>
+  </button>
+</div>
+<div class="contentContainer">
+  <div class="statistics">
+    <div class="homeTeamContainer">
+      <img src="{{ homeTeam.team.logo }}" alt="" class="homeBadge" />
+      <h3 class="homeName">{{ homeTeam.team.name }}</h3>
+      <div class="homeStats">
+        <p class="cardStats">
+          {{ homeTeam.statistics[10].value || 0
+          }}<img src="assets/yellow.png" alt="" class="yellowCard" />
+          {{ homeTeam.statistics[11].value || 0
+          }}<img src="assets/red.png" alt="" class="redCard" />
+        </p>
+        <ng-container *ngFor="let stat of homeTeam.statistics">
+          <ng-container *ngIf="stat.type === 'Total Shots'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'Shots on Goal'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'expected_goals'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'Ball Possession'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'Corner Kicks'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="statisticsHeadings">
+      <img src="{{ leagueLogo }}" alt="" class="leagueBadge" />
+      <h3 class="finalScore">
+        {{ fixture.goals.home }} - {{ fixture.goals.away }}
+      </h3>
+      <div class="leagueHeadings">
+        <p>Cards</p>
+        <ng-container *ngFor="let stat of homeTeam.statistics">
+          <ng-container *ngIf="stat.type === 'Total Shots'">
+            <p>Shots</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'Shots on Goal'">
+            <p>Shots on target</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'expected_goals'">
+            <p>Expected goals</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'Ball Possession'">
+            <p>Possession</p>
+          </ng-container>
+
+          <ng-container *ngIf="stat.type === 'Corner Kicks'">
+            <p>Corners</p>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="awayTeamContainer">
+      <img src="{{ awayTeam.team.logo }}" alt="" class="awayBadge" />
+      <h3 class="awayName">{{ awayTeam.team.name }}</h3>
+      <div class="awayStats">
+        <p class="cardStats">
+          {{ awayTeam.statistics[10].value || 0
+          }}<img src="assets/yellow.png" alt="" class="yellowCard" />
+          {{ awayTeam.statistics[11].value || 0
+          }}<img src="assets/red.png" alt="" class="redCard" />
+        </p>
+        <ng-container *ngFor="let stat of awayTeam.statistics">
+          <ng-container *ngIf="stat.type === 'Total Shots'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'Shots on Goal'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'expected_goals'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'Ball Possession'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+          <ng-container *ngIf="stat.type === 'Corner Kicks'">
+            <p>{{ stat.value }}</p>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="uclContent">
+  <gridster [options]="options">
+    <gridster-item
+      [item]="dashboard[0]"
+      (mousedown)="$event.stopPropagation()"
+      (touchstart)="$event.stopPropagation()"
+      class="groupTableTile"
+    >
+      <app-groups [leagueName]="competitionName"></app-groups>
+    </gridster-item>
+    <gridster-item
+      [item]="dashboard[1]"
+      (mousedown)="$event.stopPropagation()"
+      (touchstart)="$event.stopPropagation()"
+      class="fixturesTile"
+    >
+      <app-fixtures [leagueName]="competitionName"></app-fixtures>
+    </gridster-item>
+    <gridster-item
+      [item]="dashboard[2]"
+      (mousedown)="$event.stopPropagation()"
+      (touchstart)="$event.stopPropagation()"
+      class="resultsTile"
+    >
+      <app-results [leagueName]="competitionName"></app-results>
+    </gridster-item>
+  </gridster>
+</div>

@@ -1,0 +1,79 @@
+.fixturesTop {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fixturesTitle {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 200;
+  padding-top: 10px;
+}
+
+.fixtureCard {
+  width: 230px;
+  height: 150px;
+  padding: 10px;
+  margin: 20px;
+  &:hover {
+    box-shadow: rgb(60, 23, 90) 0px 1px 3px, rgb(60, 23, 90) 0px 1px 2px;
+  }
+}
+
+.homeTeam {
+  height: 44px;
+  width: 44px;
+}
+
+.awayTeam {
+  height: 44px;
+  width: 44px;
+}
+
+.teamNames {
+  text-align: center;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+
+.teamBadges {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.fixtureDate {
+  font-size: 18px;
+  font-weight: 200;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.badgeSpacer {
+  padding-right: 10px;
+  font-size: 40px;
+  padding-left: 10px;
+  font-weight: 100;
+}
+
+.loadingSpinner {
+  padding-top: 50px;
+  text-align: -webkit-center;
+}
+
+.fixturesContent {
+  display: flex;
+  padding-top: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+mat-select,
+mat-option {
+  font-weight: 200;
+}

@@ -1,0 +1,93 @@
+.contentContainer {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  height: 90%;
+  text-align: center;
+}
+
+.closeContainer {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.closeBtn {
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: transparent;
+  color: black;
+  &:hover {
+    background-color: #b52020;
+    color: white;
+  }
+}
+
+.statistics {
+  display: inline-flex;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  justify-content: center;
+}
+
+.statisticsHeadings {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 40%;
+}
+
+.leagueBadge,
+.homeBadge,
+.awayBadge {
+  height: 150px;
+  width: 150px;
+  padding: 10px;
+}
+
+.homeName,
+.awayName,
+.finalScore {
+  font-weight: 500;
+  text-align: center;
+  font-size: large;
+}
+
+.homeStats,
+.awayStats {
+  text-align: center;
+  p {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.leagueHeadings {
+  text-align: center;
+  p {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.homeTeamContainer,
+.awayTeamContainer {
+  width: 30%;
+}
+
+.yellowCard,
+.redCard {
+  height: 40px;
+  width: 30px;
+  margin: 10px;
+}
+
+.cardStats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

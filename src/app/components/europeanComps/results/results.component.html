@@ -1,0 +1,51 @@
+<div class="resultsTop">
+  <p class="previousResultsTitle">{{ resultsDisplayMatchday }} Results</p>
+
+  <mat-form-field class="resultsMdDropDown">
+    <mat-label class="matchDayLabel">Matchday</mat-label>
+    <mat-select
+      [(ngModel)]="currentMatchday"
+      (selectionChange)="getResults(currentMatchday)"
+    >
+      <mat-option value="{{ currentMatchdayMatOption }}"
+        >Current Matchday</mat-option
+      >
+      <ng-container *ngFor="let mDay of matchdays">
+        <mat-option value="{{ mDay }}">{{ mDay }}</mat-option>
+      </ng-container>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="resultsContent">
+  <ng-container *ngIf="!resultsLoading">
+    <ng-container *ngFor="let fixture of resultData">
+      <mat-card class="resultCard">
+        <div class="teamNames">
+          {{ fixture.teams.home.name }} Vs {{ fixture.teams.away.name }}
+        </div>
+        <div class="teamBadges">
+          <img class="homeTeam" src="{{ fixture.teams.home.logo }}" alt="" />
+          <div class="gameResult">
+            {{
+              fixture.score.fulltime.home === null
+                ? "TBA"
+                : fixture.score.fulltime.home
+            }}
+            -
+            {{
+              fixture.score.fulltime.away === null
+                ? "TBA"
+                : fixture.score.fulltime.away
+            }}
+          </div>
+          <img class="awayTeam" src="{{ fixture.teams.away.logo }}" alt="" />
+        </div>
+      </mat-card>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="resultsLoading">
+    <div class="loadingSpinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+</div>

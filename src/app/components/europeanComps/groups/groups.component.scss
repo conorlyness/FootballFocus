@@ -1,0 +1,66 @@
+.groupsTop {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.groupTitle {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 200;
+  padding-top: 10px;
+}
+
+.nameAndBadge {
+  text-align: center;
+  width: 140px;
+}
+
+.teamLogo {
+  height: 60px;
+  width: 60px;
+  padding-bottom: 20px;
+
+  img {
+    height: 50px;
+    width: 50px;
+  }
+
+  figcaption {
+    font-size: 12px;
+  }
+}
+
+table {
+  width: 100%;
+
+  th {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  td {
+    text-align: center;
+    //used to ensure all the tds are the same width
+    width: calc(100% / 8);
+    font-size: 18px;
+    font-weight: 200;
+  }
+
+  .table-row:hover {
+    background-color: rgb(228, 228, 228);
+  }
+}
+
+.table-row {
+  height: 10px;
+}
+
+.pointsTotal {
+  font-weight: bold !important;
+}
+
+mat-select,
+mat-option {
+  font-weight: 200;
+}

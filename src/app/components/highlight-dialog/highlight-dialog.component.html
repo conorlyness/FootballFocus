@@ -1,5 +1,9 @@
 <div class="dialogInfo">
-  <p>{{ data.title }}</p>
-  <div class="closeContainer" (click)="closeDialog()">X</div>
+  <p class="gameTitle">{{ data.title }}</p>
+  <div class="closeContainer">
+    <button mat-fab class="closeBtn">
+      <mat-icon (click)="onNoClick()">close</mat-icon>
+    </button>
+  </div>
 </div>
 <div class="video" #video></div>
